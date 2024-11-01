@@ -25,10 +25,11 @@ public class UpgradePanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerStateMachine.experiencePoints >= 5)
+        if(playerStateMachine.experiencePoints >= 5f)
         {
             Time.timeScale = 0;
             upgradePanel.SetActive(true);
+            Debug.Log("Entrou aqui");
         }
     }
 }
