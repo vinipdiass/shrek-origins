@@ -14,14 +14,21 @@ public class SelectAttack : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
         PlayerPrefs.SetString("PlayerAbility", "Roar");
-        
+
     }
 
     public void ButtonFart()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
         PlayerPrefs.SetString("PlayerAbility", "Fart");
-        
+
+    }
+
+    public void ButtonOnion()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
+        PlayerPrefs.SetString("PlayerAbility", "GasAttack");
+
     }
 
 }

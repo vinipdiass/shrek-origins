@@ -8,7 +8,7 @@ public class SpawnBigMan : MonoBehaviour
     public float spawnRadiusMin = 10f;
     public float spawnRadiusMax = 20f; 
     public float spawnInterval = 0.1f;
-    private float spawnDelay = 100f; 
+    private float spawnDelay = 0f; 
 
     void Start()
     {

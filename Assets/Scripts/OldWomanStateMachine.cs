@@ -233,7 +233,7 @@ public class OldWomanStateMachine : MonoBehaviour, Damageable
         }
     }
 
-    public void ReceiveDamage(float damage)
+    public void ReceiveDamage(float damage, bool knock)
     {
         // Check cooldown for receiving damage
         if (Time.time >= lastDamageReceivedTime + receiveDamageCooldown && currentState != EnemyState.Dead)

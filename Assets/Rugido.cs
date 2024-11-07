@@ -91,7 +91,7 @@ public class Rugido : MonoBehaviour
                 float distance = Vector2.Distance(transform.position, enemyObj.transform.position);
                 if (distance <= hitRange)
                 {
-                    enemy.ReceiveDamage(damage);
+                    enemy.ReceiveDamage(damage, true);
                     break;
                 }
             }

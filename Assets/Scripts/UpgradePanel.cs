@@ -25,7 +25,7 @@ public class UpgradePanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerStateMachine.experiencePoints >= 5f)
+        if(playerStateMachine.experiencePoints >= playerStateMachine.experiencePointsRequired)
         {
             Time.timeScale = 0;
             upgradePanel.SetActive(true);

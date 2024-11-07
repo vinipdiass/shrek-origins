@@ -14,6 +14,8 @@ public class OldManStateMachine : MonoBehaviour, Damageable
     public float damageRange = 0.5f;
     public GameObject damageTextPrefab;
     public GameObject xpPickupPrefab;
+    public GameObject hpPickupPrefab;
+    public float hpItemDropChance;
 
     [Header("Knockback Settings")]
     public float knockbackDistance = 1f;   // How far to knock back
@@ -66,6 +68,7 @@ public class OldManStateMachine : MonoBehaviour, Damageable
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         ChangeState(EnemyState.ChasingTarget);
+        hpItemDropChance = 0.05f;
     }
 
     void Update()
@@ -198,11 +201,23 @@ public class OldManStateMachine : MonoBehaviour, Damageable
 
     void HandleDeadState()
     {
-        if (xpPickupPrefab != null)
+        // Instancia o XP Pickup se estiver definido
+
+
+        // Verifica a chance de spawn do item especial
+        if (hpPickupPrefab != null && Random.value <= hpItemDropChance)
         {
-            Instantiate(xpPickupPrefab, transform.position, Quaternion.identity);
+            Instantiate(hpPickupPrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            if (xpPickupPrefab != null)
+            {
+                Instantiate(xpPickupPrefab, transform.position, Quaternion.identity);
+            }
         }
 
+        // Destrói o inimigo
         Destroy(gameObject);
     }
 
@@ -257,7 +272,7 @@ public class OldManStateMachine : MonoBehaviour, Damageable
         }
     }
 
-    public void ReceiveDamage(float damage)
+    public void ReceiveDamage(float damage, bool knockback)
     {
         // Check cooldown for receiving damage
         if (Time.time >= lastDamageReceivedTime + receiveDamageCooldown && currentState != EnemyState.Dead)
@@ -270,7 +285,7 @@ public class OldManStateMachine : MonoBehaviour, Damageable
 
             // Show damage text
             ShowDamageText(damage);
-            knockbackCoroutine = StartCoroutine(ApplyKnockback());
+            if (knockback) knockbackCoroutine = StartCoroutine(ApplyKnockback());
 
             StopAllCoroutinesMy();
 

@@ -54,7 +54,7 @@ public class Soco : MonoBehaviour
                 if (distance <= hitRange)
                 {
                     // Aplica dano ao inimigo
-                    damageableEnemy.ReceiveDamage(damage);
+                    damageableEnemy.ReceiveDamage(damage, true);
                     break; // Sai do loop já que o projétil foi destruído
                 }
             }

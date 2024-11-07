@@ -1,4 +1,4 @@
 public interface Damageable
 {
-    void ReceiveDamage(float damage);
+    void ReceiveDamage(float damage, bool knock);
 }

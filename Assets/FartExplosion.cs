@@ -31,7 +31,7 @@ public class FartExplosion : MonoBehaviour
                 if (distance <= explosionRadius)
                 {
                     // Apply damage to the enemy
-                    damageableEnemy.ReceiveDamage(damage);
+                    damageableEnemy.ReceiveDamage(damage, true);
                 }
             }
         }

@@ -3,10 +3,13 @@ using System.Collections;
 
 public class PlayerStateMachine : MonoBehaviour
 {
-    private enum PlayerState { Idle, Walking, Punching, Roaring, Farting }
+    private enum PlayerState { Idle, Walking, Punching, Roaring, Farting, GasAttacking }
+
     private bool hasPunch = false;
     private bool hasRoar = false;
     private bool hasFart = false;
+    private bool hasGasAttack = false;
+
     private PlayerState currentState;
     public int experiencePoints;
     public float experiencePointsRequired;
@@ -14,11 +17,15 @@ public class PlayerStateMachine : MonoBehaviour
     private bool isPunchingCoroutineRunning = false;
     private bool isRoaringCoroutineRunning = false;
     private bool isFartingCoroutineRunning = false;
+    private bool isGasAttackingCoroutineRunning = false;
+
     public float speed = 5f;
     private CharacterController characterController;
     private Punch soco;    // For punch attacks
     private Roar rugido;   // For roar attacks
     private Fart peido;    // For fart attacks
+    private Onion gasAttack; // Para ataques de gás
+
     public Animator animator;
     public int recovery;
 
@@ -40,7 +47,7 @@ public class PlayerStateMachine : MonoBehaviour
         recovery = 0;
         currentHealth = maxHealth;
         experiencePoints = 0;
-        experiencePointsRequired = 5f;
+        experiencePointsRequired = 300f;
 
         animator = GetComponent<Animator>();
         if (animator == null) Debug.LogError("Animator não encontrado no GameObject");
@@ -50,6 +57,8 @@ public class PlayerStateMachine : MonoBehaviour
         soco = GetComponent<Punch>();
         rugido = GetComponent<Roar>();
         peido = GetComponent<Fart>();
+        gasAttack = GetComponent<Onion>();
+
 
         atributos = GetComponent<Atributtes>();
 
@@ -73,6 +82,10 @@ public class PlayerStateMachine : MonoBehaviour
         else if (playerAbility == "Fart")
         {
             ActivateFart();
+        }
+        else if (playerAbility == "GasAttack")
+        {
+            ActivateGasAttack();
         }
 
         ChangeState(PlayerState.Idle); // Initial state
@@ -142,7 +155,7 @@ public class PlayerStateMachine : MonoBehaviour
                 peido.AddAttributeAttack();
                 experiencePoints = 0;
             }
-            
+
         }
         if (Input.GetKeyDown(KeyCode.T) && experiencePoints >= experiencePointsRequired)
         {
@@ -157,7 +170,7 @@ public class PlayerStateMachine : MonoBehaviour
                 atributos.increaseLevelMaxLife();
                 experiencePoints = 0;
             }
-            
+
         }
         if (Input.GetKeyDown(KeyCode.R) && experiencePoints >= experiencePointsRequired)
         {
@@ -171,7 +184,7 @@ public class PlayerStateMachine : MonoBehaviour
                 atributos.increaseLevelRecovery();
                 experiencePoints = 0;
             }
-           
+
         }
         if (Input.GetKeyDown(KeyCode.E) && experiencePoints >= experiencePointsRequired)
         {
@@ -187,7 +200,7 @@ public class PlayerStateMachine : MonoBehaviour
                 // Implement cooldown reduction in Fart if needed
                 experiencePoints = 0;
             }
-            
+
         }
 
         switch (currentState)
@@ -216,12 +229,20 @@ public class PlayerStateMachine : MonoBehaviour
                     StartCoroutine(UpdateFartState());
                 }
                 break;
+            case PlayerState.GasAttacking:
+                if (!isGasAttackingCoroutineRunning)
+                {
+                    StartCoroutine(UpdateGasAttackState());
+                }
+                break;
+
         }
 
         // Cooldown timers
         soco.IncreaseTimer();
         rugido.IncreaseTimer();
         peido.IncreaseTimer();
+        gasAttack.IncreaseTimer();
     }
 
     private IEnumerator RegenerateHealth()
@@ -241,6 +262,11 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
+    public float getXPRequired()
+    {
+        return this.experiencePointsRequired;
+    }
+
     public void ActivateRoar()
     {
         this.hasRoar = true;
@@ -251,6 +277,12 @@ public class PlayerStateMachine : MonoBehaviour
         this.hasPunch = true;
     }
 
+    public void ActivateGasAttack()
+    {
+        this.hasGasAttack = true;
+    }
+
+
     public void ActivateFart()
     {
         this.hasFart = true;
@@ -260,6 +292,16 @@ public class PlayerStateMachine : MonoBehaviour
     {
         experiencePoints += amount;
         Debug.Log("Current XP: " + experiencePoints);
+    }
+
+    public void AddHp(int amount)
+    {
+        if (currentHealth + amount >= maxHealth) currentHealth = maxHealth;
+        else
+        {
+            currentHealth += amount;
+        }
+
     }
 
     private void ChangeState(PlayerState newState)
@@ -293,6 +335,10 @@ public class PlayerStateMachine : MonoBehaviour
             case PlayerState.Farting:
                 animator.SetInteger("State", 4);
                 peido.ActivateFart(1);
+                break;
+            case PlayerState.GasAttacking:
+                animator.SetInteger("State", 5); // Certifique-se de que 5 corresponde à animação correta
+                gasAttack.ActivateGasAttack(1);
                 break;
         }
     }
@@ -340,6 +386,12 @@ public class PlayerStateMachine : MonoBehaviour
         {
             ChangeState(PlayerState.Punching);
         }
+        else if (!gasAttack.IsInCooldown() && hasGasAttack)
+        {
+            ChangeState(PlayerState.GasAttacking);
+        }
+
+
     }
 
     private void UpdateWalkingState()
@@ -356,6 +408,16 @@ public class PlayerStateMachine : MonoBehaviour
         {
             ChangeState(PlayerState.Punching);
         }
+        else if (!gasAttack.IsInCooldown() && hasGasAttack)
+        {
+            ChangeState(PlayerState.GasAttacking);
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            
+        }
+
 
         if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
         {
@@ -531,4 +593,32 @@ public class PlayerStateMachine : MonoBehaviour
 
         isFartingCoroutineRunning = false;
     }
+
+    private IEnumerator UpdateGasAttackState()
+    {
+        if (isGasAttackingCoroutineRunning) yield break;
+
+        isGasAttackingCoroutineRunning = true;
+
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        float animationDuration = stateInfo.length;
+
+        yield return new WaitForSeconds(animationDuration / 2);
+
+        gasAttack.PerformGasAttack(transform, transform.rotation);
+
+        gasAttack.ResetTimer();
+
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        {
+            ChangeState(PlayerState.Walking);
+        }
+        else
+        {
+            ChangeState(PlayerState.Idle);
+        }
+
+        isGasAttackingCoroutineRunning = false;
+    }
+
 }

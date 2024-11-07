@@ -127,7 +127,9 @@ MonoBehaviour:
   enemyVision: 5
   damageRange: 0.5
   damageTextPrefab: {fileID: 2581792204945128073, guid: 1d3d40d773cd01241a385b802a92d090, type: 3}
-  xpPickupPrefab: {fileID: 5933130314543973684, guid: 94f1bc209f2c1684eb6d452093bff4b0, type: 3}
+  xpPickupPrefab: {fileID: 5933130314543973684, guid: fe14a1f777645914ba4fc21191fd16c4, type: 3}
+  hpPickupPrefab: {fileID: 5933130314543973684, guid: ac5b89ea9fce1ad4a88f2bec83cbc863, type: 3}
+  hpItemDropChance: 0.5
   knockbackDistance: 1
   knockbackDuration: 0.1
   playerDistanceToStop: 0
