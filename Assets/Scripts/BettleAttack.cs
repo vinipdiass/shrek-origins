@@ -29,8 +29,8 @@ public class BeetleAttack : MonoBehaviour
             playerTransform = GameObject.FindWithTag("Player").transform; // ou atribua de outra forma
         }
         isActive = false; // Inicialmente inativo
-        damage = 80f;           // Dano causado aos inimigos
-        baseDamage = 80f;
+        damage = 100f;           // Dano causado aos inimigos
+        baseDamage = 100f;
     }
 
     public void ActivateBeetle()
@@ -69,13 +69,23 @@ public class BeetleAttack : MonoBehaviour
             // Atualiza a posição do besouro ao redor do jogador
             beetleInstance.transform.position = playerTransform.position + offset;
 
-            // Remove a linha que altera a rotação do besouro para que ele mantenha a rotação original
+            // Sincroniza a rotação do besouro com a rotação em Y do jogador
+            beetleInstance.transform.eulerAngles = new Vector3(
+                beetleInstance.transform.eulerAngles.x,
+                playerTransform.eulerAngles.y,
+                beetleInstance.transform.eulerAngles.z
+            );
+
             // Debug para verificar a órbita
             Debug.Log("Orbitando ao redor do jogador. Ângulo: " + angle + " | Posição: " + beetleInstance.transform.position);
-            DamageEnemiesInRange();
 
+            DamageEnemiesInRange();
         }
     }
+
+
+
+
 
 
 
