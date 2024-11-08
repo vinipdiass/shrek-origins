@@ -3,13 +3,15 @@ using System.Collections;
 
 public class PlayerStateMachine : MonoBehaviour
 {
-    private enum PlayerState { Idle, Walking, Punching, Roaring, Farting, GasAttacking }
+    private enum PlayerState { Idle, Walking, Punching, Roaring, Farting, GasAttacking, BoomerangAttacking }
+
 
     private bool hasPunch = false;
     private bool hasRoar = false;
     private bool hasFart = false;
     private bool hasGasAttack = false;
     private bool hasBeetleAttack = false;
+    private bool hasBoomerangAttack = false;
 
     private PlayerState currentState;
     public int experiencePoints;
@@ -19,6 +21,7 @@ public class PlayerStateMachine : MonoBehaviour
     private bool isRoaringCoroutineRunning = false;
     private bool isFartingCoroutineRunning = false;
     private bool isGasAttackingCoroutineRunning = false;
+    private bool isBoomerangAttackingCoroutineRunning = false;
 
     public float speed = 5f;
     private CharacterController characterController;
@@ -27,6 +30,7 @@ public class PlayerStateMachine : MonoBehaviour
     private Fart peido;    // Para ataques de peido
     private Onion gasAttack; // Para ataques de gás
     private BeetleAttack besouroAttack; // Para ataque do besouro
+    private BoomerangAttack boomerangAttack; // Script do novo ataque
 
     public Animator animator;
     public int recovery;
@@ -61,6 +65,8 @@ public class PlayerStateMachine : MonoBehaviour
         peido = GetComponent<Fart>();
         gasAttack = GetComponent<Onion>();
         besouroAttack = GetComponent<BeetleAttack>();
+        boomerangAttack = GetComponent<BoomerangAttack>();
+
 
         atributos = GetComponent<Atributtes>();
 
@@ -92,6 +98,10 @@ public class PlayerStateMachine : MonoBehaviour
         else if (playerAbility == "BeetleAttack")
         {
             ActivateBeetleAttack();
+        }
+        else if (playerAbility == "BoomerangAttack")
+        {
+            ActivateBoomerangAttack();
         }
 
         ChangeState(PlayerState.Idle); // Estado inicial
@@ -257,6 +267,12 @@ public class PlayerStateMachine : MonoBehaviour
                     StartCoroutine(UpdateGasAttackState());
                 }
                 break;
+            case PlayerState.BoomerangAttacking:
+                if (!isBoomerangAttackingCoroutineRunning)
+                {
+                    StartCoroutine(UpdateBoomerangAttackState());
+                }
+                break;
         }
 
         // Timers de cooldown
@@ -264,6 +280,7 @@ public class PlayerStateMachine : MonoBehaviour
         rugido.IncreaseTimer();
         peido.IncreaseTimer();
         gasAttack.IncreaseTimer();
+        boomerangAttack.IncreaseTimer();
     }
 
     private IEnumerator RegenerateHealth()
@@ -317,6 +334,12 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
+    public void ActivateBoomerangAttack()
+    {
+        this.hasBoomerangAttack = true;
+    }
+
+
     public void AddExperience(int amount)
     {
         experiencePoints += amount;
@@ -366,6 +389,10 @@ public class PlayerStateMachine : MonoBehaviour
             case PlayerState.GasAttacking:
                 animator.SetInteger("State", 5);
                 gasAttack.ActivateGasAttack(1);
+                break;
+            case PlayerState.BoomerangAttacking:
+                animator.SetInteger("State", 6);
+                boomerangAttack.ActivateBoomerangAttack(1);
                 break;
         }
     }
@@ -417,6 +444,11 @@ public class PlayerStateMachine : MonoBehaviour
         {
             ChangeState(PlayerState.GasAttacking);
         }
+        else if (!boomerangAttack.IsInCooldown() && hasBoomerangAttack)
+        {
+            ChangeState(PlayerState.BoomerangAttacking);
+        }
+
     }
 
     private void UpdateWalkingState()
@@ -436,6 +468,10 @@ public class PlayerStateMachine : MonoBehaviour
         else if (!gasAttack.IsInCooldown() && hasGasAttack)
         {
             ChangeState(PlayerState.GasAttacking);
+        }
+        else if (!boomerangAttack.IsInCooldown() && hasBoomerangAttack)
+        {
+            ChangeState(PlayerState.BoomerangAttacking);
         }
 
         if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
@@ -627,4 +663,32 @@ public class PlayerStateMachine : MonoBehaviour
 
         isGasAttackingCoroutineRunning = false;
     }
+
+    private IEnumerator UpdateBoomerangAttackState()
+    {
+        if (isBoomerangAttackingCoroutineRunning) yield break;
+
+        isBoomerangAttackingCoroutineRunning = true;
+
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        float animationDuration = stateInfo.length;
+
+        yield return new WaitForSeconds(animationDuration / 2);
+
+        boomerangAttack.PerformBoomerangAttack(transform, transform.rotation);
+
+        boomerangAttack.ResetTimer();
+
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        {
+            ChangeState(PlayerState.Walking);
+        }
+        else
+        {
+            ChangeState(PlayerState.Idle);
+        }
+
+        isBoomerangAttackingCoroutineRunning = false;
+    }
+
 }
