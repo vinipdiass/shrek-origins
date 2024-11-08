@@ -9,6 +9,7 @@ public class PlayerStateMachine : MonoBehaviour
     private bool hasRoar = false;
     private bool hasFart = false;
     private bool hasGasAttack = false;
+    private bool hasBeetleAttack = false;
 
     private PlayerState currentState;
     public int experiencePoints;
@@ -21,23 +22,24 @@ public class PlayerStateMachine : MonoBehaviour
 
     public float speed = 5f;
     private CharacterController characterController;
-    private Punch soco;    // For punch attacks
-    private Roar rugido;   // For roar attacks
-    private Fart peido;    // For fart attacks
+    private Punch soco;    // Para ataques de soco
+    private Roar rugido;   // Para ataques de rugido
+    private Fart peido;    // Para ataques de peido
     private Onion gasAttack; // Para ataques de gás
+    private BeetleAttack besouroAttack; // Para ataque do besouro
 
     public Animator animator;
     public int recovery;
 
-    // Origin points for attacks (not needed for Fart anymore)
+    // Pontos de origem para ataques
     public Transform pontoOrigem;
     public Transform pontoOrigemRugido;
 
-    // Health variables
+    // Variáveis de vida
     public float maxHealth = 100f;
     public float currentHealth = 100f;
 
-    // Reference to SpriteRenderer
+    // Referência ao SpriteRenderer
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     private Atributtes atributos;
@@ -53,23 +55,23 @@ public class PlayerStateMachine : MonoBehaviour
         if (animator == null) Debug.LogError("Animator não encontrado no GameObject");
         characterController = GetComponent<CharacterController>();
 
-        // Initialize abilities
+        // Inicializa habilidades
         soco = GetComponent<Punch>();
         rugido = GetComponent<Roar>();
         peido = GetComponent<Fart>();
         gasAttack = GetComponent<Onion>();
-
+        besouroAttack = GetComponent<BeetleAttack>();
 
         atributos = GetComponent<Atributtes>();
 
-        // Get the SpriteRenderer
+        // Obtém o SpriteRenderer
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null) Debug.LogError("SpriteRenderer não encontrado no GameObject");
 
-        // Store the original color
+        // Armazena a cor original
         originalColor = spriteRenderer.color;
 
-        // Activate abilities based on player preferences
+        // Ativa habilidades com base nas preferências do jogador
         string playerAbility = PlayerPrefs.GetString("PlayerAbility", "None");
         if (playerAbility == "Punch")
         {
@@ -87,11 +89,15 @@ public class PlayerStateMachine : MonoBehaviour
         {
             ActivateGasAttack();
         }
+        else if (playerAbility == "BeetleAttack")
+        {
+            ActivateBeetleAttack();
+        }
 
-        ChangeState(PlayerState.Idle); // Initial state
+        ChangeState(PlayerState.Idle); // Estado inicial
 
-        float playerWidth = characterController.bounds.extents.x * 0.3f;  // Slightly reduce margin
-        float playerHeight = characterController.bounds.extents.y * 0.3f; // Slightly reduce margin
+        float playerWidth = characterController.bounds.extents.x * 0.3f;  // Margem ligeiramente reduzida
+        float playerHeight = characterController.bounds.extents.y * 0.3f; // Margem ligeiramente reduzida
 
         playerBounds = new Bounds();
         playerBounds.SetMinMax(
@@ -106,7 +112,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         HandleMovement();
 
-        // Ability evolution
+        // Evolução de habilidades
         if (Input.GetKeyDown(KeyCode.I) && experiencePoints >= experiencePointsRequired)
         {
             soco.evolute();
@@ -122,8 +128,16 @@ public class PlayerStateMachine : MonoBehaviour
             peido.Evolute();
             experiencePoints = 0;
         }
+        if (Input.GetKeyDown(KeyCode.U) && experiencePoints >= experiencePointsRequired)
+        {
+            if (besouroAttack != null)
+            {
+                besouroAttack.Evolute();
+                experiencePoints = 0;
+            }
+        }
 
-        // Ability activation
+        // Ativação de habilidades
         if (Input.GetKeyDown(KeyCode.K) && experiencePoints >= experiencePointsRequired)
         {
             hasPunch = true;
@@ -139,8 +153,13 @@ public class PlayerStateMachine : MonoBehaviour
             hasFart = true;
             experiencePoints = 0;
         }
+        if (Input.GetKeyDown(KeyCode.M) && experiencePoints >= experiencePointsRequired)
+        {
+            ActivateBeetleAttack();
+            experiencePoints = 0;
+        }
 
-        // Attribute evolution
+        // Evolução de atributos
         if (Input.GetKeyDown(KeyCode.Y) && experiencePoints >= experiencePointsRequired)
         {
             if (atributos.getLevelDamage() == 3)
@@ -153,9 +172,12 @@ public class PlayerStateMachine : MonoBehaviour
                 soco.addAtributeAttack();
                 rugido.addAtributeAttack();
                 peido.AddAttributeAttack();
+                if (besouroAttack != null)
+                {
+                    besouroAttack.AddAttributeAttack();
+                }
                 experiencePoints = 0;
             }
-
         }
         if (Input.GetKeyDown(KeyCode.T) && experiencePoints >= experiencePointsRequired)
         {
@@ -170,7 +192,6 @@ public class PlayerStateMachine : MonoBehaviour
                 atributos.increaseLevelMaxLife();
                 experiencePoints = 0;
             }
-
         }
         if (Input.GetKeyDown(KeyCode.R) && experiencePoints >= experiencePointsRequired)
         {
@@ -184,7 +205,6 @@ public class PlayerStateMachine : MonoBehaviour
                 atributos.increaseLevelRecovery();
                 experiencePoints = 0;
             }
-
         }
         if (Input.GetKeyDown(KeyCode.E) && experiencePoints >= experiencePointsRequired)
         {
@@ -197,10 +217,12 @@ public class PlayerStateMachine : MonoBehaviour
                 atributos.increaseLevelCooldown();
                 soco.addAtributeCooldownReduction();
                 rugido.addAtributeCooldownReduction();
-                // Implement cooldown reduction in Fart if needed
+                if (besouroAttack != null)
+                {
+                    besouroAttack.AddAttributeCooldownReduction();
+                }
                 experiencePoints = 0;
             }
-
         }
 
         switch (currentState)
@@ -235,10 +257,9 @@ public class PlayerStateMachine : MonoBehaviour
                     StartCoroutine(UpdateGasAttackState());
                 }
                 break;
-
         }
 
-        // Cooldown timers
+        // Timers de cooldown
         soco.IncreaseTimer();
         rugido.IncreaseTimer();
         peido.IncreaseTimer();
@@ -249,12 +270,12 @@ public class PlayerStateMachine : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(2f); // Wait 2 seconds
+            yield return new WaitForSeconds(2f); // Espera 2 segundos
 
             if (currentHealth < maxHealth)
             {
                 currentHealth += recovery;
-                if (currentHealth > maxHealth) // Ensure currentHealth doesn't exceed maxHealth
+                if (currentHealth > maxHealth) // Garante que currentHealth não exceda maxHealth
                 {
                     currentHealth = maxHealth;
                 }
@@ -282,10 +303,18 @@ public class PlayerStateMachine : MonoBehaviour
         this.hasGasAttack = true;
     }
 
-
     public void ActivateFart()
     {
         this.hasFart = true;
+    }
+
+    public void ActivateBeetleAttack()
+    {
+        this.hasBeetleAttack = true;
+        if (besouroAttack != null)
+        {
+            besouroAttack.ActivateBeetle();
+        }
     }
 
     public void AddExperience(int amount)
@@ -296,12 +325,10 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void AddHp(int amount)
     {
-        if (currentHealth + amount >= maxHealth) currentHealth = maxHealth;
+        if (currentHealth + amount >= maxHealth)
+            currentHealth = maxHealth;
         else
-        {
             currentHealth += amount;
-        }
-
     }
 
     private void ChangeState(PlayerState newState)
@@ -337,7 +364,7 @@ public class PlayerStateMachine : MonoBehaviour
                 peido.ActivateFart(1);
                 break;
             case PlayerState.GasAttacking:
-                animator.SetInteger("State", 5); // Certifique-se de que 5 corresponde à animação correta
+                animator.SetInteger("State", 5);
                 gasAttack.ActivateGasAttack(1);
                 break;
         }
@@ -390,8 +417,6 @@ public class PlayerStateMachine : MonoBehaviour
         {
             ChangeState(PlayerState.GasAttacking);
         }
-
-
     }
 
     private void UpdateWalkingState()
@@ -413,12 +438,6 @@ public class PlayerStateMachine : MonoBehaviour
             ChangeState(PlayerState.GasAttacking);
         }
 
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            
-        }
-
-
         if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
         {
             ChangeState(PlayerState.Idle);
@@ -434,11 +453,11 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (moveHorizontal < 0)
         {
-            transform.eulerAngles = new Vector3(0, 180, 0); // Rotate left
+            transform.eulerAngles = new Vector3(0, 180, 0); // Rotaciona para a esquerda
         }
         else if (moveHorizontal > 0)
         {
-            transform.eulerAngles = new Vector3(0, 0, 0); // Rotate right
+            transform.eulerAngles = new Vector3(0, 0, 0); // Rotaciona para a direita
         }
 
         Vector3 moveDirection = new Vector3(movement.x, movement.y, 0) * speed;
@@ -453,15 +472,10 @@ public class PlayerStateMachine : MonoBehaviour
         transform.position = clampedPosition;
     }
 
-    // Function to receive damage
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-
-        // Start the flashing coroutine
         StartCoroutine(FlashWhite());
-
-        // Check if health reached zero
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -472,28 +486,22 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void Die()
     {
-        // Implement behavior on death (e.g., play animation, disable controls)
         Debug.Log("O jogador morreu!");
+        // Implementar lógica de morte do jogador
     }
 
     private IEnumerator FlashWhite()
     {
-        Debug.Log("Entrou no método de FlashWhite");
-        int flashCount = 2; // Number of times the character will flash
-        float flashDuration = 0.2f; // Duration of each flash
+        int flashCount = 2; // Número de vezes que o personagem pisca
+        float flashDuration = 0.2f; // Duração de cada flash
 
         for (int i = 0; i < flashCount; i++)
         {
-            // Change color to red
             spriteRenderer.color = Color.red;
             yield return new WaitForSeconds(flashDuration / 2);
-
-            // Return to original color
             spriteRenderer.color = originalColor;
             yield return new WaitForSeconds(flashDuration / 2);
         }
-
-        // Ensure color is original at the end
         spriteRenderer.color = originalColor;
     }
 
@@ -502,7 +510,6 @@ public class PlayerStateMachine : MonoBehaviour
         if (isPunchingCoroutineRunning) yield break;
 
         isPunchingCoroutineRunning = true;
-
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         float animationDuration = stateInfo.length;
 
@@ -620,5 +627,4 @@ public class PlayerStateMachine : MonoBehaviour
 
         isGasAttackingCoroutineRunning = false;
     }
-
 }
