@@ -123,9 +123,9 @@ public class PlayerStateMachine : MonoBehaviour
         HandleMovement();
 
         // Evolução de habilidades
-        if (Input.GetKeyDown(KeyCode.I) && experiencePoints >= experiencePointsRequired)
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            soco.evolute();
+            boomerangAttack.evolute();
             experiencePoints = 0;
         }
         if (Input.GetKeyDown(KeyCode.O) && experiencePoints >= experiencePointsRequired)

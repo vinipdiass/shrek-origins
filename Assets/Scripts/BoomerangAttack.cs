@@ -52,7 +52,7 @@ public class BoomerangAttack : MonoBehaviour
         this.timer = 0;
     }
 
-    public void Evolute()
+    public void evolute()
     {
         if (evolution >= 3)
         {
@@ -62,6 +62,7 @@ public class BoomerangAttack : MonoBehaviour
         {
             evolution++;
             damage += baseDamage;
+            cooldown /= cooldown;
             Debug.Log("Boomerang Attack evoluído para o nível " + evolution + ".");
         }
     }
