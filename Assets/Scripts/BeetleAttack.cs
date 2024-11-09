@@ -31,6 +31,8 @@ public class BeetleAttack : MonoBehaviour
         isActive = false; // Inicialmente inativo
         damage = 100f;           // Dano causado aos inimigos
         baseDamage = 100f;
+        orbitRadius = 2f; 
+        rotationSpeed = 200f;
     }
 
     public void ActivateBeetle()
@@ -92,7 +94,7 @@ public class BeetleAttack : MonoBehaviour
 
     private void DamageEnemiesInRange()
     {
-        float hitRange = 0.5f; // Alcance para considerar um hit, ajuste conforme necessário
+        float hitRange = 0.7f; // Alcance para considerar um hit, ajuste conforme necessário
 
         // Encontra todos os inimigos com a tag "Enemy"
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -114,18 +116,25 @@ public class BeetleAttack : MonoBehaviour
     }
 
     // Métodos para evolução e atributos
-    public void Evolute()
+    public void evolute()
     {
         if (evolution >= 3)
         {
             Debug.Log("Você não pode mais evoluir este poder.");
             return;
         }
+        else
+        {
+            evolution++;
+            damage += baseDamage;
+            //orbitRadius += 0.5f; // Aumenta o raio da órbita
+            SpawnBeetle();
+            rotationSpeed += 50;
 
-        evolution++;
-        damage += baseDamage;
-        orbitRadius += 0.5f; // Aumenta o raio da órbita
-        Debug.Log("Besouro evoluído para o nível " + evolution);
+            Debug.Log("Besouro evoluído para o nível " + evolution);
+        }
+
+
     }
 
     public void AddAttributeAttack()

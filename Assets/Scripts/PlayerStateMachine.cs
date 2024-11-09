@@ -125,7 +125,7 @@ public class PlayerStateMachine : MonoBehaviour
         // Evolução de habilidades
         if (Input.GetKeyDown(KeyCode.I))
         {
-            boomerangAttack.evolute();
+            soco.Evolute();
             experiencePoints = 0;
         }
         if (Input.GetKeyDown(KeyCode.O) && experiencePoints >= experiencePointsRequired)
@@ -142,7 +142,7 @@ public class PlayerStateMachine : MonoBehaviour
         {
             if (besouroAttack != null)
             {
-                besouroAttack.Evolute();
+                besouroAttack.evolute();
                 experiencePoints = 0;
             }
         }

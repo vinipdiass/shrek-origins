@@ -20,7 +20,7 @@ public class Onion : MonoBehaviour
         timer = 0f;
         cooldown = 3f; // Ajuste o cooldown conforme necessário
         damage = 0f;
-        baseDamage = 50f;
+        baseDamage = 120f;
         evolution = 0;
 
         // Inicialize o sprite do projétil, se necessário
@@ -62,7 +62,7 @@ public class Onion : MonoBehaviour
         this.timer = 0;
     }
 
-    public void Evolute()
+    public void evolute()
     {
         if (evolution >= 3)
         {
@@ -72,6 +72,7 @@ public class Onion : MonoBehaviour
         {
             evolution++;
             damage += baseDamage;
+            cooldown /= 2;
             Debug.Log("Gas Attack evoluído para o nível " + evolution + ".");
         }
     }
