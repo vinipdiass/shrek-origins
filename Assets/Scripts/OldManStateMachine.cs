@@ -15,11 +15,13 @@ public class OldManStateMachine : MonoBehaviour, Damageable
     public GameObject damageTextPrefab;
     public GameObject xpPickupPrefab;
     public GameObject hpPickupPrefab;
+    public GameObject specialXPPrefab;
     public float hpItemDropChance;
+    public float specialXPDropChance;
 
     [Header("Knockback Settings")]
-    public float knockbackDistance = 1f;   // How far to knock back
-    public float knockbackDuration = 0.1f; // How long the knockback lasts
+    public float knockbackDistance = 1f;  
+    public float knockbackDuration = 0.1f; 
 
     [Header("Components")]
     private Animator animator;
@@ -68,7 +70,7 @@ public class OldManStateMachine : MonoBehaviour, Damageable
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         ChangeState(EnemyState.ChasingTarget);
-        hpItemDropChance = 0.03f;
+        hpItemDropChance = 6;
     }
 
     void Update()
@@ -205,9 +207,12 @@ public class OldManStateMachine : MonoBehaviour, Damageable
 
 
         // Verifica a chance de spawn do item especial
-        if (hpPickupPrefab != null && Random.value <= hpItemDropChance)
+        if (hpPickupPrefab != null && Random.Range(1, 101) <= hpItemDropChance)
         {
+            if (Random.Range(1, 3) % 2 == 0)
             Instantiate(hpPickupPrefab, transform.position, Quaternion.identity);
+            else
+            Instantiate(specialXPPrefab, transform.position, Quaternion.identity);
         }
         else
         {

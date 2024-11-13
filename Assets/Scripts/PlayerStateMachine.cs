@@ -125,7 +125,7 @@ public class PlayerStateMachine : MonoBehaviour
         // Evolução de habilidades
         if (Input.GetKeyDown(KeyCode.I))
         {
-            soco.Evolute();
+            boomerangAttack.evolute();
             experiencePoints = 0;
         }
         if (Input.GetKeyDown(KeyCode.O) && experiencePoints >= experiencePointsRequired)
@@ -182,6 +182,9 @@ public class PlayerStateMachine : MonoBehaviour
                 soco.addAtributeAttack();
                 rugido.addAtributeAttack();
                 peido.AddAttributeAttack();
+                gasAttack.AddAttributeAttack();
+                besouroAttack.addAtributeAttack();
+                boomerangAttack.addAtributeAttack();
                 if (besouroAttack != null)
                 {
                     besouroAttack.AddAttributeAttack();
@@ -227,10 +230,9 @@ public class PlayerStateMachine : MonoBehaviour
                 atributos.increaseLevelCooldown();
                 soco.addAtributeCooldownReduction();
                 rugido.addAtributeCooldownReduction();
-                if (besouroAttack != null)
-                {
-                    besouroAttack.AddAttributeCooldownReduction();
-                }
+                gasAttack.addAtributeCooldownReduction();
+                besouroAttack.addAtributeCooldownReduction();
+                boomerangAttack.addAtributeCooldownReduction();
                 experiencePoints = 0;
             }
         }
