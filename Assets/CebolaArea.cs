@@ -9,6 +9,7 @@ public class GasArea : MonoBehaviour
     private float damageInterval = 0.5f; // Interval between damage ticks
     public float baseDamagePerSecond = 15f;
 
+
     void Start()
     {
         // Start applying damage over time
@@ -16,8 +17,7 @@ public class GasArea : MonoBehaviour
 
         // Destroy the gas area after its duration
         Destroy(gameObject, duration);
-        damagePerSecond = 15f;
-        baseDamagePerSecond = 15f;
+
     }
 
     private IEnumerator ApplyDamageOverTime()

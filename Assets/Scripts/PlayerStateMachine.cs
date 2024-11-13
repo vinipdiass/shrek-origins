@@ -16,6 +16,7 @@ public class PlayerStateMachine : MonoBehaviour
     private PlayerState currentState;
     public int experiencePoints;
     public float experiencePointsRequired;
+    public int money;
     private Bounds playerBounds;
     private bool isPunchingCoroutineRunning = false;
     private bool isRoaringCoroutineRunning = false;
@@ -54,6 +55,7 @@ public class PlayerStateMachine : MonoBehaviour
         currentHealth = maxHealth;
         experiencePoints = 0;
         experiencePointsRequired = 300f;
+
 
         animator = GetComponent<Animator>();
         if (animator == null) Debug.LogError("Animator não encontrado no GameObject");
@@ -125,7 +127,7 @@ public class PlayerStateMachine : MonoBehaviour
         // Evolução de habilidades
         if (Input.GetKeyDown(KeyCode.I))
         {
-            boomerangAttack.evolute();
+            gasAttack.evolute();
             experiencePoints = 0;
         }
         if (Input.GetKeyDown(KeyCode.O) && experiencePoints >= experiencePointsRequired)
@@ -183,8 +185,8 @@ public class PlayerStateMachine : MonoBehaviour
                 rugido.addAtributeAttack();
                 peido.AddAttributeAttack();
                 gasAttack.AddAttributeAttack();
-                besouroAttack.addAtributeAttack();
-                boomerangAttack.addAtributeAttack();
+                besouroAttack.AddAttributeAttack();
+                boomerangAttack.AddAttributeAttack();
                 if (besouroAttack != null)
                 {
                     besouroAttack.AddAttributeAttack();
@@ -230,9 +232,9 @@ public class PlayerStateMachine : MonoBehaviour
                 atributos.increaseLevelCooldown();
                 soco.addAtributeCooldownReduction();
                 rugido.addAtributeCooldownReduction();
-                gasAttack.addAtributeCooldownReduction();
-                besouroAttack.addAtributeCooldownReduction();
-                boomerangAttack.addAtributeCooldownReduction();
+                gasAttack.AddAttributeCooldownReduction();
+                besouroAttack.AddAttributeCooldownReduction();
+                boomerangAttack.AddAttributeCooldownReduction();
                 experiencePoints = 0;
             }
         }
@@ -345,7 +347,14 @@ public class PlayerStateMachine : MonoBehaviour
     public void AddExperience(int amount)
     {
         experiencePoints += amount;
-        Debug.Log("Current XP: " + experiencePoints);
+        
+    }
+
+    
+    public void AddMoney(int amount)
+    {
+        money += amount;
+        Debug.Log("Current money: " + money);
     }
 
     public void AddHp(int amount)

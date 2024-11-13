@@ -13,6 +13,8 @@ public class Onion : MonoBehaviour
     private int evolution;
     public Sprite normalSprite;
     public Sprite specialSprite;
+    public GameObject gasAreaPrefab;
+
 
     void Start()
     {
@@ -20,15 +22,20 @@ public class Onion : MonoBehaviour
         timer = 0f;
         cooldown = 3f; // Ajuste o cooldown conforme necessário
         damage = 0f;
-        baseDamage = 120f;
+        baseDamage = 0f;
         evolution = 0;
-
+        GasArea gasArea = gasAreaPrefab.GetComponent<GasArea>();
+        gasArea.damagePerSecond = 15f;
+        gasArea.areaRadius = 2f;
         // Inicialize o sprite do projétil, se necessário
         SpriteRenderer sr = gasProjectilePrefab.GetComponent<SpriteRenderer>();
         if (sr != null)
         {
             sr.sprite = normalSprite;
         }
+        
+        gasProjectilePrefab.transform.localScale = new Vector3(0.1f, 0.1f, 0f);
+        gasAreaPrefab.transform.localScale = new Vector3(8f, 8f, 8f);
     }
 
     public void AddAttributeAttack()
@@ -71,11 +78,25 @@ public class Onion : MonoBehaviour
         else
         {
             evolution++;
-            damage += baseDamage;
+            
             cooldown /= 2;
+
+            // Aumente o tamanho do projétil de gás
+            gasProjectilePrefab.transform.localScale *= 1.2f; // Aumenta em 20% o tamanho a cada evolução
+            gasAreaPrefab.transform.localScale *= 1.2f;
+
+            // Aumente o raio da área de gás
+            GasArea gasArea = gasAreaPrefab.GetComponent<GasArea>();
+            if (gasArea != null)
+            {
+                gasArea.areaRadius *= 1.2f; // Aumenta o raio em 20% a cada evolução
+                gasArea.damagePerSecond += 10;
+            }
+
             Debug.Log("Gas Attack evoluído para o nível " + evolution + ".");
         }
     }
+
 
     public void PerformGasAttack(Transform position, Quaternion rotation)
     {
