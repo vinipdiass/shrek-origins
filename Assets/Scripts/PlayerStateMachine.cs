@@ -5,11 +5,12 @@ public class PlayerStateMachine : MonoBehaviour
 {
     private enum PlayerState { Idle, Walking, Punching, Roaring, Farting, GasAttacking, BoomerangAttacking }
 
-    private bool hasPunch = false;
-    private bool hasRoar = false;
-    private bool hasFart = false;
-    private bool hasGasAttack = false;
-    private bool hasBeetleAttack = false;
+    public bool hasPunch = false;
+    public bool hasRoar = false;
+    public bool hasFart = false;
+    public bool hasGasAttack = false;
+    public bool hasBeetleAttack = false;
+    public bool hasBoomerangAttack = false;
 
     private PlayerState currentState;
     public int experiencePoints;
