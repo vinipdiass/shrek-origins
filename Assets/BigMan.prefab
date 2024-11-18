@@ -129,7 +129,10 @@ MonoBehaviour:
   damageTextPrefab: {fileID: 2581792204945128073, guid: 1d3d40d773cd01241a385b802a92d090, type: 3}
   xpPickupPrefab: {fileID: 5933130314543973684, guid: fe14a1f777645914ba4fc21191fd16c4, type: 3}
   hpPickupPrefab: {fileID: 5933130314543973684, guid: ac5b89ea9fce1ad4a88f2bec83cbc863, type: 3}
+  specialXPPrefab: {fileID: 5933130314543973684, guid: fe14a1f777645914ba4fc21191fd16c4, type: 3}
+  moneyPrefab: {fileID: 5933130314543973684, guid: d54c914ce1d68394782c6b5d689cf466, type: 3}
   hpItemDropChance: 0.5
+  specialXPDropChance: 0
   knockbackDistance: 1
   knockbackDuration: 0.1
   playerDistanceToStop: 0

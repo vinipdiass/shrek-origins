@@ -31,11 +31,19 @@ public class SelectAttack : MonoBehaviour
 
     }
 
-        public void ButtonBeetle()
+    public void ButtonBeetle()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
         PlayerPrefs.SetString("PlayerAbility", "BeetleAttack");
 
     }
+
+    public void ButtonFrog()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
+        PlayerPrefs.SetString("PlayerAbility", "BoomerangAttack");
+
+    }
+
 
 }
