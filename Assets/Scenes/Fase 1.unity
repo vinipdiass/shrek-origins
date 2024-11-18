@@ -682,7 +682,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 128964954}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1250823057}
+        m_TargetAssemblyTypeName: UpgradePanel, Assembly-CSharp
+        m_MethodName: Button3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &128964954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -945,7 +957,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 249945783}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1250823057}
+        m_TargetAssemblyTypeName: UpgradePanel, Assembly-CSharp
+        m_MethodName: Button1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &249945783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1243,7 +1267,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 490980594}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1250823057}
+        m_TargetAssemblyTypeName: UpgradePanel, Assembly-CSharp
+        m_MethodName: Button2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &490980594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2245,6 +2281,11 @@ MonoBehaviour:
   upgradeDescription: {fileID: 0}
   buttons: []
   playerStateMachine: {fileID: 0}
+  soco: {fileID: 0}
+  rugido: {fileID: 0}
+  peido: {fileID: 0}
+  gasAttack: {fileID: 0}
+  besouroAttack: {fileID: 0}
 --- !u!1 &849132658
 GameObject:
   m_ObjectHideFlags: 0
@@ -3004,8 +3045,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beetlePrefab: {fileID: 3196165916302179076, guid: ff1e2cd395bb9624b8458aca44e448d8, type: 3}
   rotationSpeed: 200
-  orbitRadius: 10
-  damage: 10
+  orbitRadius: 2
+  damage: 100
   playerTransform: {fileID: 1029890395}
 --- !u!1 &1105425183
 GameObject:
@@ -3406,6 +3447,11 @@ MonoBehaviour:
   upgradeDescription: {fileID: 0}
   buttons: []
   playerStateMachine: {fileID: 0}
+  soco: {fileID: 0}
+  rugido: {fileID: 0}
+  peido: {fileID: 0}
+  gasAttack: {fileID: 0}
+  besouroAttack: {fileID: 0}
 --- !u!114 &1250823058
 MonoBehaviour:
   m_ObjectHideFlags: 0

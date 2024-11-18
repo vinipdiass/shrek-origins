@@ -5,11 +5,11 @@ public class PlayerStateMachine : MonoBehaviour
 {
     private enum PlayerState { Idle, Walking, Punching, Roaring, Farting, GasAttacking }
 
-    private bool hasPunch = false;
-    private bool hasRoar = false;
-    private bool hasFart = false;
-    private bool hasGasAttack = false;
-    private bool hasBeetleAttack = false;
+    public bool hasPunch = false;
+    public bool hasRoar = false;
+    public bool hasFart = false;
+    public bool hasGasAttack = false;
+    public bool hasBeetleAttack = false;
 
     private PlayerState currentState;
     public int experiencePoints;
@@ -49,7 +49,7 @@ public class PlayerStateMachine : MonoBehaviour
         recovery = 0;
         currentHealth = maxHealth;
         experiencePoints = 0;
-        experiencePointsRequired = 300f;
+        experiencePointsRequired = 10f;
 
         animator = GetComponent<Animator>();
         if (animator == null) Debug.LogError("Animator não encontrado no GameObject");
