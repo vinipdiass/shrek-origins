@@ -16,8 +16,8 @@ public class UpgradePanel : MonoBehaviour
     public Roar rugido;
     public Fart peido;
     public Onion gasAttack;
-    //public BeetleAttack besouroAttack;
-    //public BoomerangAttack boomerangAttack;
+    public BeetleAttack besouroAttack;
+    public BoomerangAttack boomerangAttack;
     
     public int button1Random;
     public int button2Random;
@@ -41,8 +41,8 @@ public class UpgradePanel : MonoBehaviour
         rugido = player.GetComponent<Roar>();
         peido = player.GetComponent<Fart>();
         gasAttack = player.GetComponent<Onion>();
-        //besouroAttack = player.GetComponent<BeetleAttack>();
-        //boomerangAttack = player.GetComponent<BoomerangAttack>();
+        besouroAttack = player.GetComponent<BeetleAttack>();
+        boomerangAttack = player.GetComponent<BoomerangAttack>();
 
         upgradePanel.SetActive(false);
         buttonsDefined = false;
@@ -59,7 +59,7 @@ public class UpgradePanel : MonoBehaviour
             // Gerar números aleatórios distintos entre 1 e 6
             HashSet<int> uniqueNumbers = new HashSet<int>();
             System.Random random = new System.Random();
-            while (uniqueNumbers.Count < 3) uniqueNumbers.Add(random.Next(1, 5)); // Gera número entre 1 e 6
+            while (uniqueNumbers.Count < 3) uniqueNumbers.Add(random.Next(1, 7)); // Gera número entre 1 e 6
 
             // Atribuir os números às variáveis
             int[] numbers = new int[3];
@@ -198,7 +198,7 @@ public class UpgradePanel : MonoBehaviour
                     upgradeDescription.text = "Ataque de gás adquirido!";
                 }
                 break;
-            /*case 5:
+            case 5:
                 if (playerStateMachine.hasBeetleAttack)
                 {
                     besouroAttack.evolute();
@@ -221,7 +221,7 @@ public class UpgradePanel : MonoBehaviour
                     playerStateMachine.hasBoomerangAttack = true;
                     upgradeDescription.text = "Ataque de bumerangue adquirido!";
                 }
-                break;*/
+                break;
         }
 
         playerStateMachine.experiencePoints = 0;
@@ -282,7 +282,7 @@ public class UpgradePanel : MonoBehaviour
                     upgradeDescription.text = "Ataque de gás adquirido!";
                 }
                 break;
-            /*case 5:
+            case 5:
                 if (playerStateMachine.hasBeetleAttack)
                 {
                     besouroAttack.evolute();
@@ -305,7 +305,7 @@ public class UpgradePanel : MonoBehaviour
                     playerStateMachine.hasBoomerangAttack = true;
                     upgradeDescription.text = "Ataque de bumerangue adquirido!";
                 }
-                break;*/
+                break;
         }
 
         playerStateMachine.experiencePoints = 0;
@@ -366,7 +366,7 @@ public class UpgradePanel : MonoBehaviour
                     upgradeDescription.text = "Ataque de gás adquirido!";
                 }
                 break;
-            /*case 5:
+            case 5:
                 if (playerStateMachine.hasBeetleAttack)
                 {
                     besouroAttack.evolute();
@@ -389,7 +389,7 @@ public class UpgradePanel : MonoBehaviour
                     playerStateMachine.hasBoomerangAttack = true;
                     upgradeDescription.text = "Ataque de bumerangue adquirido!";
                 }
-                break;*/
+                break;
         }
 
         playerStateMachine.experiencePoints = 0;
