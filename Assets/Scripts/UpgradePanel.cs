@@ -308,7 +308,9 @@ public class UpgradePanel : MonoBehaviour
                 break;
         }
 
-        playerStateMachine.experiencePoints = 0;
+        playerStateMachine.experiencePoints -= (int)playerStateMachine.experiencePointsRequired;
+        playerStateMachine.countLevel++;
+        playerStateMachine.experiencePointsRequired += 100;
         Time.timeScale = 1;
         upgradePanel.SetActive(false);
         buttonsDefined = false;

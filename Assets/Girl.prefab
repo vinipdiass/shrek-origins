@@ -119,10 +119,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae16373f6c3e9d64abd34b541f972427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalHealth: 100
-  currentHealth: 100
+  totalHealth: 600
+  currentHealth: 600
   attackDamage: 30
-  moveSpeed: 1.1
+  moveSpeed: 1.3
   colliderRadius: 0
   enemyVision: 5
   damageRange: 0.5
@@ -131,7 +131,7 @@ MonoBehaviour:
   hpPickupPrefab: {fileID: 5933130314543973684, guid: ac5b89ea9fce1ad4a88f2bec83cbc863, type: 3}
   specialXPPrefab: {fileID: 5933130314543973684, guid: 6176f7e370aee4b43b713066e4556038, type: 3}
   moneyPrefab: {fileID: 5933130314543973684, guid: d54c914ce1d68394782c6b5d689cf466, type: 3}
-  hpItemDropChance: 0.5
+  differentItemDropChance: 0
   specialXPDropChance: 0
   knockbackDistance: 1
   knockbackDuration: 0.1

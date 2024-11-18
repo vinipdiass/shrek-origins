@@ -47,13 +47,14 @@ public class PlayerStateMachine : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     private Atributtes atributos;
+    public int countLevel;
 
     private void Start()
     {
         recovery = 0;
         currentHealth = maxHealth;
         experiencePoints = 0;
-        experiencePointsRequired = 10f;
+        experiencePointsRequired = 100f;
 
         animator = GetComponent<Animator>();
         if (animator == null) Debug.LogError("Animator não encontrado no GameObject");
@@ -66,6 +67,7 @@ public class PlayerStateMachine : MonoBehaviour
         gasAttack = GetComponent<Onion>();
         besouroAttack = GetComponent<BeetleAttack>();
         boomerangAttack = GetComponent<BoomerangAttack>();
+        countLevel = 0;
 
 
         atributos = GetComponent<Atributtes>();

@@ -31,7 +31,7 @@ public class BeetleAttack : MonoBehaviour
         damage = 100f;
         baseDamage = 100f;
         orbitRadius = 2f;
-        rotationSpeed = 200f;
+        rotationSpeed = 100f;
     }
 
     public void ActivateBeetle()
