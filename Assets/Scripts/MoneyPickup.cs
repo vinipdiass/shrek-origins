@@ -29,7 +29,7 @@ public class MoneyPickup : MonoBehaviour
             if (distanceToPlayer <= pickupRadius)
             {
                 // Add XP to the player
-                player.AddMoney(moneyAmount);
+                GameDataManager.instance.AdicionarDinheiro(moneyAmount);
                 // Destroy the XP pickup
                 Destroy(gameObject);
             }

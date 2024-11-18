@@ -127,7 +127,7 @@ public class PlayerStateMachine : MonoBehaviour
         // Evolução de habilidades
         if (Input.GetKeyDown(KeyCode.I))
         {
-            gasAttack.evolute();
+            rugido.evolute();
             experiencePoints = 0;
         }
         if (Input.GetKeyDown(KeyCode.O) && experiencePoints >= experiencePointsRequired)
