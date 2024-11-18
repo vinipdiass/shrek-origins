@@ -576,7 +576,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 128964954}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1250823057}
+        m_TargetAssemblyTypeName: UpgradePanel, Assembly-CSharp
+        m_MethodName: Button3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &128964954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -839,7 +851,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 249945783}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1250823057}
+        m_TargetAssemblyTypeName: UpgradePanel, Assembly-CSharp
+        m_MethodName: Button1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &249945783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1137,7 +1161,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 490980594}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1250823057}
+        m_TargetAssemblyTypeName: UpgradePanel, Assembly-CSharp
+        m_MethodName: Button2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &490980594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3015,6 +3051,11 @@ MonoBehaviour:
   upgradeDescription: {fileID: 0}
   buttons: []
   playerStateMachine: {fileID: 0}
+  soco: {fileID: 0}
+  rugido: {fileID: 0}
+  peido: {fileID: 0}
+  gasAttack: {fileID: 0}
+  besouroAttack: {fileID: 0}
 --- !u!114 &1250823058
 MonoBehaviour:
   m_ObjectHideFlags: 0
