@@ -115,22 +115,6 @@ public class OldManStateMachine : MonoBehaviour, Damageable
     {
         lastState = currentState;
         currentState = newState;
-
-        switch (newState)
-        {
-            case EnemyState.Idle:
-                animator.SetInteger("State", 0);
-                break;
-            case EnemyState.ChasingTarget:
-                animator.SetInteger("State", 1);
-                break;
-            case EnemyState.RecoveringFromHit:
-                animator.SetInteger("State", 3);
-                break;
-            case EnemyState.Dead:
-                animator.SetInteger("State", 0);
-                break;
-        }
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

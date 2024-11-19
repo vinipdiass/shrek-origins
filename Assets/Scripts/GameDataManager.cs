@@ -76,4 +76,8 @@ public class GameDataManager : MonoBehaviour
     public int getMoney(){
         return playerData.dinheiro;
     }
+
+    public List<int> getAtributos(){
+        return playerData.atributosDisponiveis;
+    }
 }

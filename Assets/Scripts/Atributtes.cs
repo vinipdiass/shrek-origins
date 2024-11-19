@@ -10,6 +10,7 @@ public class Atributtes : MonoBehaviour
     public int levelRecovery = 0;
     public int levelDamage = 0;
     public int levelCooldown = 0;
+    public int levelSpeed = 0;
 
     // Atualiza o dano e incrementa o nível de dano
 
@@ -33,6 +34,10 @@ public class Atributtes : MonoBehaviour
         return levelCooldown;
     }
 
+    public int getLevelSpeed(){
+        return levelSpeed;
+    }
+
     public void increaseLevelDamage()
     {
         levelDamage++;
@@ -50,5 +55,9 @@ public class Atributtes : MonoBehaviour
 
     public void increaseLevelCooldown(){
         levelCooldown++;
+    }
+
+    public void increaseLevelSpeed(){
+        levelSpeed++;
     }
 }

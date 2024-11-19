@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System;
+using System.Collections.Generic;
 
 public class PlayerStateMachine : MonoBehaviour
 {
@@ -48,6 +50,8 @@ public class PlayerStateMachine : MonoBehaviour
     private Color originalColor;
     private Atributtes atributos;
     public int countLevel;
+    public bool verificacaoLoja;
+    List<int> atributosDisponiveis;
 
     private void Start()
     {
@@ -55,6 +59,7 @@ public class PlayerStateMachine : MonoBehaviour
         currentHealth = maxHealth;
         experiencePoints = 0;
         experiencePointsRequired = 100f;
+        speed = 3f;
 
         animator = GetComponent<Animator>();
         if (animator == null) Debug.LogError("Animator não encontrado no GameObject");
@@ -117,12 +122,17 @@ public class PlayerStateMachine : MonoBehaviour
             new Vector3(Globals.WorldBounds.max.x - playerWidth, Globals.WorldBounds.max.y - playerHeight, 0.0f)
         );
 
+        atributosDisponiveis = GameDataManager.instance.getAtributos();
+        verificacaoLoja = true;
+
         StartCoroutine(RegenerateHealth());
+
     }
 
     private void Update()
     {
         HandleMovement();
+
 
         // Evolução de habilidades
         if (Input.GetKeyDown(KeyCode.I))
@@ -172,72 +182,46 @@ public class PlayerStateMachine : MonoBehaviour
         }
 
         // Evolução de atributos
-        if (Input.GetKeyDown(KeyCode.Y) && experiencePoints >= experiencePointsRequired)
+        if (Input.GetKeyDown(KeyCode.Y))
         {
-            if (atributos.getLevelDamage() == 3)
-            {
-                Debug.Log("Você não pode mais evoluir esse atributo");
-            }
-            else
-            {
-                atributos.increaseLevelDamage();
-                soco.addAtributeAttack();
-                rugido.addAtributeAttack();
-                peido.AddAttributeAttack();
-                gasAttack.AddAttributeAttack();
-                besouroAttack.AddAttributeAttack();
-                boomerangAttack.AddAttributeAttack();
-                if (besouroAttack != null)
-                {
-                    besouroAttack.AddAttributeAttack();
-                }
-                experiencePoints = 0;
-            }
+            IncreaseAtribute(0);
+            atributos.increaseLevelMaxLife();
         }
-        if (Input.GetKeyDown(KeyCode.T) && experiencePoints >= experiencePointsRequired)
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            if (atributos.getLevelMaxLife() == 3)
-            {
-                Debug.Log("Você não pode mais evoluir esse atributo");
-            }
-            else
-            {
-                this.maxHealth += 50;
-                this.currentHealth += 50;
-                atributos.increaseLevelMaxLife();
-                experiencePoints = 0;
-            }
+            IncreaseAtribute(1);
+            atributos.increaseLevelRecovery();
         }
-        if (Input.GetKeyDown(KeyCode.R) && experiencePoints >= experiencePointsRequired)
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            if (atributos.getLevelRecovery() == 3)
-            {
-                Debug.Log("Você não pode mais evoluir esse atributo");
-            }
-            else
-            {
-                this.recovery++;
-                atributos.increaseLevelRecovery();
-                experiencePoints = 0;
-            }
+            IncreaseAtribute(2);
+            atributos.increaseLevelCooldown();
         }
-        if (Input.GetKeyDown(KeyCode.E) && experiencePoints >= experiencePointsRequired)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (atributos.getLevelCooldown() == 3)
-            {
-                Debug.Log("Você não pode mais evoluir esse atributo");
-            }
-            else
-            {
-                atributos.increaseLevelCooldown();
-                soco.addAtributeCooldownReduction();
-                rugido.addAtributeCooldownReduction();
-                gasAttack.AddAttributeCooldownReduction();
-                besouroAttack.AddAttributeCooldownReduction();
-                boomerangAttack.AddAttributeCooldownReduction();
-                experiencePoints = 0;
-            }
+            IncreaseAtribute(3);
+            atributos.increaseLevelSpeed();
         }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            IncreaseAtribute(4);
+            atributos.increaseLevelDamage();
+
+        }
+
+
+        if (verificacaoLoja == true)
+        {
+            aplicaLojaAtributos(0, atributosDisponiveis[0]);
+            aplicaLojaAtributos(1, atributosDisponiveis[1]);
+            aplicaLojaAtributos(2, atributosDisponiveis[2]);
+            aplicaLojaAtributos(3, atributosDisponiveis[3]);
+            aplicaLojaAtributos(4, atributosDisponiveis[4]);
+
+            verificacaoLoja = false;
+        }
+
 
         switch (currentState)
         {
@@ -347,10 +331,10 @@ public class PlayerStateMachine : MonoBehaviour
     public void AddExperience(int amount)
     {
         experiencePoints += amount;
-        
+
     }
 
-    
+
     public void AddMoney(int amount)
     {
         money += amount;
@@ -700,6 +684,103 @@ public class PlayerStateMachine : MonoBehaviour
         }
 
         isBoomerangAttackingCoroutineRunning = false;
+    }
+
+    private void IncreaseAtribute(int at)
+    {
+        if (at == 0)
+        {
+            Debug.Log("Vida maxima aprimorado");
+
+            if (atributos.getLevelMaxLife() >= 3)
+            {
+                Debug.Log("Você não pode mais evoluir esse atributo");
+            }
+            else
+            {
+                this.maxHealth += 70;
+                this.currentHealth += 70;
+                experiencePoints = 0;
+            }
+
+        }
+        if (at == 1)
+        {
+            Debug.Log("Regen aprimorado");
+            if (atributos.getLevelRecovery() >= 3)
+            {
+                Debug.Log("Você não pode mais evoluir esse atributo");
+            }
+            else
+            {
+                this.recovery++;
+                experiencePoints = 0;
+            }
+        }
+        if (at == 2)
+        {
+
+            if (atributos.getLevelCooldown() >= 3)
+            {
+                Debug.Log("Você não pode mais evoluir esse atributo");
+            }
+            else
+            {
+                Debug.Log("Cooldown aprimorado");
+                soco.addAtributeCooldownReduction();
+                rugido.addAtributeCooldownReduction();
+                gasAttack.AddAttributeCooldownReduction();
+                besouroAttack.AddAttributeCooldownReduction();
+                boomerangAttack.AddAttributeCooldownReduction();
+                experiencePoints = 0;
+            }
+        }
+
+        if (at == 3)
+        {
+            Debug.Log("Velocidade aprimorada");
+            if (atributos.getLevelSpeed() >= 3)
+            {
+                Debug.Log("Você não pode mais evoluir esse atributo");
+            }
+            else
+            {
+                speed += 0.5f;
+            }
+        }
+
+        if (at == 4)
+        {
+            if (atributos.getLevelDamage() >= 3)
+            {
+                Debug.Log("Você não pode mais evoluir esse atributo");
+            }
+            else
+            {
+                Debug.Log("Dano aprimorado");
+                soco.addAtributeAttack();
+                rugido.addAtributeAttack();
+                peido.AddAttributeAttack();
+                gasAttack.AddAttributeAttack();
+                besouroAttack.AddAttributeAttack();
+                boomerangAttack.AddAttributeAttack();
+
+            }
+        }
+    }
+
+    public void aplicaLojaAtributos(int index, int n)
+    {
+        if (atributos == null)
+        {
+            Debug.LogError("Atributtes não inicializado!");
+            return;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            Debug.Log("Atributo comprado");
+            IncreaseAtribute(index);
+        }
     }
 
 }
