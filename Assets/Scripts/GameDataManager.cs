@@ -16,7 +16,7 @@ public class GameDataManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -53,12 +53,16 @@ public class GameDataManager : MonoBehaviour
     }
 
     // Exemplo de função para adicionar mapa desbloqueado
-    public void DesbloquearMapa(string nomeMapa)
+    public void DesbloquearMapa(int index)
     {
-        if (!playerData.mapasDesbloqueados.Contains(nomeMapa))
+        if (index >= 0 && index < playerData.mapasDesbloqueados.Count)
         {
-            playerData.mapasDesbloqueados.Add(nomeMapa);
+            playerData.mapasDesbloqueados[index] = true;
             SaveData();
+        }
+        else
+        {
+            Debug.LogError("Índice de mapa inválido para desbloquear.");
         }
     }
 
@@ -69,15 +73,24 @@ public class GameDataManager : MonoBehaviour
         SaveData();
     }
 
-    public void AdicionaAtributo(int index){
-        
+    public void AdicionaAtributo(int index)
+    {
+
     }
 
-    public int getMoney(){
+    public int getMoney()
+    {
         return playerData.dinheiro;
     }
 
-    public List<int> getAtributos(){
+    public List<int> getAtributos()
+    {
         return playerData.atributosDisponiveis;
+    }
+
+
+    public List<bool> getMapas()
+    {
+        return playerData.mapasDesbloqueados;
     }
 }

@@ -6,43 +6,63 @@ public class SelectAttack : MonoBehaviour
 {
     public void ButtonPunch()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
+        loadMap();
         PlayerPrefs.SetString("PlayerAbility", "Punch");
     }
 
     public void ButtonRoar()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
+        loadMap();
         PlayerPrefs.SetString("PlayerAbility", "Roar");
 
     }
 
     public void ButtonFart()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
+        loadMap();
         PlayerPrefs.SetString("PlayerAbility", "Fart");
 
     }
 
     public void ButtonOnion()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
+        loadMap();
         PlayerPrefs.SetString("PlayerAbility", "GasAttack");
 
     }
 
     public void ButtonBeetle()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
+        loadMap();
         PlayerPrefs.SetString("PlayerAbility", "BeetleAttack");
 
     }
 
     public void ButtonFrog()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
+        loadMap();
         PlayerPrefs.SetString("PlayerAbility", "BoomerangAttack");
 
+    }
+
+    public void loadMap(){
+        string playerAbility = PlayerPrefs.GetString("Map", "None");
+        if (playerAbility == "Map1")
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
+        }
+        else if (playerAbility == "Map2")
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
+        }
+        else if (playerAbility == "Map3")
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
+        }
+        else if (playerAbility == "Map4")
+        {
+             UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
+        }
     }
 
 

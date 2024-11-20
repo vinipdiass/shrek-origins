@@ -17,20 +17,21 @@ public class Timer : MonoBehaviour
     }
 
     void Start()
-    {     
+    {
         Time.timeScale = 1;
         StartCoroutine(StartCountdown());
         endGamePanel.SetActive(false);
         victoryPanel.SetActive(false);
+        timer = 300;
     }
 
     IEnumerator StartCountdown()
     {
-         
+
 
         while (timer > 0)
         {
-            if(playerStateMachine.currentHealth <= 0) break;
+            if (playerStateMachine.currentHealth <= 0) break;
             counterText.text = timer.ToString(); // Atualiza o texto da UI
             yield return new WaitForSeconds(1); // Espera 1 segundo
             timer--; // Decrementa o timer
@@ -41,7 +42,27 @@ public class Timer : MonoBehaviour
         // Para o jogo
         Time.timeScale = 0;
         // Ativa o painel de fim de jogo
-        victoryPanel.SetActive(true);
+        if (playerStateMachine.currentHealth <= 0)
+        {
+            endGamePanel.SetActive(true);
+        }
+        else
+        {
+            victoryPanel.SetActive(true);
+            string playerAbility = PlayerPrefs.GetString("Map", "None");
+            if (playerAbility == "Map1")
+            {
+                GameDataManager.instance.DesbloquearMapa(1);
+            }
+            else if (playerAbility == "Map2")
+            {
+                GameDataManager.instance.DesbloquearMapa(2);
+            }
+            else if (playerAbility == "Map3")
+            {
+                GameDataManager.instance.DesbloquearMapa(3);
+            }
+        }
 
     }
 }

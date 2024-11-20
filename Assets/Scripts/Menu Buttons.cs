@@ -7,7 +7,7 @@ public class MenuButtons : MonoBehaviour
     public void ButtonNewGame()
     {
         Debug.Log("New Game");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Select Attack");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Map Select");
     }
 
     public void ButtonOptions()
