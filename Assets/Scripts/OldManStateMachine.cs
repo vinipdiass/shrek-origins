@@ -21,8 +21,8 @@ public class OldManStateMachine : MonoBehaviour, Damageable
     public float specialXPDropChance;
 
     [Header("Knockback Settings")]
-    public float knockbackDistance = 1f;  
-    public float knockbackDuration = 0.1f; 
+    public float knockbackDistance = 1f;
+    public float knockbackDuration = 0.1f;
 
     [Header("Components")]
     private Animator animator;
@@ -196,11 +196,11 @@ public class OldManStateMachine : MonoBehaviour, Damageable
         {
             int random = Random.Range(1, 5);
             if (random == 1)
-            Instantiate(hpPickupPrefab, transform.position, Quaternion.identity);
+                Instantiate(hpPickupPrefab, transform.position, Quaternion.identity);
             if (random == 2)
-            Instantiate(specialXPPrefab, transform.position, Quaternion.identity);
+                Instantiate(specialXPPrefab, transform.position, Quaternion.identity);
             if (random > 2)
-            Instantiate(moneyPrefab, transform.position, Quaternion.identity);
+                Instantiate(moneyPrefab, transform.position, Quaternion.identity);
         }
         else
         {
@@ -267,6 +267,10 @@ public class OldManStateMachine : MonoBehaviour, Damageable
 
     public void ReceiveDamage(float damage, bool knockback)
     {
+        int minDamage = Mathf.FloorToInt(damage - (damage * 0.3f));
+        int maxDamage = Mathf.CeilToInt(damage + (damage * 0.3f));
+        damage = Random.Range(minDamage, maxDamage);
+
         // Check cooldown for receiving damage
         if (Time.time >= lastDamageReceivedTime + receiveDamageCooldown && currentState != EnemyState.Dead)
         {

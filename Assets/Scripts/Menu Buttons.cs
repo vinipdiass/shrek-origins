@@ -12,7 +12,7 @@ public class MenuButtons : MonoBehaviour
 
     public void ButtonOptions()
     {
-        Debug.Log("Options");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Atribute Store");
     }
 
     public void ButtonCredits()

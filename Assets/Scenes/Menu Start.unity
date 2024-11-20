@@ -1169,7 +1169,7 @@ GameObject:
   - component: {fileID: 1297581439}
   - component: {fileID: 1297581438}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Shop store
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1214,7 +1214,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Options
+  m_text: Store
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8271c16ed408d5b47b3d1bc1c29a7f20, type: 2}
   m_sharedMaterial: {fileID: -7871875819581869519, guid: 8271c16ed408d5b47b3d1bc1c29a7f20, type: 2}

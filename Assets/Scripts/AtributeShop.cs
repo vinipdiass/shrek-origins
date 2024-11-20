@@ -10,6 +10,11 @@ public class LojaDeAtributos : MonoBehaviour
     public Button atributo3Button;
     public Button atributo4Button;
     public Button atributo5Button;
+    public TextMeshProUGUI custoAt1;
+    public TextMeshProUGUI custoAt2;
+    public TextMeshProUGUI custoAt3;
+    public TextMeshProUGUI custoAt4;
+    public TextMeshProUGUI custoAt5;
 
     private int custoAtributo = 100;
     private int[] comprasAtributo = new int[5]; // Armazena quantas vezes cada atributo foi comprado
@@ -60,6 +65,16 @@ public class LojaDeAtributos : MonoBehaviour
     void AtualizarTextoMoedas()
     {
         moedasTexto.text = "" + GameDataManager.instance.getMoney();
+        if (comprasAtributo[0] >= 3) custoAt1.text = "MAX";
+        else custoAt1.text = "" + ( 100 * (comprasAtributo[0] + 1));
+        if (comprasAtributo[1] >= 3) custoAt2.text = "MAX";
+        else custoAt2.text = "" + ( 100 * (comprasAtributo[1] + 1));
+        if (comprasAtributo[2] >= 3) custoAt3.text = "MAX";
+        else custoAt3.text = "" + ( 100 * (comprasAtributo[2] + 1));
+        if (comprasAtributo[3] >= 3) custoAt4.text = "MAX";
+        else custoAt4.text = "" + ( 100 * (comprasAtributo[3] + 1));
+        if (comprasAtributo[4] >= 3) custoAt5.text = "MAX";
+        else custoAt5.text = "" + ( 100 * (comprasAtributo[4] + 1));        
     }
 
     void ConfigurarBotoes()

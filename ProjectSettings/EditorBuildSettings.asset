@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Select Attack.unity
     guid: b7adfc4f410878a4ea3c03cd5487db9f
+  - enabled: 1
+    path: Assets/Scenes/Atribute Store.unity
+    guid: ba314bfcaedcdbb49b8a67a7cff153ad
   m_configObjects: {}
