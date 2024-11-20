@@ -11,7 +11,7 @@ public class BeetleAttack : MonoBehaviour
     private float attackInterval = 0.5f;
     private float attackTimer = 0f;
 
-    private int evolution = 0;
+    private int evolution = -1;
 
     private List<GameObject> beetleInstances = new List<GameObject>(); // Lista para armazenar instâncias de besouros
     private List<float> angles = new List<float>();                   // Lista para armazenar ângulos individuais

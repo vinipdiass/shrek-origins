@@ -203,7 +203,7 @@ public class PlayerStateMachine : MonoBehaviour
             atributos.increaseLevelSpeed();
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             IncreaseAtribute(4);
             atributos.increaseLevelDamage();

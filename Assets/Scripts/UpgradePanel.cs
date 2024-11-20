@@ -24,11 +24,19 @@ public class UpgradePanel : MonoBehaviour
     public int button3Random;
     public bool buttonsDefined;
 
+    public Sprite punchSprite;
+    public Sprite roarSprite;
+    public Sprite fartSprite;
+    public Sprite gasAttackSprite;
+    public Sprite beetleAttackSprite;
+    public Sprite boomerangAttackSprite;
+
     public enum Abilities { Punch = 1, Roar = 2, Fart = 3, GasAttack = 4 } //BeetleAttack = 5, //BoomerangAttack = 6}
 
 
     void Awake()
     {
+        
         // Elemento do menu
         upgradePanel = GameObject.Find("UpgradePanel");
         upgradeDescription = GameObject.Find("UpgradeDescription").GetComponent<TextMeshProUGUI>();
@@ -76,19 +84,25 @@ public class UpgradePanel : MonoBehaviour
             // Player can learn new attacks or evolve existing ones
             for (int i = 1; i <= 6; i++)
             {
-                availableAbilities.Add(i);
+                if ((i == 1 && !playerStateMachine.hasPunch) ||
+                    (i == 2 && !playerStateMachine.hasRoar) ||
+                    (i == 3 && !playerStateMachine.hasFart) ||
+                    (i == 4 && !playerStateMachine.hasGasAttack) ||
+                    (i == 5 && !playerStateMachine.hasBeetleAttack) ||
+                    (i == 6 && !playerStateMachine.hasBoomerangAttack))
+                {
+                    availableAbilities.Add(i); // Add new attacks to the list
+                }
             }
         }
-        else
-        {
-            // Player can only evolve existing attacks
-            if (playerStateMachine.hasPunch) availableAbilities.Add(1);
-            if (playerStateMachine.hasRoar) availableAbilities.Add(2);
-            if (playerStateMachine.hasFart) availableAbilities.Add(3);
-            if (playerStateMachine.hasGasAttack) availableAbilities.Add(4);
-            if (playerStateMachine.hasBeetleAttack) availableAbilities.Add(5);
-            if (playerStateMachine.hasBoomerangAttack) availableAbilities.Add(6);
-        }
+
+        // Always include already acquired attacks for evolution
+        if (playerStateMachine.hasPunch) availableAbilities.Add(1);
+        if (playerStateMachine.hasRoar) availableAbilities.Add(2);
+        if (playerStateMachine.hasFart) availableAbilities.Add(3);
+        if (playerStateMachine.hasGasAttack) availableAbilities.Add(4);
+        if (playerStateMachine.hasBeetleAttack) availableAbilities.Add(5);
+        if (playerStateMachine.hasBoomerangAttack) availableAbilities.Add(6);
 
         // Ensure we have at least one ability to offer
         if (availableAbilities.Count == 0)
@@ -120,6 +134,7 @@ public class UpgradePanel : MonoBehaviour
         button3Random = numbers[2];
     }
 
+
     private int GetNumberOfAttacks()
     {
         int count = 0;
@@ -146,33 +161,34 @@ public class UpgradePanel : MonoBehaviour
     {
         if (abilityId == -1)
         {
-            button.gameObject.SetActive(false);
+            button.gameObject.SetActive(false); // Se não há habilidade, desativa o botão
             return;
         }
 
-        button.gameObject.SetActive(true);
+        button.gameObject.SetActive(true); // Ativa o botão e define o sprite
         switch (abilityId)
         {
             case 1:
-                button.GetComponent<Image>().sprite = soco.normalSprite;
+                button.GetComponent<Image>().sprite = punchSprite;
                 break;
             case 2:
-                button.GetComponent<Image>().sprite = rugido.normalSprite;
+                button.GetComponent<Image>().sprite = roarSprite;
                 break;
             case 3:
-                button.GetComponent<Image>().sprite = peido.normalSprite;
+                button.GetComponent<Image>().sprite = fartSprite;
                 break;
             case 4:
-                button.GetComponent<Image>().sprite = gasAttack.normalSprite;
+                button.GetComponent<Image>().sprite = gasAttackSprite;
                 break;
             case 5:
-                //button.GetComponent<Image>().sprite = besouroAttack.normalSprite;
+                button.GetComponent<Image>().sprite = beetleAttackSprite;
                 break;
             case 6:
-                //button.GetComponent<Image>().sprite = boomerangAttack.normalSprite;
+                button.GetComponent<Image>().sprite = boomerangAttackSprite;
                 break;
         }
     }
+
 
 
 
@@ -195,7 +211,7 @@ public class UpgradePanel : MonoBehaviour
     {
         switch (abilityId)
         {
-            case 1:
+            case 1: // Punch
                 if (playerStateMachine.hasPunch)
                 {
                     soco.Evolute();
@@ -207,7 +223,8 @@ public class UpgradePanel : MonoBehaviour
                     upgradeDescription.text = "Soco adquirido!";
                 }
                 break;
-            case 2:
+
+            case 2: // Roar
                 if (playerStateMachine.hasRoar)
                 {
                     rugido.Evolute();
@@ -219,7 +236,8 @@ public class UpgradePanel : MonoBehaviour
                     upgradeDescription.text = "Rugido adquirido!";
                 }
                 break;
-            case 3:
+
+            case 3: // Fart
                 if (playerStateMachine.hasFart)
                 {
                     peido.Evolute();
@@ -231,7 +249,8 @@ public class UpgradePanel : MonoBehaviour
                     upgradeDescription.text = "Peido adquirido!";
                 }
                 break;
-            case 4:
+
+            case 4: // Gas Attack
                 if (playerStateMachine.hasGasAttack)
                 {
                     gasAttack.Evolute();
@@ -243,7 +262,8 @@ public class UpgradePanel : MonoBehaviour
                     upgradeDescription.text = "Ataque de gás adquirido!";
                 }
                 break;
-            case 5:
+
+            case 5: // Beetle Attack
                 if (playerStateMachine.hasBeetleAttack)
                 {
                     besouroAttack.Evolute();
@@ -251,11 +271,14 @@ public class UpgradePanel : MonoBehaviour
                 }
                 else
                 {
-                    playerStateMachine.hasBeetleAttack = true;
+                    playerStateMachine.hasBeetleAttack = true; 
+                    besouroAttack.Evolute();
+                    Debug.Log("Entrou aqui");
                     upgradeDescription.text = "Ataque de besouro adquirido!";
                 }
                 break;
-            case 6:
+
+            case 6: // Boomerang Attack
                 if (playerStateMachine.hasBoomerangAttack)
                 {
                     boomerangAttack.Evolute();
@@ -263,22 +286,23 @@ public class UpgradePanel : MonoBehaviour
                 }
                 else
                 {
-                    playerStateMachine.hasBoomerangAttack = true;
+                    playerStateMachine.hasBoomerangAttack = true; // Atualiza estado imediatamente
                     upgradeDescription.text = "Ataque de bumerangue adquirido!";
                 }
                 break;
         }
 
-        // Update experience points and level
+        // Atualiza os pontos de experiência e progresso
         playerStateMachine.experiencePoints -= (int)playerStateMachine.experiencePointsRequired;
         playerStateMachine.countLevel++;
         playerStateMachine.experiencePointsRequired += 10;
 
-        // Close the upgrade panel
+        // Fecha o painel de upgrade
         Time.timeScale = 1;
         upgradePanel.SetActive(false);
         buttonsDefined = false;
     }
+
 
 
 }
