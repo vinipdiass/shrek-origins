@@ -52,7 +52,7 @@ public class BoomerangAttack : MonoBehaviour
         this.timer = 0;
     }
 
-    public void evolute()
+    public void Evolute()
     {
         if (evolution >= 3)
         {

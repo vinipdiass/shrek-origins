@@ -18,13 +18,13 @@ public class UpgradePanel : MonoBehaviour
     public Onion gasAttack;
     public BeetleAttack besouroAttack;
     public BoomerangAttack boomerangAttack;
-    
+
     public int button1Random;
     public int button2Random;
     public int button3Random;
     public bool buttonsDefined;
 
-    public enum Abilities {Punch = 1, Roar = 2, Fart = 3, GasAttack = 4} //BeetleAttack = 5, //BoomerangAttack = 6}
+    public enum Abilities { Punch = 1, Roar = 2, Fart = 3, GasAttack = 4 } //BeetleAttack = 5, //BoomerangAttack = 6}
 
 
     void Awake()
@@ -56,274 +56,149 @@ public class UpgradePanel : MonoBehaviour
             Time.timeScale = 0;
             upgradePanel.SetActive(true);
 
-            // Gerar números aleatórios distintos entre 1 e 6
-            HashSet<int> uniqueNumbers = new HashSet<int>();
-            System.Random random = new System.Random();
-            while (uniqueNumbers.Count < 3) uniqueNumbers.Add(random.Next(1, 7)); // Gera número entre 1 e 6
-
-            // Atribuir os números às variáveis
-            int[] numbers = new int[3];
-            uniqueNumbers.CopyTo(numbers);
-            button1Random = numbers[0];
-            button2Random = numbers[1];
-            button3Random = numbers[2];
-
-            // Debug para verificar os valores
-            //Debug.Log($"Button1Random: {button1Random}, Button2Random: {button2Random}, Button3Random: {button3Random}");
-
-            if(!buttonsDefined) DefineButtons();
+            if (!buttonsDefined)
+            {
+                // Generate random numbers only once
+                GenerateRandomButtons();
+                DefineButtons();
+                buttonsDefined = true;
+            }
         }
     }
+
+    private void GenerateRandomButtons()
+    {
+        int numberOfAttacks = GetNumberOfAttacks();
+        List<int> availableAbilities = new List<int>();
+
+        if (numberOfAttacks < 3)
+        {
+            // Player can learn new attacks or evolve existing ones
+            for (int i = 1; i <= 6; i++)
+            {
+                availableAbilities.Add(i);
+            }
+        }
+        else
+        {
+            // Player can only evolve existing attacks
+            if (playerStateMachine.hasPunch) availableAbilities.Add(1);
+            if (playerStateMachine.hasRoar) availableAbilities.Add(2);
+            if (playerStateMachine.hasFart) availableAbilities.Add(3);
+            if (playerStateMachine.hasGasAttack) availableAbilities.Add(4);
+            if (playerStateMachine.hasBeetleAttack) availableAbilities.Add(5);
+            if (playerStateMachine.hasBoomerangAttack) availableAbilities.Add(6);
+        }
+
+        // Ensure we have at least one ability to offer
+        if (availableAbilities.Count == 0)
+        {
+            Debug.LogError("No abilities available to offer.");
+            return;
+        }
+
+        // Generate unique random abilities
+        HashSet<int> uniqueNumbers = new HashSet<int>();
+        System.Random random = new System.Random();
+        while (uniqueNumbers.Count < 3 && uniqueNumbers.Count < availableAbilities.Count)
+        {
+            int index = random.Next(availableAbilities.Count);
+            uniqueNumbers.Add(availableAbilities[index]);
+        }
+
+        int[] numbers = new int[3];
+        uniqueNumbers.CopyTo(numbers);
+
+        // Fill remaining slots with -1 if less than 3 abilities are available
+        for (int i = uniqueNumbers.Count; i < 3; i++)
+        {
+            numbers[i] = -1;
+        }
+
+        button1Random = numbers[0];
+        button2Random = numbers[1];
+        button3Random = numbers[2];
+    }
+
+    private int GetNumberOfAttacks()
+    {
+        int count = 0;
+        if (playerStateMachine.hasPunch) count++;
+        if (playerStateMachine.hasRoar) count++;
+        if (playerStateMachine.hasFart) count++;
+        if (playerStateMachine.hasGasAttack) count++;
+        if (playerStateMachine.hasBeetleAttack) count++;
+        if (playerStateMachine.hasBoomerangAttack) count++;
+        return count;
+    }
+
+
+
 
     public void DefineButtons()
     {
-        buttonsDefined = true;
-        switch (button1Random)
+        SetButtonImage(buttons[0], button1Random);
+        SetButtonImage(buttons[1], button2Random);
+        SetButtonImage(buttons[2], button3Random);
+    }
+
+    private void SetButtonImage(Button button, int abilityId)
+    {
+        if (abilityId == -1)
         {
-            case 1:
-                buttons[0].GetComponent<Image>().sprite = soco.normalSprite;
-                break;
-            case 2:
-                buttons[0].GetComponent<Image>().sprite = rugido.normalSprite;
-                break;
-            case 3:
-                buttons[0].GetComponent<Image>().sprite = peido.normalSprite;
-                break;
-            case 4:
-                buttons[0].GetComponent<Image>().sprite = gasAttack.normalSprite;
-                break;
-            /*case 5:
-                buttons[0].GetComponent<Image>().sprite = besouroAttack.normalSprite;
-                break;
-            case 6:
-                buttons[0].GetComponent<Image>().sprite = boomerangAttack.normalSprite;
-                break;*/
+            button.gameObject.SetActive(false);
+            return;
         }
 
-        switch (button2Random)
+        button.gameObject.SetActive(true);
+        switch (abilityId)
         {
             case 1:
-                buttons[1].GetComponent<Image>().sprite = soco.normalSprite;
+                button.GetComponent<Image>().sprite = soco.normalSprite;
                 break;
             case 2:
-                buttons[1].GetComponent<Image>().sprite = rugido.normalSprite;
+                button.GetComponent<Image>().sprite = rugido.normalSprite;
                 break;
             case 3:
-                buttons[1].GetComponent<Image>().sprite = peido.normalSprite;
+                button.GetComponent<Image>().sprite = peido.normalSprite;
                 break;
             case 4:
-                buttons[1].GetComponent<Image>().sprite = gasAttack.normalSprite;
+                button.GetComponent<Image>().sprite = gasAttack.normalSprite;
                 break;
-            /*case 5:
-                buttons[1].GetComponent<Image>().sprite = besouroAttack.normalSprite;
-                break;
-            case 6:
-                buttons[1].GetComponent<Image>().sprite = boomerangAttack.normalSprite;
-                break;*/
-        }
-
-        switch (button3Random)
-        {
-            case 1:
-                buttons[2].GetComponent<Image>().sprite = soco.normalSprite;
-                break;
-            case 2:
-                buttons[2].GetComponent<Image>().sprite = rugido.normalSprite;
-                break;
-            case 3:
-                buttons[2].GetComponent<Image>().sprite = peido.normalSprite;
-                break;
-            case 4:
-                buttons[2].GetComponent<Image>().sprite = gasAttack.normalSprite;
-                break;
-            /*case 5:
-                buttons[2].GetComponent<Image>().sprite = besouroAttack.normalSprite;
+            case 5:
+                //button.GetComponent<Image>().sprite = besouroAttack.normalSprite;
                 break;
             case 6:
-                buttons[2].GetComponent<Image>().sprite = boomerangAttack.normalSprite;
-                break;*/
+                //button.GetComponent<Image>().sprite = boomerangAttack.normalSprite;
+                break;
         }
     }
+
 
 
     public void Button1()
     {
-        switch (button1Random)
-        {
-            case 1:
-                if (playerStateMachine.hasPunch)
-                {
-                    soco.evolute();
-                    upgradeDescription.text = "Soco evoluído!";
-                }
-                else
-                {
-                    playerStateMachine.hasPunch = true;
-                    upgradeDescription.text = "Soco adquirido!";
-                }
-                break;
-            case 2:
-                if (playerStateMachine.hasRoar)
-                {
-                    rugido.evolute();
-                    upgradeDescription.text = "Rugido evoluído!";
-                }
-                else
-                {
-                    playerStateMachine.hasRoar = true;
-                    upgradeDescription.text = "Rugido adquirido!";
-                }
-                break;
-            case 3:
-                if (playerStateMachine.hasFart)
-                {
-                    peido.Evolute();
-                    upgradeDescription.text = "Peido evoluído!";
-                }
-                else
-                {
-                    playerStateMachine.hasFart = true;
-                    upgradeDescription.text = "Peido adquirido!";
-                }
-                break;
-            case 4:
-                if (playerStateMachine.hasGasAttack)
-                {
-                    gasAttack.evolute();
-                    upgradeDescription.text = "Ataque de gás evoluido!";
-                }
-                else
-                {
-                    playerStateMachine.hasGasAttack = true;
-                    upgradeDescription.text = "Ataque de gás adquirido!";
-                }
-                break;
-            case 5:
-                if (playerStateMachine.hasBeetleAttack)
-                {
-                    besouroAttack.evolute();
-                    upgradeDescription.text = "Ataque de besouro evoluído!";
-                }
-                else
-                {
-                    playerStateMachine.hasBeetleAttack = true;
-                    upgradeDescription.text = "Ataque de besouro adquirido!";
-                }
-                break;
-            case 6:
-                if (playerStateMachine.hasBoomerangAttack)
-                {
-                    boomerangAttack.evolute();
-                    upgradeDescription.text = "Ataque de bumerangue evoluído!";
-                }
-                else
-                {
-                    playerStateMachine.hasBoomerangAttack = true;
-                    upgradeDescription.text = "Ataque de bumerangue adquirido!";
-                }
-                break;
-        }
-
-        playerStateMachine.experiencePoints = 0;
-        Time.timeScale = 1;
-        upgradePanel.SetActive(false);
-        buttonsDefined = false;
+        ApplyUpgrade(button1Random);
     }
 
     public void Button2()
     {
-        switch (button2Random)
-        {
-            case 1:
-                if (playerStateMachine.hasPunch)
-                {
-                    soco.evolute();
-                    upgradeDescription.text = "Soco evoluído!";
-                }
-                else
-                {
-                    playerStateMachine.hasPunch = true;
-                    upgradeDescription.text = "Soco adquirido!";
-                }
-                break;
-            case 2:
-                if (playerStateMachine.hasRoar)
-                {
-                    rugido.evolute();
-                    upgradeDescription.text = "Rugido evoluído!";
-                }
-                else
-                {
-                    playerStateMachine.hasRoar = true;
-                    upgradeDescription.text = "Rugido adquirido!";
-                }
-                break;
-            case 3:
-                if (playerStateMachine.hasFart)
-                {
-                    peido.Evolute();
-                    upgradeDescription.text = "Peido evoluído!";
-                }
-                else
-                {
-                    playerStateMachine.hasFart = true;
-                    upgradeDescription.text = "Peido adquirido!";
-                }
-                break;
-            case 4:
-                if (playerStateMachine.hasGasAttack)
-                {
-                    gasAttack.evolute();
-                    upgradeDescription.text = "Ataque de gás evoluido!";
-                }
-                else
-                {
-                    playerStateMachine.hasGasAttack = true;
-                    upgradeDescription.text = "Ataque de gás adquirido!";
-                }
-                break;
-            case 5:
-                if (playerStateMachine.hasBeetleAttack)
-                {
-                    besouroAttack.evolute();
-                    upgradeDescription.text = "Ataque de besouro evoluído!";
-                }
-                else
-                {
-                    playerStateMachine.hasBeetleAttack = true;
-                    upgradeDescription.text = "Ataque de besouro adquirido!";
-                }
-                break;
-            case 6:
-                if (playerStateMachine.hasBoomerangAttack)
-                {
-                    boomerangAttack.evolute();
-                    upgradeDescription.text = "Ataque de bumerangue evoluído!";
-                }
-                else
-                {
-                    playerStateMachine.hasBoomerangAttack = true;
-                    upgradeDescription.text = "Ataque de bumerangue adquirido!";
-                }
-                break;
-        }
-
-        playerStateMachine.experiencePoints -= (int)playerStateMachine.experiencePointsRequired;
-        playerStateMachine.countLevel++;
-        playerStateMachine.experiencePointsRequired += 100;
-        Time.timeScale = 1;
-        upgradePanel.SetActive(false);
-        buttonsDefined = false;
+        ApplyUpgrade(button2Random);
     }
 
     public void Button3()
     {
-        switch (button3Random)
+        ApplyUpgrade(button3Random);
+    }
+
+    private void ApplyUpgrade(int abilityId)
+    {
+        switch (abilityId)
         {
             case 1:
                 if (playerStateMachine.hasPunch)
                 {
-                    soco.evolute();
+                    soco.Evolute();
                     upgradeDescription.text = "Soco evoluído!";
                 }
                 else
@@ -335,7 +210,7 @@ public class UpgradePanel : MonoBehaviour
             case 2:
                 if (playerStateMachine.hasRoar)
                 {
-                    rugido.evolute();
+                    rugido.Evolute();
                     upgradeDescription.text = "Rugido evoluído!";
                 }
                 else
@@ -359,8 +234,8 @@ public class UpgradePanel : MonoBehaviour
             case 4:
                 if (playerStateMachine.hasGasAttack)
                 {
-                    gasAttack.evolute();
-                    upgradeDescription.text = "Ataque de gás evoluido!";
+                    gasAttack.Evolute();
+                    upgradeDescription.text = "Ataque de gás evoluído!";
                 }
                 else
                 {
@@ -371,7 +246,7 @@ public class UpgradePanel : MonoBehaviour
             case 5:
                 if (playerStateMachine.hasBeetleAttack)
                 {
-                    besouroAttack.evolute();
+                    besouroAttack.Evolute();
                     upgradeDescription.text = "Ataque de besouro evoluído!";
                 }
                 else
@@ -383,7 +258,7 @@ public class UpgradePanel : MonoBehaviour
             case 6:
                 if (playerStateMachine.hasBoomerangAttack)
                 {
-                    boomerangAttack.evolute();
+                    boomerangAttack.Evolute();
                     upgradeDescription.text = "Ataque de bumerangue evoluído!";
                 }
                 else
@@ -394,10 +269,17 @@ public class UpgradePanel : MonoBehaviour
                 break;
         }
 
-        playerStateMachine.experiencePoints = 0;
+        // Update experience points and level
+        playerStateMachine.experiencePoints -= (int)playerStateMachine.experiencePointsRequired;
+        playerStateMachine.countLevel++;
+        playerStateMachine.experiencePointsRequired += 10;
+
+        // Close the upgrade panel
         Time.timeScale = 1;
         upgradePanel.SetActive(false);
         buttonsDefined = false;
     }
+
+
 }
 

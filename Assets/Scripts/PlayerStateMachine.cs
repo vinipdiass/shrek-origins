@@ -58,7 +58,7 @@ public class PlayerStateMachine : MonoBehaviour
         recovery = 0;
         currentHealth = maxHealth;
         experiencePoints = 0;
-        experiencePointsRequired = 100f;
+        experiencePointsRequired = 1f;
         speed = 3f;
 
         animator = GetComponent<Animator>();
@@ -137,12 +137,12 @@ public class PlayerStateMachine : MonoBehaviour
         // Evolução de habilidades
         if (Input.GetKeyDown(KeyCode.I))
         {
-            rugido.evolute();
+            rugido.Evolute();
             experiencePoints = 0;
         }
         if (Input.GetKeyDown(KeyCode.O) && experiencePoints >= experiencePointsRequired)
         {
-            rugido.evolute();
+            rugido.Evolute();
             experiencePoints = 0;
         }
         if (Input.GetKeyDown(KeyCode.P) && experiencePoints >= experiencePointsRequired)
@@ -154,7 +154,7 @@ public class PlayerStateMachine : MonoBehaviour
         {
             if (besouroAttack != null)
             {
-                besouroAttack.evolute();
+                besouroAttack.Evolute();
                 experiencePoints = 0;
             }
         }

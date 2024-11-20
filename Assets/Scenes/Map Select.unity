@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 143763487}
   - component: {fileID: 143763486}
   m_Layer: 5
-  m_Name: Mapa 2
+  m_Name: Mapa 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -645,7 +645,7 @@ GameObject:
   - component: {fileID: 381595974}
   - component: {fileID: 381595973}
   m_Layer: 5
-  m_Name: Mapa 3
+  m_Name: Mapa 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -794,7 +794,7 @@ GameObject:
   - component: {fileID: 608173982}
   - component: {fileID: 608173981}
   m_Layer: 5
-  m_Name: Mapa 4
+  m_Name: Mapa 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1477,9 +1477,9 @@ RectTransform:
   - {fileID: 1184433753}
   - {fileID: 1384834958}
   - {fileID: 722440460}
+  - {fileID: 608173980}
   - {fileID: 143763485}
   - {fileID: 381595972}
-  - {fileID: 608173980}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1537,13 +1537,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map1: {fileID: 722440461}
-  map2: {fileID: 143763487}
-  map3: {fileID: 381595974}
-  map4: {fileID: 608173982}
+  map2: {fileID: 608173982}
+  map3: {fileID: 143763487}
+  map4: {fileID: 381595974}
   mapText1: {fileID: 877639485}
-  mapText2: {fileID: 1401509587}
-  mapText3: {fileID: 364506894}
-  mapText4: {fileID: 29919060}
+  mapText2: {fileID: 29919060}
+  mapText3: {fileID: 1401509587}
+  mapText4: {fileID: 364506894}
 --- !u!1 &1384834957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1578,8 +1578,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -130, y: 182}
-  m_SizeDelta: {x: 260, y: 175}
+  m_AnchoredPosition: {x: -129.3304, y: 203.21}
+  m_SizeDelta: {x: 258.4646, y: 126.39}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1384834959
 MonoBehaviour:
@@ -1601,7 +1601,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Escolha um mapa:'
+  m_text: Escolha um mapa
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1628,8 +1628,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

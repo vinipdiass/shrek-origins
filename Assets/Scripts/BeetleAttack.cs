@@ -125,7 +125,7 @@ public class BeetleAttack : MonoBehaviour
         }
     }
 
-    public void evolute()
+    public void Evolute()
     {
         if (evolution >= 3)
         {
