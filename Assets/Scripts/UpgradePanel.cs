@@ -12,6 +12,12 @@ public class UpgradePanel : MonoBehaviour
     public List<Button> buttons;
     public PlayerStateMachine playerStateMachine;
 
+    // Adicione no início da classe
+    private Dictionary<int, int> abilityLevels;
+    public int maxEvolutionLevel = 3; // Nível máximo de evolução
+    public Sprite emptySprite; // Sprite para habilidades "vazias"
+
+
     public Punch soco;
     public Roar rugido;
     public Fart peido;
@@ -36,7 +42,17 @@ public class UpgradePanel : MonoBehaviour
 
     void Awake()
     {
-        
+
+        abilityLevels = new Dictionary<int, int>
+    {
+        { 1, 0 }, // Punch
+        { 2, 0 }, // Roar
+        { 3, 0 }, // Fart
+        { 4, 0 }, // GasAttack
+        { 5, 0 }, // BeetleAttack
+        { 6, 0 }  // BoomerangAttack
+    };
+
         // Elemento do menu
         upgradePanel = GameObject.Find("UpgradePanel");
         upgradeDescription = GameObject.Find("UpgradeDescription").GetComponent<TextMeshProUGUI>();
@@ -81,37 +97,37 @@ public class UpgradePanel : MonoBehaviour
 
         if (numberOfAttacks < 3)
         {
-            // Player can learn new attacks or evolve existing ones
             for (int i = 1; i <= 6; i++)
             {
-                if ((i == 1 && !playerStateMachine.hasPunch) ||
-                    (i == 2 && !playerStateMachine.hasRoar) ||
-                    (i == 3 && !playerStateMachine.hasFart) ||
-                    (i == 4 && !playerStateMachine.hasGasAttack) ||
-                    (i == 5 && !playerStateMachine.hasBeetleAttack) ||
-                    (i == 6 && !playerStateMachine.hasBoomerangAttack))
+                if (abilityLevels[i] < maxEvolutionLevel && // Verifica se ainda pode evoluir
+                    ((i == 1 && !playerStateMachine.hasPunch) ||
+                     (i == 2 && !playerStateMachine.hasRoar) ||
+                     (i == 3 && !playerStateMachine.hasFart) ||
+                     (i == 4 && !playerStateMachine.hasGasAttack) ||
+                     (i == 5 && !playerStateMachine.hasBeetleAttack) ||
+                     (i == 6 && !playerStateMachine.hasBoomerangAttack)))
                 {
-                    availableAbilities.Add(i); // Add new attacks to the list
+                    availableAbilities.Add(i); // Adiciona novas habilidades disponíveis
                 }
             }
         }
 
-        // Always include already acquired attacks for evolution
-        if (playerStateMachine.hasPunch) availableAbilities.Add(1);
-        if (playerStateMachine.hasRoar) availableAbilities.Add(2);
-        if (playerStateMachine.hasFart) availableAbilities.Add(3);
-        if (playerStateMachine.hasGasAttack) availableAbilities.Add(4);
-        if (playerStateMachine.hasBeetleAttack) availableAbilities.Add(5);
-        if (playerStateMachine.hasBoomerangAttack) availableAbilities.Add(6);
-
-        // Ensure we have at least one ability to offer
-        if (availableAbilities.Count == 0)
+        // Inclui habilidades adquiridas, mas ainda não no nível máximo
+        for (int i = 1; i <= 6; i++)
         {
-            Debug.LogError("No abilities available to offer.");
-            return;
+            if (abilityLevels[i] < maxEvolutionLevel &&
+                ((i == 1 && playerStateMachine.hasPunch) ||
+                 (i == 2 && playerStateMachine.hasRoar) ||
+                 (i == 3 && playerStateMachine.hasFart) ||
+                 (i == 4 && playerStateMachine.hasGasAttack) ||
+                 (i == 5 && playerStateMachine.hasBeetleAttack) ||
+                 (i == 6 && playerStateMachine.hasBoomerangAttack)))
+            {
+                availableAbilities.Add(i);
+            }
         }
 
-        // Generate unique random abilities
+        // Gera habilidades únicas e aleatórias
         HashSet<int> uniqueNumbers = new HashSet<int>();
         System.Random random = new System.Random();
         while (uniqueNumbers.Count < 3 && uniqueNumbers.Count < availableAbilities.Count)
@@ -123,7 +139,7 @@ public class UpgradePanel : MonoBehaviour
         int[] numbers = new int[3];
         uniqueNumbers.CopyTo(numbers);
 
-        // Fill remaining slots with -1 if less than 3 abilities are available
+        // Preenche com -1 se menos de 3 habilidades estão disponíveis
         for (int i = uniqueNumbers.Count; i < 3; i++)
         {
             numbers[i] = -1;
@@ -133,6 +149,7 @@ public class UpgradePanel : MonoBehaviour
         button2Random = numbers[1];
         button3Random = numbers[2];
     }
+
 
 
     private int GetNumberOfAttacks()
@@ -159,13 +176,14 @@ public class UpgradePanel : MonoBehaviour
 
     private void SetButtonImage(Button button, int abilityId)
     {
-        if (abilityId == -1)
+        if (abilityId == -1 || (abilityId > 0 && abilityLevels[abilityId] >= maxEvolutionLevel))
         {
-            button.gameObject.SetActive(false); // Se não há habilidade, desativa o botão
+            button.gameObject.SetActive(true); // Mostra o botão vazio
+            button.GetComponent<Image>().sprite = emptySprite; // Define sprite vazio
             return;
         }
 
-        button.gameObject.SetActive(true); // Ativa o botão e define o sprite
+        button.gameObject.SetActive(true); // Ativa o botão
         switch (abilityId)
         {
             case 1:
@@ -192,6 +210,7 @@ public class UpgradePanel : MonoBehaviour
 
 
 
+
     public void Button1()
     {
         ApplyUpgrade(button1Random);
@@ -214,8 +233,16 @@ public class UpgradePanel : MonoBehaviour
             case 1: // Punch
                 if (playerStateMachine.hasPunch)
                 {
-                    soco.Evolute();
-                    upgradeDescription.text = "Soco evoluído!";
+                    if (abilityLevels[1] < maxEvolutionLevel)
+                    {
+                        abilityLevels[1]++;
+                        soco.Evolute();
+                        upgradeDescription.text = "Soco evoluído!";
+                    }
+                    else
+                    {
+                        upgradeDescription.text = "Soco já está no nível máximo!";
+                    }
                 }
                 else
                 {
@@ -227,8 +254,16 @@ public class UpgradePanel : MonoBehaviour
             case 2: // Roar
                 if (playerStateMachine.hasRoar)
                 {
-                    rugido.Evolute();
-                    upgradeDescription.text = "Rugido evoluído!";
+                    if (abilityLevels[2] < maxEvolutionLevel)
+                    {
+                        abilityLevels[2]++;
+                        rugido.Evolute();
+                        upgradeDescription.text = "Rugido evoluído!";
+                    }
+                    else
+                    {
+                        upgradeDescription.text = "Rugido já está no nível máximo!";
+                    }
                 }
                 else
                 {
@@ -240,8 +275,16 @@ public class UpgradePanel : MonoBehaviour
             case 3: // Fart
                 if (playerStateMachine.hasFart)
                 {
-                    peido.Evolute();
-                    upgradeDescription.text = "Peido evoluído!";
+                    if (abilityLevels[3] < maxEvolutionLevel)
+                    {
+                        abilityLevels[3]++;
+                        peido.Evolute();
+                        upgradeDescription.text = "Peido evoluído!";
+                    }
+                    else
+                    {
+                        upgradeDescription.text = "Peido já está no nível máximo!";
+                    }
                 }
                 else
                 {
@@ -253,8 +296,16 @@ public class UpgradePanel : MonoBehaviour
             case 4: // Gas Attack
                 if (playerStateMachine.hasGasAttack)
                 {
-                    gasAttack.Evolute();
-                    upgradeDescription.text = "Ataque de gás evoluído!";
+                    if (abilityLevels[4] < maxEvolutionLevel)
+                    {
+                        abilityLevels[4]++;
+                        gasAttack.Evolute();
+                        upgradeDescription.text = "Ataque de gás evoluído!";
+                    }
+                    else
+                    {
+                        upgradeDescription.text = "Ataque de gás já está no nível máximo!";
+                    }
                 }
                 else
                 {
@@ -266,14 +317,21 @@ public class UpgradePanel : MonoBehaviour
             case 5: // Beetle Attack
                 if (playerStateMachine.hasBeetleAttack)
                 {
-                    besouroAttack.Evolute();
-                    upgradeDescription.text = "Ataque de besouro evoluído!";
+                    if (abilityLevels[5] < maxEvolutionLevel)
+                    {
+                        abilityLevels[5]++;
+                        besouroAttack.Evolute();
+                        upgradeDescription.text = "Ataque de besouro evoluído!";
+                    }
+                    else
+                    {
+                        upgradeDescription.text = "Ataque de besouro já está no nível máximo!";
+                    }
                 }
                 else
                 {
-                    playerStateMachine.hasBeetleAttack = true; 
+                    playerStateMachine.hasBeetleAttack = true;
                     besouroAttack.Evolute();
-                    Debug.Log("Entrou aqui");
                     upgradeDescription.text = "Ataque de besouro adquirido!";
                 }
                 break;
@@ -281,14 +339,26 @@ public class UpgradePanel : MonoBehaviour
             case 6: // Boomerang Attack
                 if (playerStateMachine.hasBoomerangAttack)
                 {
-                    boomerangAttack.Evolute();
-                    upgradeDescription.text = "Ataque de bumerangue evoluído!";
+                    if (abilityLevels[6] < maxEvolutionLevel)
+                    {
+                        abilityLevels[6]++;
+                        boomerangAttack.Evolute();
+                        upgradeDescription.text = "Ataque de bumerangue evoluído!";
+                    }
+                    else
+                    {
+                        upgradeDescription.text = "Ataque de bumerangue já está no nível máximo!";
+                    }
                 }
                 else
                 {
-                    playerStateMachine.hasBoomerangAttack = true; // Atualiza estado imediatamente
+                    playerStateMachine.hasBoomerangAttack = true;
                     upgradeDescription.text = "Ataque de bumerangue adquirido!";
                 }
+                break;
+
+            default:
+                upgradeDescription.text = "Nenhuma habilidade selecionada.";
                 break;
         }
 
@@ -302,6 +372,8 @@ public class UpgradePanel : MonoBehaviour
         upgradePanel.SetActive(false);
         buttonsDefined = false;
     }
+
+
 
 
 
