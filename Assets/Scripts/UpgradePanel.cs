@@ -37,6 +37,10 @@ public class UpgradePanel : MonoBehaviour
     public Sprite beetleAttackSprite;
     public Sprite boomerangAttackSprite;
 
+    //Atributos:
+
+    public Sprite maxHpSprite;
+
     public enum Abilities { Punch = 1, Roar = 2, Fart = 3, GasAttack = 4 } //BeetleAttack = 5, //BoomerangAttack = 6}
 
 
@@ -51,6 +55,7 @@ public class UpgradePanel : MonoBehaviour
         { 4, 0 }, // GasAttack
         { 5, 0 }, // BeetleAttack
         { 6, 0 }  // BoomerangAttack
+        
     };
 
         // Elemento do menu
