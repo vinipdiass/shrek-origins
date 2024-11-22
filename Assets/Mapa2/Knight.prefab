@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2451674592346108315}
   - component: {fileID: 6420310269938146237}
   m_Layer: 0
-  m_Name: OldMan
+  m_Name: Knight
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.24, y: -2.55, z: 0.030813}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,7 +44,7 @@ Animator:
   m_GameObject: {fileID: 131184763627869497}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 626fa5f46f71efa45a0cd4e4732bdf65, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2724940e6775ae549b611f1a79a5facc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -96,7 +96,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 526973108, guid: febf1a325863a174aa8ddc91d1a1c6c6, type: 3}
+  m_Sprite: {fileID: -754819144, guid: 29ec2a1994d79c04086f9fec7bc4458d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -119,9 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae16373f6c3e9d64abd34b541f972427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalHealth: 50
-  currentHealth: 50
-  attackDamage: 10
+  totalHealth: 75
+  currentHealth: 75
+  attackDamage: 13
   moveSpeed: 0.95
   colliderRadius: 0
   enemyVision: 5
