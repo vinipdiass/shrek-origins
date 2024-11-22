@@ -40,8 +40,10 @@ public class UpgradePanel : MonoBehaviour
     //Atributos:
 
     public Sprite maxHpSprite;
-    public Sprite attackSpeedSprite;
-    public Sprite movementSpeedSprite;
+    public Sprite recoverySprite;
+    public Sprite cooldownSprite;
+    public Sprite moveSpeedSprite;
+    public Sprite damageSprite;
 
     public enum Abilities
     {
@@ -71,7 +73,9 @@ public class UpgradePanel : MonoBehaviour
             { 6, 0 }, // BoomerangAttack
             { 7, 0 },
             { 8, 0 },
-            { 9, 0 }
+            { 9, 0 },
+            { 10, 0 },
+            { 11, 0 }
         };
 
 
@@ -242,10 +246,16 @@ public class UpgradePanel : MonoBehaviour
                 button.GetComponent<Image>().sprite = maxHpSprite;
                 break;
             case 8:
-                button.GetComponent<Image>().sprite = attackSpeedSprite;
+                button.GetComponent<Image>().sprite = recoverySprite;
                 break;
             case 9:
-                button.GetComponent<Image>().sprite = movementSpeedSprite;
+                button.GetComponent<Image>().sprite = cooldownSprite;
+                break;
+            case 10:
+                button.GetComponent<Image>().sprite = moveSpeedSprite;
+                break;
+            case 11:
+                button.GetComponent<Image>().sprite = damageSprite;
                 break;
         }
     }
@@ -412,29 +422,48 @@ public class UpgradePanel : MonoBehaviour
                 }
                 break;
 
-            case 8: // Attack Speed
+            case 8: 
                 if (abilityLevels[8] < maxEvolutionLevel)
                 {
                     abilityLevels[8]++;
                     playerStateMachine.IncreaseAtribute(1);
-                    upgradeDescription.text = "Velocidade de ataque aumentada!";
                 }
                 else
                 {
-                    upgradeDescription.text = "Velocidade de ataque já está no nível máximo!";
                 }
                 break;
 
-            case 9: // Movement Speed
+            case 9: // Cooldown
                 if (abilityLevels[9] < maxEvolutionLevel)
                 {
                     abilityLevels[9]++;
                     playerStateMachine.IncreaseAtribute(2);
-                    upgradeDescription.text = "Velocidade de movimento aumentada!";
                 }
                 else
                 {
-                    upgradeDescription.text = "Velocidade de movimento já está no nível máximo!";
+                }
+                break;
+
+            
+            case 10: // Movespeed
+                if (abilityLevels[10] < maxEvolutionLevel)
+                {
+                    abilityLevels[10]++;
+                    playerStateMachine.IncreaseAtribute(3);
+                }
+                else
+                {
+                }
+                break;
+
+            case 11: // Dano
+                if (abilityLevels[11] < maxEvolutionLevel)
+                {
+                    abilityLevels[11]++;
+                    playerStateMachine.IncreaseAtribute(4);
+                }
+                else
+                {
                 }
                 break;
 
