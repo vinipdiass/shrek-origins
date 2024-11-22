@@ -40,23 +40,40 @@ public class UpgradePanel : MonoBehaviour
     //Atributos:
 
     public Sprite maxHpSprite;
+    public Sprite attackSpeedSprite;
+    public Sprite movementSpeedSprite;
 
-    public enum Abilities { Punch = 1, Roar = 2, Fart = 3, GasAttack = 4 } //BeetleAttack = 5, //BoomerangAttack = 6}
+    public enum Abilities
+    {
+        Punch = 1,
+        Roar = 2,
+        Fart = 3,
+        GasAttack = 4,
+        BeetleAttack = 5,
+        BoomerangAttack = 6,
+        MaxHP = 7,
+        Recovery = 8,
+        Cooldown = 9
+    }
+
 
 
     void Awake()
     {
 
         abilityLevels = new Dictionary<int, int>
-    {
-        { 1, 0 }, // Punch
-        { 2, 0 }, // Roar
-        { 3, 0 }, // Fart
-        { 4, 0 }, // GasAttack
-        { 5, 0 }, // BeetleAttack
-        { 6, 0 }  // BoomerangAttack
-        
-    };
+        {
+            { 1, 0 }, // Punch
+            { 2, 0 }, // Roar
+            { 3, 0 }, // Fart
+            { 4, 0 }, // GasAttack
+            { 5, 0 }, // BeetleAttack
+            { 6, 0 }, // BoomerangAttack
+            { 7, 0 },
+            { 8, 0 },
+            { 9, 0 }
+        };
+
 
         // Elemento do menu
         upgradePanel = GameObject.Find("UpgradePanel");
@@ -95,56 +112,66 @@ public class UpgradePanel : MonoBehaviour
         }
     }
 
+    private bool IsAttackAcquired(int abilityId)
+    {
+        switch (abilityId)
+        {
+            case 1:
+                return playerStateMachine.hasPunch;
+            case 2:
+                return playerStateMachine.hasRoar;
+            case 3:
+                return playerStateMachine.hasFart;
+            case 4:
+                return playerStateMachine.hasGasAttack;
+            case 5:
+                return playerStateMachine.hasBeetleAttack;
+            case 6:
+                return playerStateMachine.hasBoomerangAttack;
+            default:
+                return false;
+        }
+    }
+
+
     private void GenerateRandomButtons()
     {
-        int numberOfAttacks = GetNumberOfAttacks();
-        List<int> availableAbilities = new List<int>();
+        List<int> availableUpgrades = new List<int>();
 
-        if (numberOfAttacks < 3)
+        // Ataques (habilidades) disponíveis
+        for (int i = 1; i <= 6; i++)
         {
-            for (int i = 1; i <= 6; i++)
+            if (abilityLevels[i] < maxEvolutionLevel)
             {
-                if (abilityLevels[i] < maxEvolutionLevel && // Verifica se ainda pode evoluir
-                    ((i == 1 && !playerStateMachine.hasPunch) ||
-                     (i == 2 && !playerStateMachine.hasRoar) ||
-                     (i == 3 && !playerStateMachine.hasFart) ||
-                     (i == 4 && !playerStateMachine.hasGasAttack) ||
-                     (i == 5 && !playerStateMachine.hasBeetleAttack) ||
-                     (i == 6 && !playerStateMachine.hasBoomerangAttack)))
+                if ((GetNumberOfAttacks() < 3) || IsAttackAcquired(i))
                 {
-                    availableAbilities.Add(i); // Adiciona novas habilidades disponíveis
+                    availableUpgrades.Add(i);
                 }
             }
         }
 
-        // Inclui habilidades adquiridas, mas ainda não no nível máximo
-        for (int i = 1; i <= 6; i++)
+        // Atributos disponíveis
+        for (int i = 7; i <= 9; i++)
         {
-            if (abilityLevels[i] < maxEvolutionLevel &&
-                ((i == 1 && playerStateMachine.hasPunch) ||
-                 (i == 2 && playerStateMachine.hasRoar) ||
-                 (i == 3 && playerStateMachine.hasFart) ||
-                 (i == 4 && playerStateMachine.hasGasAttack) ||
-                 (i == 5 && playerStateMachine.hasBeetleAttack) ||
-                 (i == 6 && playerStateMachine.hasBoomerangAttack)))
+            if (abilityLevels[i] < maxEvolutionLevel)
             {
-                availableAbilities.Add(i);
+                availableUpgrades.Add(i);
             }
         }
 
-        // Gera habilidades únicas e aleatórias
+        // Gera upgrades únicos e aleatórios
         HashSet<int> uniqueNumbers = new HashSet<int>();
         System.Random random = new System.Random();
-        while (uniqueNumbers.Count < 3 && uniqueNumbers.Count < availableAbilities.Count)
+        while (uniqueNumbers.Count < 3 && uniqueNumbers.Count < availableUpgrades.Count)
         {
-            int index = random.Next(availableAbilities.Count);
-            uniqueNumbers.Add(availableAbilities[index]);
+            int index = random.Next(availableUpgrades.Count);
+            uniqueNumbers.Add(availableUpgrades[index]);
         }
 
         int[] numbers = new int[3];
         uniqueNumbers.CopyTo(numbers);
 
-        // Preenche com -1 se menos de 3 habilidades estão disponíveis
+        // Preenche com -1 se menos de 3 upgrades estão disponíveis
         for (int i = uniqueNumbers.Count; i < 3; i++)
         {
             numbers[i] = -1;
@@ -168,6 +195,8 @@ public class UpgradePanel : MonoBehaviour
         if (playerStateMachine.hasBoomerangAttack) count++;
         return count;
     }
+
+
 
 
 
@@ -208,6 +237,15 @@ public class UpgradePanel : MonoBehaviour
                 break;
             case 6:
                 button.GetComponent<Image>().sprite = boomerangAttackSprite;
+                break;
+            case 7:
+                button.GetComponent<Image>().sprite = maxHpSprite;
+                break;
+            case 8:
+                button.GetComponent<Image>().sprite = attackSpeedSprite;
+                break;
+            case 9:
+                button.GetComponent<Image>().sprite = movementSpeedSprite;
                 break;
         }
     }
@@ -361,10 +399,50 @@ public class UpgradePanel : MonoBehaviour
                     upgradeDescription.text = "Ataque de bumerangue adquirido!";
                 }
                 break;
+            case 7: // Max HP
+                if (abilityLevels[7] < maxEvolutionLevel)
+                {
+                    abilityLevels[7]++;
+                    playerStateMachine.IncreaseAtribute(0);
+                    upgradeDescription.text = "Vida máxima aumentada!";
+                }
+                else
+                {
+                    upgradeDescription.text = "Vida máxima já está no nível máximo!";
+                }
+                break;
+
+            case 8: // Attack Speed
+                if (abilityLevels[8] < maxEvolutionLevel)
+                {
+                    abilityLevels[8]++;
+                    playerStateMachine.IncreaseAtribute(1);
+                    upgradeDescription.text = "Velocidade de ataque aumentada!";
+                }
+                else
+                {
+                    upgradeDescription.text = "Velocidade de ataque já está no nível máximo!";
+                }
+                break;
+
+            case 9: // Movement Speed
+                if (abilityLevels[9] < maxEvolutionLevel)
+                {
+                    abilityLevels[9]++;
+                    playerStateMachine.IncreaseAtribute(2);
+                    upgradeDescription.text = "Velocidade de movimento aumentada!";
+                }
+                else
+                {
+                    upgradeDescription.text = "Velocidade de movimento já está no nível máximo!";
+                }
+                break;
+
 
             default:
                 upgradeDescription.text = "Nenhuma habilidade selecionada.";
                 break;
+
         }
 
         // Atualiza os pontos de experiência e progresso

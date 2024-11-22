@@ -686,7 +686,7 @@ public class PlayerStateMachine : MonoBehaviour
         isBoomerangAttackingCoroutineRunning = false;
     }
 
-    private void IncreaseAtribute(int at)
+    public void IncreaseAtribute(int at)
     {
         if (at == 0)
         {

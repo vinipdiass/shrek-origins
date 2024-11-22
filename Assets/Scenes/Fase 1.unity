@@ -1161,7 +1161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData:
-    mapasDesbloqueados: []
+    mapasDesbloqueados: 
     dinheiro: 0
     atributosDisponiveis: 
 --- !u!1001 &497928972
@@ -1926,6 +1926,8 @@ MonoBehaviour:
   upgradeDescription: {fileID: 0}
   buttons: []
   playerStateMachine: {fileID: 0}
+  maxEvolutionLevel: 3
+  emptySprite: {fileID: 0}
   soco: {fileID: 0}
   rugido: {fileID: 0}
   peido: {fileID: 0}
@@ -1936,6 +1938,15 @@ MonoBehaviour:
   button2Random: 0
   button3Random: 0
   buttonsDefined: 0
+  punchSprite: {fileID: 0}
+  roarSprite: {fileID: 0}
+  fartSprite: {fileID: 0}
+  gasAttackSprite: {fileID: 0}
+  beetleAttackSprite: {fileID: 0}
+  boomerangAttackSprite: {fileID: 0}
+  maxHpSprite: {fileID: 0}
+  attackSpeedSprite: {fileID: 0}
+  movementSpeedSprite: {fileID: 0}
 --- !u!1 &856820187
 GameObject:
   m_ObjectHideFlags: 0
@@ -2804,6 +2815,8 @@ MonoBehaviour:
   upgradeDescription: {fileID: 0}
   buttons: []
   playerStateMachine: {fileID: 0}
+  maxEvolutionLevel: 3
+  emptySprite: {fileID: 0}
   soco: {fileID: 0}
   rugido: {fileID: 0}
   peido: {fileID: 0}
@@ -2814,6 +2827,15 @@ MonoBehaviour:
   button2Random: 0
   button3Random: 0
   buttonsDefined: 0
+  punchSprite: {fileID: 21300000, guid: 2eb7f28aee571614cbe720e19823737e, type: 3}
+  roarSprite: {fileID: 21300000, guid: 43fcf6678f8cb534c9d345a15be91286, type: 3}
+  fartSprite: {fileID: 623289464, guid: 067b5e58d26ec0f40aceaa7120486ca2, type: 3}
+  gasAttackSprite: {fileID: 21300000, guid: 7b677154e5a156f42b32ab8384f79add, type: 3}
+  beetleAttackSprite: {fileID: 2125874285, guid: e7c17efef7f4e5244900fece1053d94c, type: 3}
+  boomerangAttackSprite: {fileID: -81646719, guid: a37ca39a887d6af49b5fe9a72994d7d7, type: 3}
+  maxHpSprite: {fileID: 21300000, guid: 7e4fa4699cc3aaf4f9df1afbeddfc9c3, type: 3}
+  attackSpeedSprite: {fileID: 21300000, guid: 5e54e908c4dbbd141aca31f7d8064afc, type: 3}
+  movementSpeedSprite: {fileID: 21300000, guid: 52467c441a947b54799e1aac5f60e680, type: 3}
 --- !u!114 &1250823058
 MonoBehaviour:
   m_ObjectHideFlags: 0
