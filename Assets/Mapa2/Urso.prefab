@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2451674592346108315}
   - component: {fileID: 6420310269938146237}
   m_Layer: 0
-  m_Name: BigMan
+  m_Name: Urso
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.24, y: -2.55, z: 0.030813}
-  m_LocalScale: {x: 3, y: 3, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,7 +44,7 @@ Animator:
   m_GameObject: {fileID: 131184763627869497}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4f9895163ba58fd43ac0ac570c13bc7b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2db994d7a3337ec4589fdafa092d4d3c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -96,7 +96,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -922939525, guid: c58feb073f0b2f544b4caaaa85e76965, type: 3}
+  m_Sprite: {fileID: 1750315347, guid: 3c113b535b34a39408ef3cdea7d0e124, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -119,18 +119,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae16373f6c3e9d64abd34b541f972427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalHealth: 800
-  currentHealth: 800
-  attackDamage: 30
-  moveSpeed: 1.8
+  totalHealth: 450
+  currentHealth: 450
+  attackDamage: 20
+  moveSpeed: 1.2
   colliderRadius: 0
   enemyVision: 5
   damageRange: 0.5
   damageTextPrefab: {fileID: 2581792204945128073, guid: 1d3d40d773cd01241a385b802a92d090, type: 3}
-  xpPickupPrefab: {fileID: 5933130314543973684, guid: fe14a1f777645914ba4fc21191fd16c4, type: 3}
-  hpPickupPrefab: {fileID: 5933130314543973684, guid: fe14a1f777645914ba4fc21191fd16c4, type: 3}
-  specialXPPrefab: {fileID: 5933130314543973684, guid: fe14a1f777645914ba4fc21191fd16c4, type: 3}
-  moneyPrefab: {fileID: 5933130314543973684, guid: fe14a1f777645914ba4fc21191fd16c4, type: 3}
+  xpPickupPrefab: {fileID: 5933130314543973684, guid: 94f1bc209f2c1684eb6d452093bff4b0, type: 3}
+  hpPickupPrefab: {fileID: 5933130314543973684, guid: ac5b89ea9fce1ad4a88f2bec83cbc863, type: 3}
+  specialXPPrefab: {fileID: 5933130314543973684, guid: 6176f7e370aee4b43b713066e4556038, type: 3}
+  moneyPrefab: {fileID: 5933130314543973684, guid: d54c914ce1d68394782c6b5d689cf466, type: 3}
   differentItemDropChance: 0
   specialXPDropChance: 0
   knockbackDistance: 1

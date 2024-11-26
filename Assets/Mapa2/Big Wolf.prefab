@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2451674592346108315}
   - component: {fileID: 6420310269938146237}
   m_Layer: 0
-  m_Name: BigMan
+  m_Name: Big Wolf
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.24, y: -2.55, z: 0.030813}
-  m_LocalScale: {x: 3, y: 3, z: 2}
+  m_LocalScale: {x: 9, y: 9, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,7 +44,7 @@ Animator:
   m_GameObject: {fileID: 131184763627869497}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4f9895163ba58fd43ac0ac570c13bc7b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6794c41f1493d9048b17d7dd124dca81, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -96,8 +96,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -922939525, guid: c58feb073f0b2f544b4caaaa85e76965, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: -1209976353, guid: e5a5934cb6fecd54bacf9e6cff7d08da, type: 3}
+  m_Color: {r: 0.48867923, g: 0.8885888, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -119,8 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae16373f6c3e9d64abd34b541f972427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalHealth: 800
-  currentHealth: 800
+  totalHealth: 1300
+  currentHealth: 1300
   attackDamage: 30
   moveSpeed: 1.8
   colliderRadius: 0

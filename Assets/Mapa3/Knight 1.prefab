@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2451674592346108315}
   - component: {fileID: 6420310269938146237}
   m_Layer: 0
-  m_Name: BigMan
+  m_Name: Knight 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ Animator:
   m_GameObject: {fileID: 131184763627869497}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4f9895163ba58fd43ac0ac570c13bc7b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2724940e6775ae549b611f1a79a5facc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -96,8 +96,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -922939525, guid: c58feb073f0b2f544b4caaaa85e76965, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: -754819144, guid: 29ec2a1994d79c04086f9fec7bc4458d, type: 3}
+  m_Color: {r: 1, g: 0.8763926, b: 0.53396225, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
