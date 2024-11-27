@@ -62,7 +62,6 @@ public class UpgradePanel : MonoBehaviour
 
     void Awake()
     {
-
         abilityLevels = new Dictionary<int, int>
         {
             { 1, 0 }, // Punch
@@ -71,12 +70,13 @@ public class UpgradePanel : MonoBehaviour
             { 4, 0 }, // GasAttack
             { 5, 0 }, // BeetleAttack
             { 6, 0 }, // BoomerangAttack
-            { 7, 0 },
-            { 8, 0 },
-            { 9, 0 },
-            { 10, 0 },
-            { 11, 0 }
+            { 7, 0 }, // MaxHP
+            { 8, 0 }, // Recovery
+            { 9, 0 }, // Cooldown
+            { 10, 0 }, // MoveSpeed
+            { 11, 0 }  // Damage
         };
+
 
 
         // Elemento do menu
@@ -155,7 +155,7 @@ public class UpgradePanel : MonoBehaviour
         }
 
         // Atributos disponíveis
-        for (int i = 7; i <= 9; i++)
+        for (int i = 7; i <= 11; i++)
         {
             if (abilityLevels[i] < maxEvolutionLevel)
             {
@@ -422,7 +422,7 @@ public class UpgradePanel : MonoBehaviour
                 }
                 break;
 
-            case 8: 
+            case 8:
                 if (abilityLevels[8] < maxEvolutionLevel)
                 {
                     abilityLevels[8]++;
@@ -444,7 +444,7 @@ public class UpgradePanel : MonoBehaviour
                 }
                 break;
 
-            
+
             case 10: // Movespeed
                 if (abilityLevels[10] < maxEvolutionLevel)
                 {
@@ -477,7 +477,7 @@ public class UpgradePanel : MonoBehaviour
         // Atualiza os pontos de experiência e progresso
         playerStateMachine.experiencePoints -= (int)playerStateMachine.experiencePointsRequired;
         playerStateMachine.countLevel++;
-        playerStateMachine.experiencePointsRequired += 10;
+        playerStateMachine.experiencePointsRequired += 15;
 
         // Fecha o painel de upgrade
         Time.timeScale = 1;

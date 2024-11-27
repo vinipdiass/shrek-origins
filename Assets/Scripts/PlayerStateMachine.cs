@@ -58,7 +58,7 @@ public class PlayerStateMachine : MonoBehaviour
         recovery = 0;
         currentHealth = maxHealth;
         experiencePoints = 0;
-        experiencePointsRequired = 1f;
+        experiencePointsRequired = 20f;
         speed = 3f;
 
         animator = GetComponent<Animator>();
