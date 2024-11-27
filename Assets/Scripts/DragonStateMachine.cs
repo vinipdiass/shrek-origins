@@ -33,6 +33,12 @@ public class DragonStateMachine : MonoBehaviour, Damageable
     private float receiveDamageCooldown = 0.2f;
     private float lastDamageReceivedTime;
 
+    public float knockbackDistance = 1f;
+    public float knockbackDuration = 0.1f;
+
+    private Coroutine knockbackCoroutine;
+
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -99,18 +105,6 @@ public class DragonStateMachine : MonoBehaviour, Damageable
 
         // Olha na direção do jogador
         LookTarget(direction);
-
-        // Dano ao jogador ao colidir com o dragão
-        if (Vector2.Distance(transform.position, playerTransform.position) <= colliderRadius)
-        {
-            // Aplica dano ao jogador e knockback
-            PlayerStateMachine player = playerTransform.GetComponent<PlayerStateMachine>();
-            if (player != null)
-            {
-                player.TakeDamage(attackDamage);
-                ApplyKnockback(player);
-            }
-        }
     }
 
     void HandleRecoveringFromHit()
@@ -131,10 +125,14 @@ public class DragonStateMachine : MonoBehaviour, Damageable
     // Função para lançar uma bola de fogo
     private void LaunchFireball()
     {
-        // Cria a bola de fogo
+        // Calcula a direção da bola de fogo
         if (fireballPrefab != null)
         {
-            GameObject fireball = Instantiate(fireballPrefab, transform.position, Quaternion.identity);
+            // Desloca um pouco a origem da bola de fogo para frente
+            Vector3 fireballSpawnPosition = transform.position + transform.right * 1.5f;  // 1.5f é o deslocamento para frente
+
+            // Cria a bola de fogo
+            GameObject fireball = Instantiate(fireballPrefab, fireballSpawnPosition, Quaternion.identity);
 
             // Calcula a direção em que a bola de fogo irá
             Vector2 direction = (playerTransform.position - transform.position).normalized;
@@ -157,7 +155,6 @@ public class DragonStateMachine : MonoBehaviour, Damageable
 
     public void ReceiveDamage(float damage, bool knockback)
     {
-        // Implementar o dano (semelhante ao que foi feito no OldManStateMachine)
         if (Time.time >= lastDamageReceivedTime + receiveDamageCooldown && currentState != EnemyState.Dead)
         {
             currentHealth -= damage;
@@ -171,8 +168,42 @@ public class DragonStateMachine : MonoBehaviour, Damageable
             {
                 ChangeState(EnemyState.Dead);
             }
+
+            // Aplica o knockback se necessário
+            if (knockback)
+            {
+                if (knockbackCoroutine != null)
+                {
+                    StopCoroutine(knockbackCoroutine);
+                }
+                knockbackCoroutine = StartCoroutine(ApplyKnockback());
+            }
         }
     }
+    private IEnumerator ApplyKnockback()
+    {
+        // Calcula a direção do knockback a partir da posição do jogador
+        if (playerTransform == null) yield break;
+
+        Vector2 knockbackDirection = (transform.position - playerTransform.position).normalized;
+
+        // Calcula a posição alvo do knockback
+        Vector3 knockbackTarget = transform.position + (Vector3)(knockbackDirection * knockbackDistance);
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < knockbackDuration)
+        {
+            // Move o dragão em direção ao ponto de knockback
+            transform.position = Vector3.Lerp(transform.position, knockbackTarget, elapsedTime / knockbackDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Garante que a coroutine seja finalizada
+        knockbackCoroutine = null;
+    }
+
 
     private void ShowDamageText(float damage)
     {
@@ -185,12 +216,6 @@ public class DragonStateMachine : MonoBehaviour, Damageable
                 dmgTextScript.SetText(damage.ToString());
             }
         }
-    }
-
-    private void ApplyKnockback(PlayerStateMachine player)
-    {
-        // Aplica knockback no jogador
-        Vector2 knockbackDirection = (player.transform.position - transform.position).normalized;
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

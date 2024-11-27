@@ -1816,7 +1816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6ac8688d13e9b43b1b3553cc23ba0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ManPrefab: {fileID: 131184763627869497, guid: 8bd06346ee6ea9f4a96f9c8b9d7905b4, type: 3}
+  ManPrefab: {fileID: 131184763627869497, guid: 9c9833a4d6f97ff4dba7f56b1eed1b03, type: 3}
   player: {fileID: 1029890395}
   spawnRadiusMin: 20
   spawnRadiusMax: 20

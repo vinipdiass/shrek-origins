@@ -20,4 +20,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Map Select.unity
     guid: e874382e87408a046aece4ba04cf996f
+  - enabled: 1
+    path: Assets/Scenes/Fase 2.unity
+    guid: 8c4ab113259436d4793aec5dc1caf84a
+  - enabled: 1
+    path: Assets/Scenes/Fase 3.unity
+    guid: c052c7ed2e133c94595f8766d5afdc53
+  - enabled: 1
+    path: Assets/Scenes/Fase 4.unity
+    guid: c035a648e01307441a9c592001d339ce
   m_configObjects: {}

@@ -27,7 +27,7 @@ public class Punch : MonoBehaviour
         Cooldown = 2f;
         baseCooldown = 2f;
         contaSocos = 1;
-        damage = 50;
+        damage = 100;
         evolution = 0;
         baseDamage = damage;
 

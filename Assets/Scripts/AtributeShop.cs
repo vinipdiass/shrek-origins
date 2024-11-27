@@ -57,8 +57,12 @@ public class LojaDeAtributos : MonoBehaviour
         {
             GameDataManager.instance.playerData.dinheiro = 0;
             AtualizarTextoMoedas();
+
+            // Salvar o novo valor no arquivo JSON
+            GameDataManager.instance.SaveData();
         }
     }
+
 
 
 
@@ -66,15 +70,15 @@ public class LojaDeAtributos : MonoBehaviour
     {
         moedasTexto.text = "" + GameDataManager.instance.getMoney();
         if (comprasAtributo[0] >= 3) custoAt1.text = "MAX";
-        else custoAt1.text = "" + ( 100 * (comprasAtributo[0] + 1));
+        else custoAt1.text = "" + (100 * (comprasAtributo[0] + 1));
         if (comprasAtributo[1] >= 3) custoAt2.text = "MAX";
-        else custoAt2.text = "" + ( 100 * (comprasAtributo[1] + 1));
+        else custoAt2.text = "" + (100 * (comprasAtributo[1] + 1));
         if (comprasAtributo[2] >= 3) custoAt3.text = "MAX";
-        else custoAt3.text = "" + ( 100 * (comprasAtributo[2] + 1));
+        else custoAt3.text = "" + (100 * (comprasAtributo[2] + 1));
         if (comprasAtributo[3] >= 3) custoAt4.text = "MAX";
-        else custoAt4.text = "" + ( 100 * (comprasAtributo[3] + 1));
+        else custoAt4.text = "" + (100 * (comprasAtributo[3] + 1));
         if (comprasAtributo[4] >= 3) custoAt5.text = "MAX";
-        else custoAt5.text = "" + ( 100 * (comprasAtributo[4] + 1));        
+        else custoAt5.text = "" + (100 * (comprasAtributo[4] + 1));
     }
 
     void ConfigurarBotoes()

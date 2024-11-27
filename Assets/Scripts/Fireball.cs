@@ -5,7 +5,7 @@ using UnityEngine;
 public class Fireball : MonoBehaviour
 {
     [Header("Attributes")]
-    public float damage = 10f;             // Dano da bola de fogo
+    public float damage = 40f;             // Dano da bola de fogo
     public float knockbackForce = 5f;      // Força do knockback
     public float lifetime = 5f;            // Tempo de vida da bola de fogo (para destruição após um tempo)
     public float damageRange = 0.5f;       // Distância de dano ao jogador (similar ao damageRange do OldMan)

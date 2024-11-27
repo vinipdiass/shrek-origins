@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7568417816971337966}
   - component: {fileID: 6420310269938146237}
   m_Layer: 0
-  m_Name: "Drag\xE3o"
+  m_Name: Farquaad
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.24, y: -2.55, z: 0.030813}
-  m_LocalScale: {x: 9, y: 9, z: 2}
+  m_LocalScale: {x: 3, y: 3, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -45,7 +45,7 @@ Animator:
   m_GameObject: {fileID: 131184763627869497}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4caf707478fc6c74e90c62771d42b8ac, type: 2}
+  m_Controller: {fileID: 9100000, guid: a526fdd4ba42dca4180fa3bc8550e78b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -97,7 +97,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 389819333, guid: 31f6a256b9812fe40ab511f3f9fc7702, type: 3}
+  m_Sprite: {fileID: 1994789997, guid: 1f263f1a59f8d7f489d3861f5c2fede3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -152,10 +152,10 @@ MonoBehaviour:
   enemyVision: 5
   damageRange: 0.5
   damageTextPrefab: {fileID: 2581792204945128073, guid: 1d3d40d773cd01241a385b802a92d090, type: 3}
-  xpPickupPrefab: {fileID: 5933130314543973684, guid: fe14a1f777645914ba4fc21191fd16c4, type: 3}
-  hpPickupPrefab: {fileID: 5933130314543973684, guid: fe14a1f777645914ba4fc21191fd16c4, type: 3}
-  specialXPPrefab: {fileID: 5933130314543973684, guid: fe14a1f777645914ba4fc21191fd16c4, type: 3}
-  moneyPrefab: {fileID: 5933130314543973684, guid: fe14a1f777645914ba4fc21191fd16c4, type: 3}
+  xpPickupPrefab: {fileID: 5933130314543973684, guid: 94f1bc209f2c1684eb6d452093bff4b0, type: 3}
+  hpPickupPrefab: {fileID: 5933130314543973684, guid: ac5b89ea9fce1ad4a88f2bec83cbc863, type: 3}
+  specialXPPrefab: {fileID: 5933130314543973684, guid: 6176f7e370aee4b43b713066e4556038, type: 3}
+  moneyPrefab: {fileID: 5933130314543973684, guid: d54c914ce1d68394782c6b5d689cf466, type: 3}
   differentItemDropChance: 0
   specialXPDropChance: 0
   knockbackDistance: 1

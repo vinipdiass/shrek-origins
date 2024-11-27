@@ -53,15 +53,15 @@ public class SelectAttack : MonoBehaviour
         }
         else if (playerAbility == "Map2")
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 2");
         }
         else if (playerAbility == "Map3")
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 3");
         }
         else if (playerAbility == "Map4")
         {
-             UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 1");
+             UnityEngine.SceneManagement.SceneManager.LoadScene("Fase 4");
         }
     }
 

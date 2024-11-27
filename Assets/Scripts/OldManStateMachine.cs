@@ -71,7 +71,7 @@ public class OldManStateMachine : MonoBehaviour, Damageable
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         ChangeState(EnemyState.ChasingTarget);
-        differentItemDropChance = 6;
+        differentItemDropChance = 4;
     }
 
     void Update()
