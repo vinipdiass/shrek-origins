@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 using UnityEngine.UI;
 
 public class UpgradePanel : MonoBehaviour
@@ -14,6 +16,7 @@ public class UpgradePanel : MonoBehaviour
 
     // Adicione no início da classe
     private Dictionary<int, int> abilityLevels;
+    private Dictionary<int, string> abilityDescriptions;
     public int maxEvolutionLevel = 3; // Nível máximo de evolução
     public Sprite emptySprite; // Sprite para habilidades "vazias"
 
@@ -62,6 +65,21 @@ public class UpgradePanel : MonoBehaviour
 
     void Awake()
     {
+        abilityDescriptions = new Dictionary<int, string>
+        {
+            { 1, "Evolui o soco." }, // Punch
+            { 2, "Evolui o urro." }, // Roar
+            { 3, "Evolui o peido." }, // Fart
+            { 4, "Evolui a cebola." }, // Gas Attack
+            { 5, "Evolui o besouro." }, // Beetle Attack
+            { 6, "Evolui os sapos." }, // Boomerang Attack
+            { 7, "Aumenta a vida maxima do jogador." }, // MaxHP
+            { 8, "Aumenta a regeneracao de vida." }, // Recovery
+            { 9, "Reduz o tempo de recarga dos ataques. Se houver o ataque besouro, aumenta a velocidade da rotação." }, // Cooldown
+            { 10, "Aumenta a velocidade de movimento do jogador." }, // MoveSpeed
+            { 11, "Aumenta o dano causado por ataques." } // Damage
+        };
+
         abilityLevels = new Dictionary<int, int>
         {
             { 1, 0 }, // Punch
@@ -210,7 +228,59 @@ public class UpgradePanel : MonoBehaviour
         SetButtonImage(buttons[0], button1Random);
         SetButtonImage(buttons[1], button2Random);
         SetButtonImage(buttons[2], button3Random);
+
+        AddButtonHoverEvent(buttons[0], button1Random);
+        AddButtonHoverEvent(buttons[1], button2Random);
+        AddButtonHoverEvent(buttons[2], button3Random);
     }
+
+    private void AddButtonHoverEvent(Button button, int abilityId)
+    {
+        EventTrigger trigger = button.GetComponent<EventTrigger>();
+
+        if (trigger == null)
+        {
+            trigger = button.gameObject.AddComponent<EventTrigger>();
+        }
+
+        trigger.triggers.Clear();
+
+        // Evento PointerEnter (quando o mouse entra no botão)
+        EventTrigger.Entry pointerEnter = new EventTrigger.Entry();
+        pointerEnter.eventID = EventTriggerType.PointerEnter;
+        pointerEnter.callback.AddListener((eventData) =>
+        {
+            ShowDescription(abilityId);
+        });
+        trigger.triggers.Add(pointerEnter);
+
+        // Evento PointerExit (quando o mouse sai do botão)
+        EventTrigger.Entry pointerExit = new EventTrigger.Entry();
+        pointerExit.eventID = EventTriggerType.PointerExit;
+        pointerExit.callback.AddListener((eventData) =>
+        {
+            HideDescription();
+        });
+        trigger.triggers.Add(pointerExit);
+    }
+
+    private void ShowDescription(int abilityId)
+    {
+        if (abilityDescriptions.ContainsKey(abilityId) && abilityId > 0)
+        {
+            upgradeDescription.text = abilityDescriptions[abilityId];
+        }
+        else
+        {
+            upgradeDescription.text = "";
+        }
+    }
+
+    private void HideDescription()
+    {
+        upgradeDescription.text = "";
+    }
+
 
     private void SetButtonImage(Button button, int abilityId)
     {
