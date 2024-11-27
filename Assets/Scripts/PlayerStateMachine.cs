@@ -2,7 +2,9 @@ using UnityEngine;
 using System.Collections;
 using System;
 using System.Collections.Generic;
-
+//Tela de voltar no shop
+//Aumentar xp talvez??
+//Mostrar o que cada coisa faz ao passar o mouse em cima.
 public class PlayerStateMachine : MonoBehaviour
 {
     private enum PlayerState { Idle, Walking, Punching, Roaring, Farting, GasAttacking, BoomerangAttacking }
