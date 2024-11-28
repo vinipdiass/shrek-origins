@@ -119,10 +119,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae16373f6c3e9d64abd34b541f972427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalHealth: 75
-  currentHealth: 75
-  attackDamage: 13
-  moveSpeed: 0.95
+  totalHealth: 100
+  currentHealth: 100
+  attackDamage: 20
+  moveSpeed: 1.2
   colliderRadius: 0
   enemyVision: 5
   damageRange: 0.5

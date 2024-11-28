@@ -6,6 +6,7 @@ using System.Collections.Generic;
 //Aumentar xp talvez??
 //Buffar vida maxima
 //Nerfar regen
+//Pisar na lava toma dano
 public class PlayerStateMachine : MonoBehaviour
 {
     private enum PlayerState { Idle, Walking, Punching, Roaring, Farting, GasAttacking, BoomerangAttacking }
@@ -55,6 +56,8 @@ public class PlayerStateMachine : MonoBehaviour
     public int countLevel;
     public bool verificacaoLoja;
     List<int> atributosDisponiveis;
+    public float damageInterval = 1f; // pro dano da lava
+    private float damageTimer = 0f; // dano da lava
 
     private void Start()
     {
@@ -477,14 +480,25 @@ public class PlayerStateMachine : MonoBehaviour
             ChangeState(PlayerState.Idle);
         }
     }
-
     private void HandleMovement()
     {
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         float moveVertical = Input.GetAxisRaw("Vertical");
 
+        // Calcula o vetor de movimento com base nos inputs do jogador
         Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0).normalized;
 
+        // Cria a direção de movimento desejada
+        Vector3 moveDirection = movement * speed * Time.deltaTime;
+
+        // Verifica se o movimento está bloqueado nas direções horizontal e vertical
+        if (!IsBlockedInDirection(moveDirection))
+        {
+            // Se não estiver bloqueado, aplica o movimento
+            characterController.Move(moveDirection);
+        }
+
+        // Atualiza a rotação do jogador com base na direção horizontal
         if (moveHorizontal < 0)
         {
             transform.eulerAngles = new Vector3(0, 180, 0); // Rotaciona para a esquerda
@@ -494,9 +508,7 @@ public class PlayerStateMachine : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 0, 0); // Rotaciona para a direita
         }
 
-        Vector3 moveDirection = new Vector3(movement.x, movement.y, 0) * speed;
-        characterController.Move(moveDirection * Time.deltaTime);
-
+        // Limita a posição do jogador dentro dos limites do cenário (bordas)
         Vector3 clampedPosition = new Vector3(
             Mathf.Clamp(transform.position.x, playerBounds.min.x, playerBounds.max.x),
             Mathf.Clamp(transform.position.y, playerBounds.min.y, playerBounds.max.y),
@@ -505,6 +517,55 @@ public class PlayerStateMachine : MonoBehaviour
 
         transform.position = clampedPosition;
     }
+
+    private bool IsBlockedInDirection(Vector3 direction)
+    {
+        // Define a distância mínima para a colisão, ajustável dependendo da necessidade
+        float moveDistance = direction.magnitude;
+
+        // Se a direção de movimento for muito pequena, não há movimento a ser feito
+        if (moveDistance < 0.1f) return false;
+
+        // Lançando o raycast na direção do movimento
+        RaycastHit hit;
+
+        // Verifica se o raycast detecta algo na direção do movimento
+        if (Physics.Raycast(transform.position, direction, out hit, moveDistance))
+        {
+            // Verifica se o objeto atingido tem a tag "Colisor"
+            if (hit.collider.CompareTag("Colisor"))
+            {
+                // Se colidir com um objeto com a tag "Colisor", bloqueia o movimento
+                return true;
+            }
+        }
+
+        // Caso contrário, o movimento não está bloqueado
+        return false;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        // Verifica se o objeto com o qual o jogador colidiu tem a tag "Colisor"
+        if (other.CompareTag("Colisor"))
+        {
+            // Incrementa o timer com o tempo passado
+            damageTimer += Time.deltaTime;
+
+            // Verifica se o tempo passou o intervalo para aplicar o dano
+            if (damageTimer >= damageInterval)
+            {
+                // Reseta o timer
+                damageTimer = 0f;
+
+                // Aplica 40 de dano ao jogador
+                TakeDamage(10);
+            }
+        }
+    }
+
+
+
 
     public void TakeDamage(float damage)
     {
