@@ -67,15 +67,15 @@ public class UpgradePanel : MonoBehaviour
     {
         abilityDescriptions = new Dictionary<int, string>
         {
-            { 1, "Evolui o soco." }, // Punch
-            { 2, "Evolui o urro." }, // Roar
-            { 3, "Evolui o peido." }, // Fart
-            { 4, "Evolui a cebola." }, // Gas Attack
-            { 5, "Evolui o besouro." }, // Beetle Attack
-            { 6, "Evolui os sapos." }, // Boomerang Attack
+            { 1, "Evolui/Aprende o soco." }, // Punch
+            { 2, "Evolui/Aprende o urro." }, // Roar
+            { 3, "Evolui/Aprende o peido." }, // Fart
+            { 4, "Evolui/Aprende a cebola." }, // Gas Attack
+            { 5, "Evolui/Aprende o besouro." }, // Beetle Attack
+            { 6, "Evolui/Aprende os sapos." }, // Boomerang Attack
             { 7, "Aumenta a vida maxima do jogador." }, // MaxHP
             { 8, "Aumenta a regeneracao de vida." }, // Recovery
-            { 9, "Reduz o tempo de recarga dos ataques. Se houver o ataque besouro, aumenta a velocidade da rotação." }, // Cooldown
+            { 9, "Reduz o tempo de recarga dos ataques." }, // Cooldown
             { 10, "Aumenta a velocidade de movimento do jogador." }, // MoveSpeed
             { 11, "Aumenta o dano causado por ataques." } // Damage
         };

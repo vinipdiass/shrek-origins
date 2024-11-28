@@ -10,6 +10,7 @@ public class LojaDeAtributos : MonoBehaviour
     public Button atributo3Button;
     public Button atributo4Button;
     public Button atributo5Button;
+    public Button retornarButton;
     public TextMeshProUGUI custoAt1;
     public TextMeshProUGUI custoAt2;
     public TextMeshProUGUI custoAt3;
@@ -88,6 +89,7 @@ public class LojaDeAtributos : MonoBehaviour
         atributo3Button.onClick.AddListener(() => ComprarAtributo(2));
         atributo4Button.onClick.AddListener(() => ComprarAtributo(3));
         atributo5Button.onClick.AddListener(() => ComprarAtributo(4));
+        retornarButton.onClick.AddListener(() => Retornar());
     }
 
     void ComprarAtributo(int indiceAtributo)
@@ -153,6 +155,11 @@ public class LojaDeAtributos : MonoBehaviour
         GameDataManager.instance.SaveData();
 
         Debug.Log("Atributos resetados e 1500 moedas adicionadas!");
+    }
+
+
+    public void Retornar(){
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu Start");
     }
 
 
