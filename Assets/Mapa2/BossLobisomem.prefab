@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2451674592346108315}
   - component: {fileID: 6420310269938146237}
   m_Layer: 0
-  m_Name: Lobisomem Big
+  m_Name: BossLobisomem
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
