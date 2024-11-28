@@ -4,7 +4,8 @@ using System;
 using System.Collections.Generic;
 //Tela de voltar no shop
 //Aumentar xp talvez??
-//Mostrar o que cada coisa faz ao passar o mouse em cima.
+//Buffar vida maxima
+//Nerfar regen
 public class PlayerStateMachine : MonoBehaviour
 {
     private enum PlayerState { Idle, Walking, Punching, Roaring, Farting, GasAttacking, BoomerangAttacking }
@@ -277,7 +278,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(2f); // Espera 2 segundos
+            yield return new WaitForSeconds(3f); // Espera 2 segundos
 
             if (currentHealth < maxHealth)
             {
