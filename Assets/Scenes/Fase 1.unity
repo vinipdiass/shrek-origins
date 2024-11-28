@@ -418,7 +418,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Return To Menu Title
+  m_text: Retornar ao menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8271c16ed408d5b47b3d1bc1c29a7f20, type: 2}
   m_sharedMaterial: {fileID: -7871875819581869519, guid: 8271c16ed408d5b47b3d1bc1c29a7f20, type: 2}
@@ -1208,6 +1208,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4836833450391920628, guid: 02501c51a0abfde46bc475ee35e42d0f, type: 3}
+      propertyPath: m_text
+      value: Sair do jogo
+      objectReference: {fileID: 0}
     - target: {fileID: 4870449751786912297, guid: 02501c51a0abfde46bc475ee35e42d0f, type: 3}
       propertyPath: m_SizeDelta.y
       value: 52.894
@@ -1355,6 +1359,10 @@ PrefabInstance:
     - target: {fileID: 8865473437319448938, guid: 02501c51a0abfde46bc475ee35e42d0f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -2.672
+      objectReference: {fileID: 0}
+    - target: {fileID: 9185743056866345817, guid: 02501c51a0abfde46bc475ee35e42d0f, type: 3}
+      propertyPath: m_text
+      value: Retornar ao menu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -1540,7 +1548,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit Game
+  m_text: Sair do jogo
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8271c16ed408d5b47b3d1bc1c29a7f20, type: 2}
   m_sharedMaterial: {fileID: -7871875819581869519, guid: 8271c16ed408d5b47b3d1bc1c29a7f20, type: 2}
@@ -2203,6 +2211,7 @@ MonoBehaviour:
   currentHealth: 100
   countLevel: 0
   verificacaoLoja: 0
+  damageInterval: 1
 --- !u!4 &1029890395
 Transform:
   m_ObjectHideFlags: 0
@@ -3218,7 +3227,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Shrek has Survived
+  m_text: Shrek sobreviveu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8271c16ed408d5b47b3d1bc1c29a7f20, type: 2}
   m_sharedMaterial: {fileID: -7871875819581869519, guid: 8271c16ed408d5b47b3d1bc1c29a7f20, type: 2}

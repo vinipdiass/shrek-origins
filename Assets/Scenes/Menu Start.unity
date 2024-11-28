@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 20153254}
   - component: {fileID: 20153256}
   - component: {fileID: 20153255}
+  - component: {fileID: 20153257}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -197,6 +198,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 20153253}
   m_CullTransparentMesh: 1
+--- !u!95 &20153257
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20153253}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 506739df9a4843e4f951e8dcd9dee3a4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &287007666
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,7 +542,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit
+  m_text: Sair
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8271c16ed408d5b47b3d1bc1c29a7f20, type: 2}
   m_sharedMaterial: {fileID: -7871875819581869519, guid: 8271c16ed408d5b47b3d1bc1c29a7f20, type: 2}
@@ -920,7 +942,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Game
+  m_text: Novo jogo
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8271c16ed408d5b47b3d1bc1c29a7f20, type: 2}
   m_sharedMaterial: {fileID: -7871875819581869519, guid: 8271c16ed408d5b47b3d1bc1c29a7f20, type: 2}
@@ -1214,7 +1236,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Store
+  m_text: Atributos
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8271c16ed408d5b47b3d1bc1c29a7f20, type: 2}
   m_sharedMaterial: {fileID: -7871875819581869519, guid: 8271c16ed408d5b47b3d1bc1c29a7f20, type: 2}
@@ -1467,7 +1489,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Credits
+  m_text: Creditos
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8271c16ed408d5b47b3d1bc1c29a7f20, type: 2}
   m_sharedMaterial: {fileID: -7871875819581869519, guid: 8271c16ed408d5b47b3d1bc1c29a7f20, type: 2}

@@ -17,7 +17,7 @@ public class MenuButtons : MonoBehaviour
 
     public void ButtonCredits()
     {
-        Debug.Log("Credits");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Creditos");
     }
 
     public void ButtonQuit()
