@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3782270728984413624}
   - component: {fileID: 3097535945127862153}
-  - component: {fileID: 512885807490157552}
+  - component: {fileID: 7487451644620668805}
   m_Layer: 0
   m_Name: xpChest
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &512885807490157552
+--- !u!114 &7487451644620668805
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,4 +98,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xpAmount: 5
-  pickupRadius: 3
+  pickupRadius: 2

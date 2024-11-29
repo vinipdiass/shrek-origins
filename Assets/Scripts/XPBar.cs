@@ -16,6 +16,7 @@ public class XPBar : MonoBehaviour
 
     void Update()
     {
-        XPBarImage.fillAmount = playerStateMachine.experiencePoints / playerStateMachine.experiencePointsRequired;
+        XPBarImage.fillAmount = (float)playerStateMachine.experiencePoints / (float)playerStateMachine.getXPRequired();
+
     }
 }

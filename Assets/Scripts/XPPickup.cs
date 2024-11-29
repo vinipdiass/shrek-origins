@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class XPChest : MonoBehaviour
+public class XPPickup : MonoBehaviour
 {
     public int xpAmount = 5; // Amount of XP this pickup gives
     public float pickupRadius = 1.0f; // Adjust as needed

@@ -62,7 +62,7 @@ public class PlayerStateMachine : MonoBehaviour
         recovery = 0;
         currentHealth = maxHealth;
         experiencePoints = 0;
-        experiencePointsRequired = 20f;
+        experiencePointsRequired = 30f;
         speed = 3f;
 
         animator = GetComponent<Animator>();
@@ -294,7 +294,13 @@ public class PlayerStateMachine : MonoBehaviour
 
     public float getXPRequired()
     {
-        return this.experiencePointsRequired;
+        return experiencePointsRequired;
+    }
+
+
+    public float getXP()
+    {
+        return experiencePoints;
     }
 
     public void ActivateRoar()

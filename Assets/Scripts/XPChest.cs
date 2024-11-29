@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class XPPickup : MonoBehaviour
+public class XPChest : MonoBehaviour
 {
     public int xpAmount = 5; // Amount of XP this pickup gives
-    public float pickupRadius = 3.0f; // Adjust as needed
+    public float pickupRadius; // Adjust as needed
 
     private Transform playerTransform;
     private PlayerStateMachine player;
@@ -16,9 +16,12 @@ public class XPPickup : MonoBehaviour
         {
             playerTransform = playerObj.transform;
             player = playerObj.GetComponent<PlayerStateMachine>();
-        
+
         }
-        xpAmount = (int)player.getXPRequired();
+
+        pickupRadius = 2.3f;
+
+
     }
 
     private void Update()
@@ -29,6 +32,7 @@ public class XPPickup : MonoBehaviour
             if (distanceToPlayer <= pickupRadius)
             {
                 // Add XP to the player
+                xpAmount = (int)player.getXPRequired();
                 player.AddExperience(xpAmount);
                 // Destroy the XP pickup
                 Destroy(gameObject);
