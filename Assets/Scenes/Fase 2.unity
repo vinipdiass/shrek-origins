@@ -242,11 +242,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.55
+      value: -2.23
       objectReference: {fileID: 0}
     - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.75
+      value: -17.36
       objectReference: {fileID: 0}
     - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1030,11 +1030,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -23.46
+      value: -30.2
       objectReference: {fileID: 0}
     - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.86
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2356,6 +2356,7 @@ MonoBehaviour:
   currentHealth: 100
   countLevel: 0
   verificacaoLoja: 0
+  damageInterval: 1
 --- !u!4 &1029890395
 Transform:
   m_ObjectHideFlags: 0
@@ -2513,9 +2514,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 81a5bdd6dd3b46940bf704fb7c75807b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 90e7f822ea5315a4890ed2141f4d7314, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.279
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2647,6 +2648,7 @@ MonoBehaviour:
   normalSprite: {fileID: 21300000, guid: 7b677154e5a156f42b32ab8384f79add, type: 3}
   specialSprite: {fileID: 21300000, guid: 7b677154e5a156f42b32ab8384f79add, type: 3}
   gasAreaPrefab: {fileID: 3196165916302179076, guid: 2610da9d5fd94514aabb24584cb1d5d1, type: 3}
+  gasArea: {fileID: 0}
 --- !u!114 &1029890405
 MonoBehaviour:
   m_ObjectHideFlags: 0

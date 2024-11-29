@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 //Aumentar o XP
 //Resolver o BUG de XP
+//Diminuir o quanto a vida cura
 public class PlayerStateMachine : MonoBehaviour
 {
     private enum PlayerState { Idle, Walking, Punching, Roaring, Farting, GasAttacking, BoomerangAttacking }
