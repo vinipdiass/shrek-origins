@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ad7b1f934ed9b643b2cb9107ef6c231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalHealth: 20000
-  currentHealth: 20000
+  totalHealth: 25000
+  currentHealth: 25000
   attackDamage: 120
   moveSpeed: 0
   colliderRadius: 0

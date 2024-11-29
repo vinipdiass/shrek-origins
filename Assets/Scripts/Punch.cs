@@ -17,7 +17,6 @@ public class Punch : MonoBehaviour
     private float baseDamage;
     private int evolution;
     public Sprite normalSprite;  // Sprite padrão
-    public Sprite specialSprite;  // Novo sprite para o nível de evolução 3
     void Start()
     {
         isActive = false;
@@ -105,24 +104,14 @@ public class Punch : MonoBehaviour
         }
         else
         {
-            if (evolution == 2)
-            {
-                // Acessa o SpriteRenderer do prefab socoProjetil e altera o sprite
-                SpriteRenderer sr = socoProjetil.GetComponent<SpriteRenderer>();
-                if (sr != null)
-                {
-                    sr.sprite = specialSprite;
-                    Debug.Log("Sprite do projetil alterado no nível de evolução 3.");
-                }
-            }
             this.evolution++;
             this.Cooldown /= this.Cooldown;
             this.damage += this.baseDamage;
 
             // Dobra as escalas de X e Y do projetil, mantendo o Z
             Vector3 newScale = socoProjetil.transform.localScale;
-            newScale.x *= 2;  // Dobra a escala no eixo X
-            newScale.y *= 2;  // Dobra a escala no eixo Y
+            newScale.x *= 1.5f;  // Dobra a escala no eixo X
+            newScale.y *= 1.5f;  // Dobra a escala no eixo Y
             socoProjetil.transform.localScale = newScale;  // Aplica a nova escala
 
             Debug.Log("Projetil evoluído. Nova escala: " + socoProjetil.transform.localScale);

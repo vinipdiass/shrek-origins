@@ -18,7 +18,7 @@ public class MoneyPickup : MonoBehaviour
             player = playerObj.GetComponent<PlayerStateMachine>();
         }
 
-        moneyAmount = Random.Range(5, 51);
+        moneyAmount = Random.Range(5, 41);
     }
 
     private void Update()
