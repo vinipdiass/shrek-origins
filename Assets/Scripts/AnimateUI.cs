@@ -31,3 +31,7 @@ public class AnimateUI : MonoBehaviour
         }
     }
 }
+
+//Aumentar XP necessario
+//Diminuir e sprite no final
+//Lobiboss mais pro final

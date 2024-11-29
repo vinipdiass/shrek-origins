@@ -1934,7 +1934,7 @@ GameObject:
   - component: {fileID: 698011904}
   - component: {fileID: 698011905}
   - component: {fileID: 698011909}
-  - component: {fileID: 698011908}
+  - component: {fileID: 698011912}
   - component: {fileID: 698011911}
   - component: {fileID: 698011910}
   m_Layer: 0
@@ -2011,23 +2011,6 @@ MonoBehaviour:
   spawnRadiusMin: 15
   spawnRadiusMax: 15
   spawnInterval: 1.5
---- !u!114 &698011908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 698011901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38ff44a8e6746864f96c2c597e490aca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BoyPrefab: {fileID: 131184763627869497, guid: 50c69d604e3038e419676e48f661a8b8, type: 3}
-  player: {fileID: 1029890395}
-  spawnRadiusMin: 30
-  spawnRadiusMax: 60
-  spawnInterval: 150
 --- !u!114 &698011909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2102,6 +2085,23 @@ MonoBehaviour:
   spawnRadiusMin: 15
   spawnRadiusMax: 15
   spawnInterval: 1.5
+--- !u!114 &698011912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698011901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19f0daff7ea9bff469a99714360a6b47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoyPrefab: {fileID: 131184763627869497, guid: 50c69d604e3038e419676e48f661a8b8, type: 3}
+  player: {fileID: 1029890395}
+  spawnRadiusMin: 30
+  spawnRadiusMax: 60
+  spawnInterval: 500
 --- !u!1 &856820187
 GameObject:
   m_ObjectHideFlags: 0
