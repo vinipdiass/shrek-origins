@@ -14,6 +14,7 @@ public class Onion : MonoBehaviour
     public Sprite normalSprite;
     public Sprite specialSprite;
     public GameObject gasAreaPrefab;
+    public GasArea gasArea;
 
 
     void Start()
@@ -24,7 +25,7 @@ public class Onion : MonoBehaviour
         damage = 0f;
         baseDamage = 0f;
         evolution = 0;
-        GasArea gasArea = gasAreaPrefab.GetComponent<GasArea>();
+        gasArea = gasAreaPrefab.GetComponent<GasArea>();
         gasArea.damagePerSecond = 15f;
         gasArea.areaRadius = 2f;
         // Inicialize o sprite do projétil, se necessário
@@ -40,7 +41,7 @@ public class Onion : MonoBehaviour
 
     public void AddAttributeAttack()
     {
-        this.damage += baseDamage;
+        gasArea.damagePerSecond += 10;
     }
 
     public void AddAttributeCooldownReduction()

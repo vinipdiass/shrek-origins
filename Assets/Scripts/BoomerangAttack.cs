@@ -17,8 +17,8 @@ public class BoomerangAttack : MonoBehaviour
         isActive = false;
         timer = 0f;
         cooldown = 2.5f; 
-        damage = 80f;
-        baseDamage = 80f;
+        damage = 60f;
+        baseDamage = 60f;
         evolution = 0;
     }
 

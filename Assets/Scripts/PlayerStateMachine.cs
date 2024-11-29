@@ -2,11 +2,9 @@ using UnityEngine;
 using System.Collections;
 using System;
 using System.Collections.Generic;
-//Tela de voltar no shop
-//Aumentar xp talvez??
-//Buffar vida maxima
-//Nerfar regen
-//Pisar na lava toma dano
+
+//Aumentar o XP
+//Resolver o BUG de XP
 public class PlayerStateMachine : MonoBehaviour
 {
     private enum PlayerState { Idle, Walking, Punching, Roaring, Farting, GasAttacking, BoomerangAttacking }

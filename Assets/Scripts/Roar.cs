@@ -24,8 +24,8 @@ public class Roar : MonoBehaviour
         timer = 0f;
         Cooldown = 3f;
         roarCount = 1;
-        damage = 55;
-        baseDamage = 55;
+        damage = 70;
+        baseDamage = 70;
         evolution = 0;
         baseCooldown = Cooldown;
 
