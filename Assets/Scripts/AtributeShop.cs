@@ -16,6 +16,7 @@ public class LojaDeAtributos : MonoBehaviour
     public TextMeshProUGUI custoAt3;
     public TextMeshProUGUI custoAt4;
     public TextMeshProUGUI custoAt5;
+    public AudioSource somDinheiro;
 
     private int custoAtributo = 100;
     private int[] comprasAtributo = new int[5]; // Armazena quantas vezes cada atributo foi comprado
@@ -99,6 +100,7 @@ public class LojaDeAtributos : MonoBehaviour
         {
             // Deduzir o custo das moedas do jogador
             GameDataManager.instance.playerData.dinheiro -= custoCalculado;
+            somDinheiro.Play();
 
             // Atualizar os atributos na lista de atributos disponíveis
             if (GameDataManager.instance.playerData.atributosDisponiveis.Count <= indiceAtributo)
