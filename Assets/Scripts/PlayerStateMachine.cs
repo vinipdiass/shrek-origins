@@ -57,6 +57,7 @@ public class PlayerStateMachine : MonoBehaviour
     List<int> atributosDisponiveis;
     public float damageInterval = 1f; // pro dano da lava
     private float damageTimer = 0f; // dano da lava
+    public AudioSource somCebola;
 
     private void Start()
     {
@@ -473,6 +474,7 @@ public class PlayerStateMachine : MonoBehaviour
         }
         else if (!gasAttack.IsInCooldown() && hasGasAttack)
         {
+            
             ChangeState(PlayerState.GasAttacking);
         }
         else if (!boomerangAttack.IsInCooldown() && hasBoomerangAttack)
@@ -707,11 +709,13 @@ public class PlayerStateMachine : MonoBehaviour
 
         isGasAttackingCoroutineRunning = true;
 
+
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         float animationDuration = stateInfo.length;
-
+        
         yield return new WaitForSeconds(animationDuration / 2);
-
+        somCebola.Play();
+        
         gasAttack.PerformGasAttack(transform, transform.rotation);
 
         gasAttack.ResetTimer();
