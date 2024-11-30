@@ -7,6 +7,7 @@ public class XPPickup : MonoBehaviour
 
     private Transform playerTransform;
     private PlayerStateMachine player;
+    public AudioSource somXP;
 
     private void Start()
     {
@@ -26,6 +27,7 @@ public class XPPickup : MonoBehaviour
             float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
             if (distanceToPlayer <= pickupRadius)
             {
+                somXP.Play();
                 // Add XP to the player
                 player.AddExperience(xpAmount);
                 // Destroy the XP pickup

@@ -17,6 +17,8 @@ public class LojaDeAtributos : MonoBehaviour
     public TextMeshProUGUI custoAt4;
     public TextMeshProUGUI custoAt5;
     public AudioSource somDinheiro;
+    public AudioSource somDinheiro2;
+    public int controlaSom = 0;
 
     private int custoAtributo = 100;
     private int[] comprasAtributo = new int[5]; // Armazena quantas vezes cada atributo foi comprado
@@ -100,7 +102,16 @@ public class LojaDeAtributos : MonoBehaviour
         {
             // Deduzir o custo das moedas do jogador
             GameDataManager.instance.playerData.dinheiro -= custoCalculado;
-            somDinheiro.Play();
+            if (controlaSom == 0)
+            {
+                somDinheiro.Play();
+                controlaSom = 1;
+            }
+            else {
+                somDinheiro2.Play();
+                controlaSom = 0;
+            }
+
 
             // Atualizar os atributos na lista de atributos disponíveis
             if (GameDataManager.instance.playerData.atributosDisponiveis.Count <= indiceAtributo)
@@ -160,7 +171,8 @@ public class LojaDeAtributos : MonoBehaviour
     }
 
 
-    public void Retornar(){
+    public void Retornar()
+    {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Menu Start");
     }
 
