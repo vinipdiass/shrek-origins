@@ -26,7 +26,7 @@ public class HPPickup : MonoBehaviour
             float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
             if (distanceToPlayer <= pickupRadius)
             {
-                player.AddHp(40);
+                player.AddHp(20);
                 Destroy(gameObject);
             }
         }

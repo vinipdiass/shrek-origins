@@ -2294,7 +2294,7 @@ MonoBehaviour:
   player: {fileID: 1029890395}
   spawnRadiusMin: 15
   spawnRadiusMax: 15
-  spawnInterval: 3
+  spawnInterval: 1.5
 --- !u!114 &698011908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2311,7 +2311,7 @@ MonoBehaviour:
   player: {fileID: 1029890395}
   spawnRadiusMin: 15
   spawnRadiusMax: 15
-  spawnInterval: 3
+  spawnInterval: 1.5
 --- !u!114 &698011909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2348,7 +2348,6 @@ MonoBehaviour:
   playerStateMachine: {fileID: 0}
   maxEvolutionLevel: 3
   emptySprite: {fileID: 0}
-  somEscolha: {fileID: 0}
   soco: {fileID: 0}
   rugido: {fileID: 0}
   peido: {fileID: 0}
@@ -2748,15 +2747,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 492d28c3ec99ebf4f87284d30b7b10ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  experiencePoints: 0
+  experiencePointsRequired: 10
+  money: 0
   hasPunch: 0
   hasRoar: 0
   hasFart: 0
   hasGasAttack: 0
   hasBeetleAttack: 0
   hasBoomerangAttack: 0
-  experiencePoints: 0
-  experiencePointsRequired: 10
-  money: 0
   speed: 3
   animator: {fileID: 0}
   recovery: 0
@@ -3101,7 +3100,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fcafbf9fa495de94380f6921e255bcf8, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.023
+  m_Volume: 0.05
   m_Pitch: 1.53
   Loop: 0
   Mute: 0
@@ -3482,7 +3481,6 @@ MonoBehaviour:
   playerStateMachine: {fileID: 0}
   maxEvolutionLevel: 3
   emptySprite: {fileID: 0}
-  somEscolha: {fileID: 1250823061}
   soco: {fileID: 0}
   rugido: {fileID: 0}
   peido: {fileID: 0}

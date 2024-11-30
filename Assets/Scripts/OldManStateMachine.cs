@@ -18,6 +18,7 @@ public class OldManStateMachine : MonoBehaviour, Damageable
     public GameObject specialXPPrefab;
     public GameObject moneyPrefab;
     public float differentItemDropChance;
+
     public float specialXPDropChance;
 
     [Header("Knockback Settings")]

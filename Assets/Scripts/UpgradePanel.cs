@@ -546,7 +546,8 @@ public class UpgradePanel : MonoBehaviour
         // Atualiza os pontos de experiência e progresso
         playerStateMachine.experiencePoints = playerStateMachine.experiencePoints % (int)playerStateMachine.experiencePointsRequired;
         playerStateMachine.countLevel++;
-        playerStateMachine.experiencePointsRequired *= 1.3f;
+        playerStateMachine.experiencePointsRequired *= 1.20f;
+        playerStateMachine.experiencePointsRequired += 10f;
 
         // Fecha o painel de upgrade
         Time.timeScale = 1;

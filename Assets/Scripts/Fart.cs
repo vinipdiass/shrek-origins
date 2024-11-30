@@ -20,10 +20,10 @@ public class Fart : MonoBehaviour
         isActive = false;
         timer = 0f;
         cooldown = 2f; // Adjusted cooldown for balance
-        damage = 55f;
-        baseDamage = 55f;
+        damage = 70f;
+        baseDamage = 70f;
         evolution = 0;
-        explosionRadius = 1.5f; // Initial radius of the explosion
+        explosionRadius = 2f; // Initial radius of the explosion
 
         // Set initial scale based on explosionRadius
         float newScale = 4f * explosionRadius;
