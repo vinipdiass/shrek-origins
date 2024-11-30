@@ -228,63 +228,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1029890395}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &113777842
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 131184763627869497, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_Name
-      value: Urso
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.23
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -17.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.030813
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
 --- !u!1 &118560775
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,63 +361,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 118560775}
   m_CullTransparentMesh: 1
---- !u!1001 &124967973
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 131184763627869497, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_Name
-      value: Urso (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 30.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.030813
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
 --- !u!1 &127816412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,63 +902,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 249945780}
   m_CullTransparentMesh: 1
---- !u!1001 &324325201
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 131184763627869497, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_Name
-      value: Urso (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -30.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 8.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.030813
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094024804713715748, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2df31640cb109994a9b006a1d3a0074d, type: 3}
 --- !u!1 &415707768
 GameObject:
   m_ObjectHideFlags: 0
@@ -2102,8 +1931,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BoyPrefab: {fileID: 131184763627869497, guid: 50c69d604e3038e419676e48f661a8b8, type: 3}
   player: {fileID: 1029890395}
-  spawnRadiusMin: 30
-  spawnRadiusMax: 60
+  spawnRadiusMin: 15
+  spawnRadiusMax: 20
   spawnInterval: 500
 --- !u!1 &856820187
 GameObject:
@@ -3878,6 +3707,3 @@ SceneRoots:
   - {fileID: 494826777}
   - {fileID: 1105425187}
   - {fileID: 497928972}
-  - {fileID: 324325201}
-  - {fileID: 124967973}
-  - {fileID: 113777842}
