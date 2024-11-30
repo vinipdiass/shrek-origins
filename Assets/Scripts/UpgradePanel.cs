@@ -20,7 +20,6 @@ public class UpgradePanel : MonoBehaviour
     public int maxEvolutionLevel = 3; // Nível máximo de evolução
     public Sprite emptySprite; // Sprite para habilidades "vazias"
 
-
     public Punch soco;
     public Roar rugido;
     public Fart peido;

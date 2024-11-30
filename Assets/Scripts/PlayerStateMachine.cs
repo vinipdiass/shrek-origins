@@ -8,14 +8,10 @@ using System.Collections.Generic;
 //Diminuir o quanto a vida cura
 public class PlayerStateMachine : MonoBehaviour
 {
-    private enum PlayerState { Idle, Walking, Punching, Roaring, Farting, GasAttacking, BoomerangAttacking }
+    private enum PlayerState { Idle, Walking }
 
-    public bool hasPunch = false;
-    public bool hasRoar = false;
-    public bool hasFart = false;
-    public bool hasGasAttack = false;
-    public bool hasBeetleAttack = false;
-    public bool hasBoomerangAttack = false;
+
+
 
     private PlayerState currentState;
     public int experiencePoints;
@@ -27,6 +23,20 @@ public class PlayerStateMachine : MonoBehaviour
     private bool isFartingCoroutineRunning = false;
     private bool isGasAttackingCoroutineRunning = false;
     private bool isBoomerangAttackingCoroutineRunning = false;
+
+    // Variáveis de controle para cada ataque
+    private bool isPunching = false;
+    private bool isRoaring = false;
+    private bool isFarting = false;
+    private bool isGasAttacking = false;
+    private bool isBoomerangAttacking = false;
+
+    public bool hasPunch = false;
+    public bool hasRoar = false;
+    public bool hasFart = false;
+    public bool hasGasAttack = false;
+    public bool hasBeetleAttack = false;
+    public bool hasBoomerangAttack = false;
 
     public float speed = 5f;
     private CharacterController characterController;
@@ -139,84 +149,6 @@ public class PlayerStateMachine : MonoBehaviour
     {
         HandleMovement();
 
-
-        // Evolução de habilidades
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            rugido.Evolute();
-            experiencePoints = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.O) && experiencePoints >= experiencePointsRequired)
-        {
-            rugido.Evolute();
-            experiencePoints = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.P) && experiencePoints >= experiencePointsRequired)
-        {
-            peido.Evolute();
-            experiencePoints = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.U) && experiencePoints >= experiencePointsRequired)
-        {
-            if (besouroAttack != null)
-            {
-                besouroAttack.Evolute();
-                experiencePoints = 0;
-            }
-        }
-
-        // Ativação de habilidades
-        if (Input.GetKeyDown(KeyCode.K) && experiencePoints >= experiencePointsRequired)
-        {
-            hasPunch = true;
-            experiencePoints = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.L) && experiencePoints >= experiencePointsRequired)
-        {
-            hasRoar = true;
-            experiencePoints = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.J) && experiencePoints >= experiencePointsRequired)
-        {
-            hasFart = true;
-            experiencePoints = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.M) && experiencePoints >= experiencePointsRequired)
-        {
-            ActivateBeetleAttack();
-            experiencePoints = 0;
-        }
-
-        // Evolução de atributos
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            IncreaseAtribute(0);
-            atributos.increaseLevelMaxLife();
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            IncreaseAtribute(1);
-            atributos.increaseLevelRecovery();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            IncreaseAtribute(2);
-            atributos.increaseLevelCooldown();
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            IncreaseAtribute(3);
-            atributos.increaseLevelSpeed();
-        }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            IncreaseAtribute(4);
-            atributos.increaseLevelDamage();
-
-        }
-
-
         if (verificacaoLoja == true)
         {
             aplicaLojaAtributos(0, atributosDisponiveis[0]);
@@ -237,36 +169,7 @@ public class PlayerStateMachine : MonoBehaviour
             case PlayerState.Walking:
                 UpdateWalkingState();
                 break;
-            case PlayerState.Punching:
-                if (!isPunchingCoroutineRunning)
-                {
-                    StartCoroutine(UpdatePunchState());
-                }
-                break;
-            case PlayerState.Roaring:
-                if (!isRoaringCoroutineRunning)
-                {
-                    StartCoroutine(UpdateRoarState());
-                }
-                break;
-            case PlayerState.Farting:
-                if (!isFartingCoroutineRunning)
-                {
-                    StartCoroutine(UpdateFartState());
-                }
-                break;
-            case PlayerState.GasAttacking:
-                if (!isGasAttackingCoroutineRunning)
-                {
-                    StartCoroutine(UpdateGasAttackState());
-                }
-                break;
-            case PlayerState.BoomerangAttacking:
-                if (!isBoomerangAttackingCoroutineRunning)
-                {
-                    StartCoroutine(UpdateBoomerangAttackState());
-                }
-                break;
+
         }
 
         // Timers de cooldown
@@ -367,7 +270,6 @@ public class PlayerStateMachine : MonoBehaviour
         currentState = newState;
         EnterState(newState);
     }
-
     private void EnterState(PlayerState state)
     {
         switch (state)
@@ -378,115 +280,65 @@ public class PlayerStateMachine : MonoBehaviour
             case PlayerState.Walking:
                 animator.SetInteger("State", 1);
                 break;
-            case PlayerState.Punching:
-                animator.SetInteger("State", 2);
-                soco.Activate(1);
-                soco.ActivateProjectile2(0);
-                soco.ActivateProjectile(0);
-                break;
-            case PlayerState.Roaring:
-                animator.SetInteger("State", 3);
-                rugido.ActivateRoar(1);
-                rugido.ActivateProjectile(0);
-                break;
-            case PlayerState.Farting:
-                animator.SetInteger("State", 4);
-                peido.ActivateFart(1);
-                break;
-            case PlayerState.GasAttacking:
-                animator.SetInteger("State", 5);
-                gasAttack.ActivateGasAttack(1);
-                break;
-            case PlayerState.BoomerangAttacking:
-                animator.SetInteger("State", 6);
-                boomerangAttack.ActivateBoomerangAttack(1);
-                break;
         }
     }
 
+
     private void ExitState(PlayerState state)
     {
-        if (state == PlayerState.Punching)
+
+    }
+
+
+    private void CheckAndStartAttacks()
+    {
+        if (!peido.IsInCooldown() && hasFart && !isFarting)
         {
-            soco.Activate(0);
-            soco.ActivateProjectile2(0);
-            soco.ActivateProjectile(0);
-            soco.resetTimer();
-            isPunchingCoroutineRunning = false;
+            animator.SetInteger("State", 4);
+            StartCoroutine(UpdateFartState());
         }
-        else if (state == PlayerState.Roaring)
+        if (!rugido.IsInCooldown() && hasRoar && !isRoaring)
         {
-            rugido.ActivateRoar(0);
-            rugido.ActivateProjectile(0);
-            rugido.resetTimer();
-            isRoaringCoroutineRunning = false;
+            animator.SetInteger("State", 3);
+            StartCoroutine(UpdateRoarState());
         }
-        else if (state == PlayerState.Farting)
+        if (!soco.IsInCooldown() && hasPunch && !isPunching)
         {
-            peido.ActivateFart(0);
-            peido.ResetTimer();
-            isFartingCoroutineRunning = false;
+            animator.SetInteger("State", 2);
+            StartCoroutine(UpdatePunchState());
+        }
+        if (!gasAttack.IsInCooldown() && hasGasAttack && !isGasAttacking)
+        {
+            animator.SetInteger("State", 5);
+            StartCoroutine(UpdateGasAttackState());
+        }
+        if (!boomerangAttack.IsInCooldown() && hasBoomerangAttack && !isBoomerangAttacking)
+        {
+            animator.SetInteger("State", 6);
+            StartCoroutine(UpdateBoomerangAttackState());
         }
     }
 
     private void UpdateIdleState()
     {
+        CheckAndStartAttacks();
+
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
             ChangeState(PlayerState.Walking);
         }
-        else if (!peido.IsInCooldown() && hasFart)
-        {
-            ChangeState(PlayerState.Farting);
-        }
-        else if (!rugido.IsInCooldown() && hasRoar)
-        {
-            ChangeState(PlayerState.Roaring);
-        }
-        else if (!soco.IsInCooldown() && hasPunch)
-        {
-            ChangeState(PlayerState.Punching);
-        }
-        else if (!gasAttack.IsInCooldown() && hasGasAttack)
-        {
-            ChangeState(PlayerState.GasAttacking);
-        }
-        else if (!boomerangAttack.IsInCooldown() && hasBoomerangAttack)
-        {
-            ChangeState(PlayerState.BoomerangAttacking);
-        }
-
     }
 
     private void UpdateWalkingState()
     {
-        if (!peido.IsInCooldown() && hasFart)
-        {
-            ChangeState(PlayerState.Farting);
-        }
-        else if (!rugido.IsInCooldown() && hasRoar)
-        {
-            ChangeState(PlayerState.Roaring);
-        }
-        else if (!soco.IsInCooldown() && hasPunch)
-        {
-            ChangeState(PlayerState.Punching);
-        }
-        else if (!gasAttack.IsInCooldown() && hasGasAttack)
-        {
-            
-            ChangeState(PlayerState.GasAttacking);
-        }
-        else if (!boomerangAttack.IsInCooldown() && hasBoomerangAttack)
-        {
-            ChangeState(PlayerState.BoomerangAttacking);
-        }
+        CheckAndStartAttacks();
 
         if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
         {
             ChangeState(PlayerState.Idle);
         }
     }
+
     private void HandleMovement()
     {
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
@@ -609,12 +461,19 @@ public class PlayerStateMachine : MonoBehaviour
 
     private IEnumerator UpdatePunchState()
     {
-        if (isPunchingCoroutineRunning) yield break;
+        if (isPunching)
+        {
+            Debug.Log("Soco já está em execução.");
+            yield break;
+        }
+        Debug.Log("Iniciando soco.");
 
-        isPunchingCoroutineRunning = true;
+        isPunching = true;
+
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         float animationDuration = stateInfo.length;
 
+        Debug.Log("Estado da animação: " + stateInfo.shortNameHash);
         yield return new WaitForSeconds(animationDuration / 2);
 
         if (!soco.isProjectile2Active())
@@ -633,27 +492,32 @@ public class PlayerStateMachine : MonoBehaviour
 
         soco.resetTimer();
 
+
+        isPunching = false;
+        soco.ActivateProjectile(0);
+        soco.ActivateProjectile2(0);
+
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
-            ChangeState(PlayerState.Walking);
+            animator.SetInteger("State", 1); // Caminhando
         }
         else
         {
-            ChangeState(PlayerState.Idle);
+            animator.SetInteger("State", 0); // Idle
         }
-
-        isPunchingCoroutineRunning = false;
     }
+
+
 
     private IEnumerator UpdateRoarState()
     {
-        if (isRoaringCoroutineRunning) yield break;
-
-        isRoaringCoroutineRunning = true;
+        if (isRoaring) yield break; // Evita múltiplas instâncias do mesmo ataque
+        isRoaring = true;
 
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         float animationDuration = stateInfo.length;
 
+        // Metade do tempo da animação
         yield return new WaitForSeconds(animationDuration / 2);
 
         if (!rugido.isRoarActive())
@@ -664,100 +528,107 @@ public class PlayerStateMachine : MonoBehaviour
 
         rugido.resetTimer();
 
+        isRoaring = false;
+
+        // Atualiza a animação com base no movimento
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
-            ChangeState(PlayerState.Walking);
+            animator.SetInteger("State", 1); // Caminhando
         }
         else
         {
-            ChangeState(PlayerState.Idle);
+            animator.SetInteger("State", 0); // Idle
         }
-
-        isRoaringCoroutineRunning = false;
     }
+
 
     private IEnumerator UpdateFartState()
     {
-        if (isFartingCoroutineRunning) yield break;
-
-        isFartingCoroutineRunning = true;
+        if (isFarting) yield break; // Evita múltiplas instâncias do mesmo ataque
+        isFarting = true;
 
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         float animationDuration = stateInfo.length;
 
+        // Metade do tempo da animação
         yield return new WaitForSeconds(animationDuration / 2);
 
         peido.FartAttack(transform.position);
 
         peido.ResetTimer();
 
+        isFarting = false;
+
+        // Atualiza a animação com base no movimento
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
-            ChangeState(PlayerState.Walking);
+            animator.SetInteger("State", 1); // Caminhando
         }
         else
         {
-            ChangeState(PlayerState.Idle);
+            animator.SetInteger("State", 0); // Idle
         }
-
-        isFartingCoroutineRunning = false;
     }
+
 
     private IEnumerator UpdateGasAttackState()
     {
-        if (isGasAttackingCoroutineRunning) yield break;
-
-        isGasAttackingCoroutineRunning = true;
-
+        if (isGasAttacking) yield break; // Evita múltiplas instâncias do mesmo ataque
+        isGasAttacking = true;
 
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         float animationDuration = stateInfo.length;
-        
+
+        // Metade do tempo da animação
         yield return new WaitForSeconds(animationDuration / 2);
+
         somCebola.Play();
-        
         gasAttack.PerformGasAttack(transform, transform.rotation);
 
         gasAttack.ResetTimer();
 
+        isGasAttacking = false;
+
+        // Atualiza a animação com base no movimento
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
-            ChangeState(PlayerState.Walking);
+            animator.SetInteger("State", 1); // Caminhando
         }
         else
         {
-            ChangeState(PlayerState.Idle);
+            animator.SetInteger("State", 0); // Idle
         }
-
-        isGasAttackingCoroutineRunning = false;
     }
+
 
     private IEnumerator UpdateBoomerangAttackState()
     {
-        if (isBoomerangAttackingCoroutineRunning) yield break;
-
-        isBoomerangAttackingCoroutineRunning = true;
+        if (isBoomerangAttacking) yield break; // Evita múltiplas instâncias do mesmo ataque
+        isBoomerangAttacking = true;
 
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         float animationDuration = stateInfo.length;
 
+        // Metade do tempo da animação
         yield return new WaitForSeconds(animationDuration / 2);
 
         boomerangAttack.PerformBoomerangAttack(transform, transform.rotation);
 
         boomerangAttack.ResetTimer();
 
+        isBoomerangAttacking = false;
+
+        // Atualiza a animação com base no movimento
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
-            ChangeState(PlayerState.Walking);
+            animator.SetInteger("State", 1); // Caminhando
         }
         else
         {
-            ChangeState(PlayerState.Idle);
+            animator.SetInteger("State", 0); // Idle
         }
-
-        isBoomerangAttackingCoroutineRunning = false;
     }
+
 
     public void IncreaseAtribute(int at)
     {
