@@ -31,7 +31,7 @@ public class SpawnOldMan : MonoBehaviour
     float randomDistance = Random.Range(spawnRadiusMin, spawnRadiusMax);
     Vector3 spawnPosition = player.position + randomDirection * randomDistance;
 
-    Instantiate(ManPrefab, spawnPosition, Quaternion.identity);
+    Instantiate(oldManPrefab, spawnPosition, Quaternion.identity);
     }
 
 

@@ -32,7 +32,7 @@ public class SpawnOldWoman : MonoBehaviour
     float randomDistance = Random.Range(spawnRadiusMin, spawnRadiusMax);
     Vector3 spawnPosition = player.position + randomDirection * randomDistance;
 
-    Instantiate(ManPrefab, spawnPosition, Quaternion.identity);
+    Instantiate(OldWomanPrefab, spawnPosition, Quaternion.identity);
     }
 
 }

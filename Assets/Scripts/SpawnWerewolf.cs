@@ -34,6 +34,6 @@ public class SpawnWerewolf : MonoBehaviour
     float randomDistance = Random.Range(spawnRadiusMin, spawnRadiusMax);
     Vector3 spawnPosition = player.position + randomDirection * randomDistance;
 
-    Instantiate(ManPrefab, spawnPosition, Quaternion.identity);
+    Instantiate(WomanPrefab, spawnPosition, Quaternion.identity);
     }
 }
