@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moneyAmount: 0
   pickupRadius: 1
+  damageTextPrefab: {fileID: 2581792204945128073, guid: 96f22eb1d93a6fb42add9c3d0aed0ba0, type: 3}
 --- !u!95 &-8069805530691330157
 Animator:
   serializedVersion: 5

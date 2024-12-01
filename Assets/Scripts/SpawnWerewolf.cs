@@ -13,8 +13,8 @@ public class SpawnWerewolf : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnWomanCoroutine());
-        spawnRadiusMax = 30f;
-        spawnRadiusMin = 30f;
+        spawnRadiusMax = 10f;
+        spawnRadiusMin = 20f;
     }
 
     IEnumerator SpawnWomanCoroutine()

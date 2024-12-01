@@ -7,6 +7,7 @@ public class MoneyPickup : MonoBehaviour
 
     private Transform playerTransform;
     private PlayerStateMachine player;
+    public GameObject damageTextPrefab;
 
     private void Start()
     {
@@ -31,7 +32,25 @@ public class MoneyPickup : MonoBehaviour
                 // Add XP to the player
                 GameDataManager.instance.AdicionarDinheiro(moneyAmount);
                 // Destroy the XP pickup
+                ShowDamageText(moneyAmount);
                 Destroy(gameObject);
+
+            }
+        }
+    }
+    
+    void ShowDamageText(float damage)
+    {
+        if (damageTextPrefab != null)
+        {
+            // Instantiate damage text at the position of OldMan
+            GameObject dmgText = Instantiate(damageTextPrefab, transform.position, Quaternion.identity);
+
+            // Set the text to show received damage
+            DamageText dmgTextScript = dmgText.GetComponent<DamageText>();
+            if (dmgTextScript != null)
+            {
+                dmgTextScript.SetText("+" + damage.ToString());
             }
         }
     }

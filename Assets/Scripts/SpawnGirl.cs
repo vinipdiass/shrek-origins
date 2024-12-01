@@ -13,8 +13,8 @@ public class SpawnGirl : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnGirlCoroutine());
-        spawnRadiusMax = 30f;
-        spawnRadiusMin = 30f;
+        spawnRadiusMax = 10f;
+        spawnRadiusMin = 20f;
     }
 
     IEnumerator SpawnGirlCoroutine()

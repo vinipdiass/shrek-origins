@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8604165926744137999}
   - component: {fileID: 5208229588685688844}
   m_Layer: 0
-  m_Name: Texto Moedas
+  m_Name: Texto dinheiro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278386943
-  m_fontColor: {r: 1, g: 0, b: 0.013530254, a: 1}
+  m_fontColor: {r: 1, g: 0.95496154, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c551bceb4e6f1064e8f7bbc08438bf79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 1
+  lifetime: 2
   floatSpeed: 1
   offset: {x: 0, y: 1, z: 0}
   randomizeIntensity: {x: 0.5, y: 0.5, z: 0}

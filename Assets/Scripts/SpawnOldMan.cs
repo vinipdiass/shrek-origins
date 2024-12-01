@@ -12,8 +12,8 @@ public class SpawnOldMan : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnOldManCoroutine());
-        spawnRadiusMax = 30f;
-        spawnRadiusMin = 30f;
+        spawnRadiusMax = 10f;
+        spawnRadiusMin = 20f;
     }
 
     IEnumerator SpawnOldManCoroutine()
