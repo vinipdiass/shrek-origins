@@ -28,10 +28,10 @@ public class BeetleAttack : MonoBehaviour
             playerTransform = GameObject.FindWithTag("Player").transform;
         }
         isActive = false;
-        damage = 80f;
-        baseDamage = 80f;
+        damage = 65f;
+        baseDamage = 65f;
         orbitRadius = 2f;
-        rotationSpeed = 120f;
+        rotationSpeed = 100f;
     }
 
     public void ActivateBeetle()
@@ -150,6 +150,6 @@ public class BeetleAttack : MonoBehaviour
 
     public void AddAttributeCooldownReduction()
     {
-        rotationSpeed += 50;
+        rotationSpeed += 25;
     }
 }

@@ -3,20 +3,22 @@ using UnityEngine;
 
 public class SpawnOldWoman : MonoBehaviour
 {
-    public GameObject OldWomanPrefab; 
-    public Transform player;       
+    public GameObject OldWomanPrefab;
+    public Transform player;
     public float spawnRadiusMin = 10f;
-    public float spawnRadiusMax = 20f; 
-    public float spawnInterval = 0.1f;   
+    public float spawnRadiusMax = 20f;
+    public float spawnInterval = 0.1f;
 
     void Start()
     {
         StartCoroutine(SpawnOldWomanCoroutine());
+        spawnRadiusMax = 30f;
+        spawnRadiusMin = 30f;
     }
 
     IEnumerator SpawnOldWomanCoroutine()
     {
-        while (true) 
+        while (true)
         {
             SpawnOldWomanAtRandomPosition();
             yield return new WaitForSeconds(spawnInterval);
@@ -25,12 +27,12 @@ public class SpawnOldWoman : MonoBehaviour
 
     void SpawnOldWomanAtRandomPosition()
     {
-      
-        Vector3 randomDirection = Random.insideUnitSphere.normalized;
-        float randomDistance = Random.Range(spawnRadiusMin, spawnRadiusMax); 
-        Vector3 spawnPosition = player.position + randomDirection * randomDistance;
 
-        Instantiate(OldWomanPrefab, spawnPosition, Quaternion.identity);
+    Vector3 randomDirection = Random.onUnitSphere;
+    float randomDistance = Random.Range(spawnRadiusMin, spawnRadiusMax);
+    Vector3 spawnPosition = player.position + randomDirection * randomDistance;
+
+    Instantiate(ManPrefab, spawnPosition, Quaternion.identity);
     }
 
 }
