@@ -76,8 +76,6 @@ public class PlayerStateMachine : MonoBehaviour
         experiencePoints = 0;
         experiencePointsRequired = 30f;
         speed = 3f;
-
-        animator = GetComponent<Animator>();
         if (animator == null) Debug.LogError("Animator não encontrado no GameObject");
         characterController = GetComponent<CharacterController>();
 
@@ -149,7 +147,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         HandleMovement();
 
-        if (verificacaoLoja == true)
+        if (verificacaoLoja && atributosDisponiveis.Count >= 5)
         {
             aplicaLojaAtributos(0, atributosDisponiveis[0]);
             aplicaLojaAtributos(1, atributosDisponiveis[1]);
@@ -159,6 +157,11 @@ public class PlayerStateMachine : MonoBehaviour
 
             verificacaoLoja = false;
         }
+        else if (verificacaoLoja)
+        {
+            Debug.LogError("A lista 'atributosDisponiveis' não possui elementos suficientes.");
+        }
+
 
 
         switch (currentState)

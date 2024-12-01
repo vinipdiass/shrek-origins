@@ -50,6 +50,15 @@ public class GameDataManager : MonoBehaviour
             playerData = new PlayerData(); // Inicializa com dados padrão
             Debug.Log("Nenhum dado salvo encontrado, inicializando com valores padrão.");
         }
+        if (playerData.atributosDisponiveis.Count < 5)
+        {
+            int itemsToAdd = 5 - playerData.atributosDisponiveis.Count;
+            for (int i = 0; i < itemsToAdd; i++)
+            {
+                playerData.atributosDisponiveis.Add(0); // Adiciona valores padrão
+            }
+        }
+
     }
 
     // Exemplo de função para adicionar mapa desbloqueado

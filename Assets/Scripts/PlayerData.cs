@@ -13,6 +13,7 @@ public class PlayerData
     {
         mapasDesbloqueados = new List<bool>();
         dinheiro = 0;
-        atributosDisponiveis = new List<int>();
+        atributosDisponiveis = new List<int> { 0, 0, 0, 0, 0 };
     }
+
 }
