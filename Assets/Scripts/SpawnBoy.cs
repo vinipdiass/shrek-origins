@@ -3,16 +3,18 @@ using UnityEngine;
 
 public class SpawnBoy : MonoBehaviour
 {
-    public GameObject BoyPrefab; 
-    public Transform player;       
+    public GameObject BoyPrefab;
+    public Transform player;
     public float spawnRadiusMin = 10f;
-    public float spawnRadiusMax = 20f; 
+    public float spawnRadiusMax = 20f;
     public float spawnInterval = 0.1f;
-    private float spawnDelay = 160f; 
+    private float spawnDelay = 160f;
 
     void Start()
     {
         StartCoroutine(SpawnBoyCoroutine());
+        spawnRadiusMax = 10f;
+        spawnRadiusMin = 20f;
     }
 
     IEnumerator SpawnBoyCoroutine()
@@ -20,7 +22,7 @@ public class SpawnBoy : MonoBehaviour
         // Wait for 2 minutes before starting the spawn loop
         yield return new WaitForSeconds(spawnDelay);
 
-        while (true) 
+        while (true)
         {
             SpawnBoyAtRandomPosition();
             yield return new WaitForSeconds(spawnInterval);
@@ -29,8 +31,8 @@ public class SpawnBoy : MonoBehaviour
 
     void SpawnBoyAtRandomPosition()
     {
-        Vector3 randomDirection = Random.insideUnitSphere.normalized;
-        float randomDistance = Random.Range(spawnRadiusMin, spawnRadiusMax); 
+        Vector3 randomDirection = Random.onUnitSphere;
+        float randomDistance = Random.Range(spawnRadiusMin, spawnRadiusMax);
         Vector3 spawnPosition = player.position + randomDirection * randomDistance;
 
         Instantiate(BoyPrefab, spawnPosition, Quaternion.identity);

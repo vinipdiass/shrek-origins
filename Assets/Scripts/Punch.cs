@@ -23,8 +23,8 @@ public class Punch : MonoBehaviour
         Projectile = false;
         Projectile2 = false;
         timer = 0f;
-        Cooldown = 2f;
-        baseCooldown = 2f;
+        Cooldown = 1.5f;
+        baseCooldown = 1.5f;
         contaSocos = 1;
         damage = 100;
         evolution = 0;

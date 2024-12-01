@@ -46,6 +46,7 @@ public class UpgradePanel : MonoBehaviour
     public Sprite cooldownSprite;
     public Sprite moveSpeedSprite;
     public Sprite damageSprite;
+    public bool showDescription = false;
 
     public enum Abilities
     {
@@ -76,7 +77,8 @@ public class UpgradePanel : MonoBehaviour
             { 8, "Aumenta a regeneracao de vida." }, // Recovery
             { 9, "Reduz o tempo de recarga dos ataques." }, // Cooldown
             { 10, "Aumenta a velocidade de movimento do jogador." }, // MoveSpeed
-            { 11, "Aumenta o dano causado por ataques." } // Damage
+            { 11, "Aumenta o dano causado por ataques." }, // Damage
+            { 12, "Selecione um aprimoramento."}
         };
 
         abilityLevels = new Dictionary<int, int>
@@ -122,6 +124,8 @@ public class UpgradePanel : MonoBehaviour
         {
             Time.timeScale = 0;
             upgradePanel.SetActive(true);
+            if (showDescription == false)
+            ShowDescription(12);
 
             if (!buttonsDefined)
             {
@@ -235,6 +239,7 @@ public class UpgradePanel : MonoBehaviour
 
     private void AddButtonHoverEvent(Button button, int abilityId)
     {
+        showDescription = true;
         EventTrigger trigger = button.GetComponent<EventTrigger>();
 
         if (trigger == null)
@@ -552,6 +557,7 @@ public class UpgradePanel : MonoBehaviour
         // Fecha o painel de upgrade
         Time.timeScale = 1;
         upgradePanel.SetActive(false);
+        showDescription = false;
         buttonsDefined = false;
     }
 

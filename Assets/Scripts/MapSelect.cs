@@ -16,6 +16,7 @@ public class MapSelect : MonoBehaviour
 
     private List<Button> mapButtons;
     private List<TextMeshProUGUI> mapTexts;
+    public Button retornarButton;
 
     private void Start()
     {
@@ -28,6 +29,7 @@ public class MapSelect : MonoBehaviour
 
         // Atualiza o estado dos botões e textos baseado nos mapas desbloqueados
         UpdateMapButtons();
+        retornarButton.onClick.AddListener(() => Retornar());
     }
 
     private void Update()
@@ -37,6 +39,7 @@ public class MapSelect : MonoBehaviour
         {
             ResetMapsToInitialState();
         }
+        
     }
 
     private void EnsureDefaultMapUnlocked()
@@ -132,6 +135,11 @@ public class MapSelect : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Select Attack");
         PlayerPrefs.SetString("Map", "Map1");
+    }
+
+    public void Retornar()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu Start");
     }
 
     public void Map2()

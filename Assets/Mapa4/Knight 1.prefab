@@ -122,7 +122,7 @@ MonoBehaviour:
   totalHealth: 1500
   currentHealth: 1500
   attackDamage: 30
-  moveSpeed: 2.1
+  moveSpeed: 2.5
   colliderRadius: 0
   enemyVision: 5
   damageRange: 0.5

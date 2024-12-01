@@ -76,7 +76,6 @@ public class PlayerStateMachine : MonoBehaviour
         experiencePoints = 0;
         experiencePointsRequired = 30f;
         speed = 3f;
-
         animator = GetComponent<Animator>();
         if (animator == null) Debug.LogError("Animator não encontrado no GameObject");
         characterController = GetComponent<CharacterController>();
