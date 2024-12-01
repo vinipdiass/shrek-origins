@@ -121,8 +121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalHealth: 500
   currentHealth: 500
-  attackDamage: 20
-  moveSpeed: 1.8
+  attackDamage: 17
+  moveSpeed: 2.2
   colliderRadius: 0
   enemyVision: 5
   damageRange: 0.5

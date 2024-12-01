@@ -184,7 +184,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(3f); // Espera 2 segundos
+            yield return new WaitForSeconds(1.5f); // Espera 2 segundos
 
             if (currentHealth < maxHealth)
             {
@@ -689,7 +689,7 @@ public class PlayerStateMachine : MonoBehaviour
             }
             else
             {
-                speed += 0.5f;
+                speed += 0.4f;
             }
         }
 

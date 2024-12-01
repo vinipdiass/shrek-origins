@@ -45,3 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Barra de vida
+    uniqueID: 584974387
+    locked: 0
+  - name: Vida
+    uniqueID: 149685371
+    locked: 0
