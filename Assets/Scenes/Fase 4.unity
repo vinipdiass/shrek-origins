@@ -2227,7 +2227,7 @@ MonoBehaviour:
   player: {fileID: 1029890395}
   spawnRadiusMin: 15
   spawnRadiusMax: 15
-  spawnInterval: 0.4
+  spawnInterval: 0.3
 --- !u!114 &698011905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2244,7 +2244,7 @@ MonoBehaviour:
   player: {fileID: 1029890395}
   spawnRadiusMin: 15
   spawnRadiusMax: 15
-  spawnInterval: 0.4
+  spawnInterval: 0.3
 --- !u!114 &698011907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2278,7 +2278,7 @@ MonoBehaviour:
   player: {fileID: 1029890395}
   spawnRadiusMin: 15
   spawnRadiusMax: 15
-  spawnInterval: 1
+  spawnInterval: 0.7
 --- !u!114 &698011909
 MonoBehaviour:
   m_ObjectHideFlags: 0
