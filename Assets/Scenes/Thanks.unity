@@ -359,6 +359,7 @@ GameObject:
   - component: {fileID: 750445795}
   - component: {fileID: 750445798}
   - component: {fileID: 750445797}
+  - component: {fileID: 750445799}
   - component: {fileID: 750445796}
   m_Layer: 5
   m_Name: Panel
@@ -445,6 +446,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750445794}
   m_CullTransparentMesh: 1
+--- !u!114 &750445799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750445794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 625cabd3864b24e4fa6378767d1c222b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map1: {fileID: 0}
+  map2: {fileID: 0}
+  map3: {fileID: 0}
+  map4: {fileID: 0}
+  mapText1: {fileID: 0}
+  mapText2: {fileID: 0}
+  mapText3: {fileID: 0}
+  mapText4: {fileID: 0}
+  retornarButton: {fileID: 2021091676}
 --- !u!1 &891641686
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,6 +548,7 @@ GameObject:
   - component: {fileID: 1218847732}
   - component: {fileID: 1218847734}
   - component: {fileID: 1218847728}
+  - component: {fileID: 1218847735}
   - component: {fileID: 1218847727}
   - component: {fileID: 1218847733}
   m_Layer: 5
@@ -679,6 +702,20 @@ MonoBehaviour:
   mapText3: {fileID: 0}
   mapText4: {fileID: 0}
   retornarButton: {fileID: 2021091676}
+--- !u!114 &1218847735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218847726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3d3bf1850c1124686c9454a8967797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadSceneButton: {fileID: 2021091676}
+  targetScene: Menu Start
 --- !u!1 &1384834957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,7 +1040,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 0
 --- !u!114 &2021091677
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,7 +6,6 @@ public class AppearImage : MonoBehaviour
 {
     public float fadeDuration = 2f; // Duração do fade-in
     public string targetScene = "Thanks"; // Nome da cena a ser carregada
-    public SpriteRenderer blackScreen; // Referência ao SpriteRenderer para a tela preta
 
     private SpriteRenderer spriteRenderer; // Referência ao SpriteRenderer para controlar a opacidade
 
@@ -25,19 +24,7 @@ public class AppearImage : MonoBehaviour
         color.a = 0f;
         spriteRenderer.color = color;
 
-        // Inicializa a tela preta completamente transparente
-        if (blackScreen != null)
-        {
-            Color blackColor = blackScreen.color;
-            blackColor.a = 0f;
-            blackScreen.color = blackColor;
-        }
-        else
-        {
-            Debug.LogError("A tela preta (blackScreen) não foi atribuída!");
-        }
-
-        // Inicia a sequência de exibição da imagem e da tela preta
+        // Inicia a sequência de exibição da imagem
         StartCoroutine(AppearSequence());
     }
 
@@ -49,17 +36,8 @@ public class AppearImage : MonoBehaviour
         // Gradualmente aumenta a opacidade da imagem inicial para 1
         yield return StartCoroutine(FadeSprite(spriteRenderer, 1f));
 
-        // Aguarda mais 3 segundos antes de iniciar a tela preta
+        // Aguarda mais 3 segundos antes de carregar a cena
         yield return new WaitForSeconds(3f);
-
-        // Gradualmente torna a tela preta
-        if (blackScreen != null)
-        {
-            yield return StartCoroutine(FadeSprite(blackScreen, 1f));
-        }
-
-        // Aguarda 2 segundos com a tela preta totalmente opaca
-        yield return new WaitForSeconds(2f);
 
         // Carrega a cena especificada
         SceneManager.LoadScene(targetScene);
