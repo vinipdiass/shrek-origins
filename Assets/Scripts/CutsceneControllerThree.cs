@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement; // Necessário para carregar cenas
 using System.Collections;
 
-public class AppearImage : MonoBehaviour
+public class AppearImage2 : MonoBehaviour
 {
     public float fadeDuration = 2f; // Duração do fade-in
     public string targetScene = "Thanks"; // Nome da cena a ser carregada
