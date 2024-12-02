@@ -141,7 +141,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeDuration: 2
   targetScene: Thanks
-  blackScreen: {fileID: 0}
 --- !u!1 &127729798 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2602365585397795927, guid: bc9f6561625648f46b268fa8526a8ad6, type: 3}
@@ -904,6 +903,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fiona
       objectReference: {fileID: 0}
+    - target: {fileID: 2602365585397795927, guid: bc9f6561625648f46b268fa8526a8ad6, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 5505596944360645371, guid: bc9f6561625648f46b268fa8526a8ad6, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1337,6 +1340,10 @@ PrefabInstance:
     - target: {fileID: 2602365585397795927, guid: bc9f6561625648f46b268fa8526a8ad6, type: 3}
       propertyPath: m_Name
       value: "Cora\xE7\xE3o"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2602365585397795927, guid: bc9f6561625648f46b268fa8526a8ad6, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5505596944360645371, guid: bc9f6561625648f46b268fa8526a8ad6, type: 3}
       propertyPath: m_Sprite

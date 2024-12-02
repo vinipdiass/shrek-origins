@@ -1,11 +1,11 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Importar o namespace para gerenciar cenas
 
 public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI counterText;
-    //public GameObject victoryPanel;
     public GameObject endGamePanel;
     public GameObject victoryPanel;
     public PlayerStateMachine playerStateMachine;
@@ -22,13 +22,11 @@ public class Timer : MonoBehaviour
         StartCoroutine(StartCountdown());
         endGamePanel.SetActive(false);
         victoryPanel.SetActive(false);
-        timer = 300;
+        timer = 5;
     }
 
     IEnumerator StartCountdown()
     {
-
-
         while (timer > 0)
         {
             if (playerStateMachine.currentHealth <= 0) break;
@@ -41,28 +39,35 @@ public class Timer : MonoBehaviour
 
         // Para o jogo
         Time.timeScale = 0;
-        // Ativa o painel de fim de jogo
+
+        // Ativa o painel de fim de jogo ou carrega a cena de final
         if (playerStateMachine.currentHealth <= 0)
         {
             endGamePanel.SetActive(true);
         }
         else
         {
-            victoryPanel.SetActive(true);
             string playerAbility = PlayerPrefs.GetString("Map", "None");
             if (playerAbility == "Map1")
             {
                 GameDataManager.instance.DesbloquearMapa(1);
+                victoryPanel.SetActive(true);
             }
             else if (playerAbility == "Map2")
             {
                 GameDataManager.instance.DesbloquearMapa(2);
+                victoryPanel.SetActive(true);
             }
             else if (playerAbility == "Map3")
             {
                 GameDataManager.instance.DesbloquearMapa(3);
+                victoryPanel.SetActive(true);
+            }
+            else if (playerAbility == "Map4")
+            {
+                Time.timeScale = 1; // Restaura o tempo normal antes de carregar a cena
+                SceneManager.LoadScene("FINAL"); // Carrega a cena "FINAL"
             }
         }
-
     }
 }
