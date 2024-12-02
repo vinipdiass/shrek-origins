@@ -22,7 +22,7 @@ public class Timer : MonoBehaviour
         StartCoroutine(StartCountdown());
         endGamePanel.SetActive(false);
         victoryPanel.SetActive(false);
-        timer = 5;
+        timer = 300;
     }
 
     IEnumerator StartCountdown()
