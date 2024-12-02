@@ -22,6 +22,7 @@ public class CutsceneController : MonoBehaviour
         {
             animator = GetComponent<Animator>();
         }
+        
 
         // Iniciar a sequência
         StartCoroutine(CutsceneSequence());
@@ -30,7 +31,7 @@ public class CutsceneController : MonoBehaviour
     private IEnumerator CutsceneSequence()
     {
         // Espera 2 segundos antes de iniciar o fade out
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
 
         // Gradualmente reduz a opacidade para 0
         yield return StartCoroutine(FadeTo(0f));
